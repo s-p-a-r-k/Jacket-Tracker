@@ -7,6 +7,7 @@ import { firebaseConfig } from '../environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
@@ -16,7 +17,18 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {LoginPage} from '../pages/login/login';
+import {LoggedinPage} from '../pages/loggedin/loggedin';
 import { CreateaccountPage } from '../pages/createaccount/createaccount';
+
+const firebaseAuth = {
+  apiKey: "AIzaSyDPr_smunA_RpcWByjClYrTcWdDJyb0--M",
+  authDomain: "jacket-tracker-90b5c.firebaseapp.com",
+  databaseURL: "https://jacket-tracker-90b5c.firebaseio.com",
+  projectId: "jacket-tracker-90b5c",
+  storageBucket: "jacket-tracker-90b5c.appspot.com",
+  messagingSenderId: "674608756377"
+};
+
 
 @NgModule({
   declarations: [
@@ -25,7 +37,8 @@ import { CreateaccountPage } from '../pages/createaccount/createaccount';
     ListPage,
     LandingPage,
     LoginPage,
-    CreateaccountPage
+    CreateaccountPage,
+    LoggedinPage
   ],
   imports: [
     BrowserModule,
@@ -33,6 +46,7 @@ import { CreateaccountPage } from '../pages/createaccount/createaccount';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFireModule.initializeApp(firebaseAuth)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -41,7 +55,8 @@ import { CreateaccountPage } from '../pages/createaccount/createaccount';
     ListPage,
     LandingPage,
     LoginPage,
-    CreateaccountPage
+    CreateaccountPage,
+    LoggedinPage
   ],
   providers: [
     StatusBar,
