@@ -9,10 +9,11 @@
 
 <ion-content padding>
   <h3>Welcome to Jacket Tracker</h3>
-  <button ion-button secondary>Log In</button>
+    <div id = "topButtons">
+      <button ion-button ion-button (click) ="logIn()">Log In</button>
 
-  <button ion-button>Create Account</button>
-
+      <button ion-button ion-button (click) ="createAcc()">Create Account</button>
+    </div>
   <ion-item *ngFor="let item of items | async">
     {{item | json}}
   </ion-item>

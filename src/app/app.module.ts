@@ -15,12 +15,17 @@ import { LandingPage } from '../pages/landing/landing';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import {LoginPage} from '../pages/login/login';
+import { CreateaccountPage } from '../pages/createaccount/createaccount';
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    LandingPage
+    LandingPage,
+    LoginPage,
+    CreateaccountPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     ListPage,
-    LandingPage
+    LandingPage,
+    LoginPage,
+    CreateaccountPage
   ],
   providers: [
     StatusBar,
