@@ -25,5 +25,26 @@ export class LoggedinPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoggedinPage');
   }
+  onAddUniformClick() {
+    console.log("clicked onadduniformclick")
+  }
+  onSearchClick() {
+    console.log("clicked onsearchclick")
+  }
+  onViewAssignmentsClick() {
+    console.log("clicked onviewassigmentclick")
+  }
+  onViewUniformsClick() {
+    console.log("clicked onviewuniformsclick")
+  }
+  onManageAccountClick() {
+    console.log("clicked onmanageaccountclick")
+  }
+  onAssignUniformsClick() {
+    console.log("clickedonassignuniformsclick")
+  }
+  onLogOutClick() {
+    console.log("clicked onlogoutclick")
+  }
 
 }
