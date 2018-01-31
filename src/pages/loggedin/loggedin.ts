@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams , AlertController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
+
+import { HomePage } from '../home/home';
+
 
 /**
  * Generated class for the LoggedinPage page.
@@ -18,8 +21,15 @@ export class LoggedinPage {
 
   email: string;
 
-  constructor(private fire: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private fire: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     this.email = fire.auth.currentUser.email;
+  }
+  alert(message: string) {
+    this.alertCtrl.create({
+      title: 'Sign Out',
+      subTitle: message,
+      buttons: ['OK']
+    }).present();
   }
 
   ionViewDidLoad() {
@@ -44,6 +54,16 @@ export class LoggedinPage {
     console.log("clickedonassignuniformsclick")
   }
   onLogOutClick() {
+    this.fire.auth.signOut()
+      .then(() => {
+        this.alert('Sign out succesful')
+        this.navCtrl.setRoot( HomePage)
+        console.log('logged out');
+      })
+      .catch( error => {
+        console.log('got an error', error);
+        this.alert(error.message);
+      })
     console.log("clicked onlogoutclick")
   }
 
