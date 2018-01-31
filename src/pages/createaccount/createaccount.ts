@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 
+
 /**
  * Generated class for the CreateaccountPage page.
  *
@@ -16,7 +17,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class CreateaccountPage {
 
-  @ViewChild('username') user;
+  @ViewChild('email') email;
   @ViewChild('password') password;
 
   constructor(private fire: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
@@ -35,19 +36,25 @@ export class CreateaccountPage {
   }
 
   registerUser() {
+    this.fire.auth.sendPasswordResetEmail(this.email.value)
+      .then(() => {
+        this.alert('Please check your email to reset your password')
+        console.log('email sent');
+      })
+      .catch( error => {
+        console.log('got an error', error);
+        this.alert(error.message);
+      })
 //    console.log('Would create account with', this.user.value, this.password.value);
-    this.fire.auth.createUserWithEmailAndPassword(this.user.value, this.password.value)
-    .then(data => {
-      console.log('got data', data);
-      this.alert('Registered!');
-    })
-    .catch(error => {
-      console.log('got an error', error);
-      this.alert(error.message);
-    })
-
-
-    console.log('would register with', this.user.value, this.password.value);
+    // this.fire.auth.createUserWithEmailAndPassword(this.user.value, this.password.value)
+    // .then(data => {
+    //   console.log('got data', data);
+    //   this.alert('Registered!');
+    // })
+    // .catch(error => {
+    //   console.log('got an error', error);
+    //   this.alert(error.message);
+    // })
 
 /*    let alert = this.alertCtrl.create({
       title: 'You will create an account with the entered username and password',
