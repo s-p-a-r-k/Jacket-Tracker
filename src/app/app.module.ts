@@ -20,6 +20,8 @@ import {LoginPage} from '../pages/login/login';
 import {LoggedinPage} from '../pages/loggedin/loggedin';
 import { CreateaccountPage } from '../pages/createaccount/createaccount';
 
+import {QuickmanagementPage} from '../pages/quickmanagement/quickmanagement';
+
 const firebaseAuth = {
   apiKey: "AIzaSyDPr_smunA_RpcWByjClYrTcWdDJyb0--M",
   authDomain: "jacket-tracker-90b5c.firebaseapp.com",
@@ -38,7 +40,8 @@ const firebaseAuth = {
     LandingPage,
     LoginPage,
     CreateaccountPage,
-    LoggedinPage
+    LoggedinPage,
+    QuickmanagementPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ const firebaseAuth = {
     LandingPage,
     LoginPage,
     CreateaccountPage,
-    LoggedinPage
+    LoggedinPage,
+    QuickmanagementPage
   ],
   providers: [
     StatusBar,
