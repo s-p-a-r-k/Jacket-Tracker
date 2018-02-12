@@ -9,9 +9,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { LandingPage } from '../pages/landing/landing';
+import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -33,9 +32,8 @@ const firebaseAuth = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    ListPage,
     LandingPage,
+    ListPage,
     LoginPage,
     CreateaccountPage,
     LoggedinPage
@@ -51,9 +49,8 @@ const firebaseAuth = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    ListPage,
     LandingPage,
+    ListPage,
     LoginPage,
     CreateaccountPage,
     LoggedinPage
