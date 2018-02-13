@@ -15,9 +15,10 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import {LoginPage} from '../pages/login/login';
-import {LoggedinPage} from '../pages/loggedin/loggedin';
+import { LoginPage } from '../pages/login/login';
+import { LoggedinPage } from '../pages/loggedin/loggedin';
 import { CreateaccountPage } from '../pages/createaccount/createaccount';
+import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
 
 const firebaseAuth = {
   apiKey: "AIzaSyDPr_smunA_RpcWByjClYrTcWdDJyb0--M",
@@ -36,7 +37,8 @@ const firebaseAuth = {
     ListPage,
     LoginPage,
     CreateaccountPage,
-    LoggedinPage
+    LoggedinPage,
+    UniformCheckoutPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ const firebaseAuth = {
     ListPage,
     LoginPage,
     CreateaccountPage,
-    LoggedinPage
+    LoggedinPage,
+    UniformCheckoutPage
   ],
   providers: [
     StatusBar,

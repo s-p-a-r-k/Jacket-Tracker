@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <!-- <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button> -->
+    <ion-title>Jacket Tracker</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>First Name</ion-label>
+      <ion-input type="text" [(ngModel)]="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Last Name</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+    <!-- TODO: form validation for formatted inputs (GTID, email, etc) -->
+    <ion-item>
+      <ion-label floating>GTID</ion-label>
+      <ion-input type="text" [(ngModel)]="gtid" maxlength="9"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Instrument</ion-label>
+      <ion-select [selectOptions]="selectOptions" [(ngModel)]="selectedInstrument">
+        <ion-option *ngFor="let instrument of instruments" [value]="instrument.name">{{instrument.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Uniform Information</ion-label>
+      <ion-input type="text">Placeholder</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Waiver Placeholder</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>I agree to the terms and conditions above</ion-label>
+      <ion-checkbox checked="false" [(ngModel)]="agree"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <button ion-button large (click) ="submitForm()">Submit</button>
+  </div>
+</ion-content>
