@@ -20,14 +20,16 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
+    // Used for an example of ngFor and navigation.
+    // Menu list but Temp Quick Management was made since we do not have search screen yet.
     this.pages = [
       { title: 'Add New Uniform', component: LoggedinPage },
       { title: 'Search', component: LoggedinPage },
       { title: 'View Current Assignments', component: LoggedinPage },
       { title: 'View Uniforms', component: LoggedinPage },
       { title: 'Manage Acount', component: LoggedinPage },
-      { title: 'Assign Uniforms', component: LoggedinPage }
+      { title: 'Assign Uniforms', component: LoggedinPage },
+      { title: 'Temp Quick Management', component: LoggedinPage }
     ];
 
   }

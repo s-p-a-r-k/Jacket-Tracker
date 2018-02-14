@@ -53,6 +53,9 @@ export class LoggedinPage {
   onAssignUniformsClick() {
     console.log("clickedonassignuniformsclick")
   }
+  onTempQuickManagementClick() {
+    console.log("clickedon tempquickmanagementclick")
+  }
   onLogOutClick() {
     this.fire.auth.signOut()
       .then(() => {
