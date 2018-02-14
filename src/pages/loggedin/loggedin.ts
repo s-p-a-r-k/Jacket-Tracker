@@ -57,7 +57,7 @@ export class LoggedinPage {
     this.fire.auth.signOut()
       .then(() => {
         this.alert('Sign out succesful')
-        this.navCtrl.setRoot( HomePage)
+        this.navCtrl.setRoot(LandingPage)
         console.log('logged out');
       })
       .catch( error => {
