@@ -1,50 +1,53 @@
 <ion-header>
   <ion-navbar>
-    <!-- <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button> -->
     <ion-title>Jacket Tracker</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
+  <form [formGroup]="uniformRequest" (ngSubmit)="submitForm()">
     <ion-item>
       <ion-label floating>First Name</ion-label>
-      <ion-input type="text" [(ngModel)]="username"></ion-input>
+      <ion-input formControlName="firstname"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Last Name</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
+      <ion-input formControlName="lastname"></ion-input>
     </ion-item>
-    <!-- TODO: form validation for formatted inputs (GTID, email, etc) -->
     <ion-item>
       <ion-label floating>GTID</ion-label>
-      <ion-input type="text" [(ngModel)]="gtid" maxlength="9"></ion-input>
+      <ion-input formControlName="gtid"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Email</ion-label>
-      <ion-input type="email" [(ngModel)]="email"></ion-input>
+      <ion-input formControlName="email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Instrument</ion-label>
-      <ion-select [selectOptions]="selectOptions" [(ngModel)]="selectedInstrument">
-        <ion-option *ngFor="let instrument of instruments" [value]="instrument.name">{{instrument.name}}</ion-option>
+      <ion-select [selectOptions]="selectOptions" formControlName="instrument" (ionChange)="initEquipment()">
+        <ion-option *ngFor="let i of instruments" [value]="i">{{i.name}}</ion-option>
       </ion-select>
     </ion-item>
+    <div formArrayName="equipment">
+      <div *ngFor="let e of uniformRequest.value.instrument.equipment; let i=index" class="panel panel-default">
+        <div [formGroupName]="i">
+          <ion-input [readonly]="true" [value]="e" formControlName="type">{{e}}</ion-input>
+          <ion-item>
+            <ion-label floating>ID</ion-label>
+            <ion-input type="text" formControlName="id"></ion-input>
+          </ion-item>
+        </div>
+      </div>
+    </div>
     <ion-item>
-      <ion-label floating>Uniform Information</ion-label>
-      <ion-input type="text">Placeholder</ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Waiver Placeholder</ion-label>
+      <p><span>Waiver Placeholder</span></p>
     </ion-item>
     <ion-item>
       <ion-label>I agree to the terms and conditions above</ion-label>
-      <ion-checkbox checked="false" [(ngModel)]="agree"></ion-checkbox>
+      <ion-checkbox formControlName="agree"></ion-checkbox>
     </ion-item>
-  </ion-list>
-  <div padding>
-    <button ion-button large (click) ="submitForm()">Submit</button>
-  </div>
+    <div id="submit" padding>
+      <button ion-button large type="submit" [disabled]="!uniformRequest.valid">Submit</button>
+    </div>
+  </form>
 </ion-content>
