@@ -7,11 +7,56 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
+<!--     <ion-header-bar class="bar-stable">
+      <h1 class="title">Service Provider Details</h1>
+    </ion-header-bar> -->
+    <ion-content>
+        <ion-grid>
+          <ion-row align-items-center>
+            <ion-col> <ion-checkbox [(ngModel)]="selectAll" (ionChange)="allChecked()"></ion-checkbox> Select All </ion-col>
+            <ion-col> First Name </ion-col>
+            <ion-col> Last Name </ion-col>
+            <ion-col> Email </ion-col>
+            <ion-col> Section </ion-col>
+            <ion-col> Jacket </ion-col>
+            <ion-col> Sash </ion-col>
+            <ion-col> Bibbus </ion-col>
+            <ion-col> Gloves </ion-col>
+            <ion-col> Vest </ion-col>
+            <ion-col> Note </ion-col>
+          </ion-row>
+        </ion-grid>
 
-  </ion-list>
-<div id = "topButtons">
-      <button ion-button> Submit </button>
-      <button ion-button ion-button (click) ="backToHome()"> Back to Home </button>
-  </div>
+<!--         <div class="row header">
+          <div class="col"> <ion-checkbox [(ngModel)]="selectAll" (ionChange)="allChecked()"></ion-checkbox> Select All </div>
+          <div class="col"> First Name </div>
+          <div class="col"> Last Name </div>
+          <div class="col"> Email </div>
+          <div class="col"> Section </div>
+          <div class="col"> Jacket </div>
+          <div class="col"> Sash </div>
+          <div class="col"> Bibbus </div>
+          <div class="col"> Gloves </div>
+          <div class="col"> Vest </div>
+          <div class="col"> Note </div>
+        </div> -->
+
+<!--         <div class="row" ng-repeat="data in ctrl.data">
+          <div class="col">{{data.name}}</div>
+          <div class="col">{{data.code}}</div>
+          <div class="col">LK {{data.limit}}</div>
+          <div class="col">{{data.account}}</div>
+          <div class="col"><button class="button" ng-click="ctrl.add($index)">Add</button></div>
+        </div> -->
+    </ion-content>
+
+    <div id = "decisions">
+        <ion-select interface = "popover" placeholder = "Select Action" [(ngModel)]="action">
+          <ion-option value="email">Email selected members</ion-option>
+          <ion-option value="uniform">Modify selected uniform status</ion-option>
+          <ion-option value="student">Modify selected student information</ion-option>
+        </ion-select>
+        <button ion-button> Submit </button>
+        <button ion-button ion-button (click) ="backToHome()"> Back to Home </button>
+    </div>
 </ion-content>
