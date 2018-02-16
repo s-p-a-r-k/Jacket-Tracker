@@ -33,6 +33,10 @@ export class QuickmanagementPage {
     this.navCtrl.push(LoggedinPage);
   }
 
+  checked(item) {
+    console.log(item);
+  }
+
   quickManageSubmit(selectedAction) {
       if (selectedAction == "email") {
         console.log('email option selected');
