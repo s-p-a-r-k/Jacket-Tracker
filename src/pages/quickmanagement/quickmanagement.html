@@ -51,12 +51,18 @@
     </ion-content>
 
     <div id = "decisions">
-        <ion-select interface = "popover" placeholder = "Select Action" [(ngModel)]="action">
-          <ion-option value="email">Email selected members</ion-option>
-          <ion-option value="uniform">Modify selected uniform status</ion-option>
-          <ion-option value="student">Modify selected student information</ion-option>
-        </ion-select>
-        <button ion-button> Submit </button>
-        <button ion-button ion-button (click) ="backToHome()"> Back to Home </button>
+      <ion-list>
+        <ion-item>
+            <ion-label>Select Action</ion-label>
+            <ion-select interface = "popover" [(ngModel)]="action" (ngModelChange)="quickManageSubmit(action)">
+              <ion-option value="email">Email selected members</ion-option>
+              <ion-option value="uniform">Modify selected uniform status</ion-option>
+              <ion-option value="student">Modify selected student information</ion-option>
+            </ion-select>
+        </ion-item>
+            <!-- Using popover doesn't require submit button as it automatically closes overlay and selects that value
+            <button ion-button ion-button (click) = "quickManageSubmit(action)"> Submit </button>-->
+            <button ion-button ion-button (click) ="backToHome()"> Back to Home </button>
+      </ion-list>
     </div>
 </ion-content>

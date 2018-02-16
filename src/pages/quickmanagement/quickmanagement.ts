@@ -29,4 +29,14 @@ export class QuickmanagementPage {
     this.navCtrl.push(LoggedinPage);
   }
 
+  quickManageSubmit(selectedAction) {
+      if (selectedAction == "email") {
+        console.log('email option selected');
+      } else if (selectedAction == "uniform"){
+        console.log('uniform status option selected');
+      } else {
+        console.log('student information option');
+      }
+  }
+  
 }
