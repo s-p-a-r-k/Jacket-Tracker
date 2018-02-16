@@ -27,7 +27,7 @@
           </ion-row>
 
           <ion-row align-items-center *ngFor="let item of items | async">
-            <ion-col> <ion-checkbox [(ngModel)]="item.gtid" (ionChange)="checked(item)"></ion-checkbox> </ion-col>
+            <ion-col> <ion-checkbox [(ngModel)]="item.selected" (ionChange)="checked(item)"></ion-checkbox> </ion-col>
             <ion-col *ngIf="item.firstname; else none"> {{item.firstname}} </ion-col>
             <ion-col *ngIf="item.lastname; else none"> {{item.lastname}} </ion-col>
             <ion-col *ngIf="item.email; else none"> {{item.email}} </ion-col>

@@ -45,14 +45,17 @@ export class QuickmanagementPage {
   }
 
   allChecked() {
-    this.selectAll = true;
+    if (this.selectAll) {
+      this.selectAll = false;
+    } else {
+      this.selectAll = true;
+    }
   }
 
   checked(item) {
     console.log(item);
     this.arrChosen.push(item);
     this.arrChosen = this.arrChosen.reduce((x,y) => x.findIndex(e => e.email==y.email) < 0 ? [...x, y]: x, []);
-
   }
 
   quickManageSubmit(selectedAction) {
