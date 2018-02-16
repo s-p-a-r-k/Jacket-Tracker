@@ -62,9 +62,8 @@ export class QuickmanagementPage {
         for (let student in this.arrChosen) {
             for (let equiptype in this.arrChosen[student].equipment) {
               this.doRadio();
-              console.log(this.arrChosen[student].equipment[equiptype].status);
-              this.arrChosen[student].equipment[equiptype].status = this.radioResult;
-              console.log(this.itemarr);
+              this.studentRecordRef.update('-L5MwxyyDzZow5oNVIxu/equipment/' + equiptype, {status: 'dirty'})
+              //this.updateStatus(this.radioResult, student, equiptype);
             }
         }
       } else {
@@ -72,8 +71,8 @@ export class QuickmanagementPage {
       }
   }
 
-  updateStatus(result) {
-
+  updateStatus(result, student, equiptype) {
+    this.arrChosen[student].equipment[equiptype].status = this.radioResult;
   }
 
   doRadio() {
@@ -103,9 +102,13 @@ export class QuickmanagementPage {
     alert.addButton({
       text: 'Ok',
       handler: (data: any) => {
+        
         console.log('Radio data:', data);
-        this.radioOpen = false;
+        let navTransition = alert.dismiss();
+
         this.radioResult = data;
+
+        return false;
       }
     });
 
