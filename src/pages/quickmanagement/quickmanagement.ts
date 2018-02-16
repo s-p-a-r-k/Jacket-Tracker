@@ -23,6 +23,9 @@ export class QuickmanagementPage {
 
   constructor(public navCtrl: NavController, afDB: AngularFireDatabase) {
     this.items = afDB.list('students').valueChanges();
+    console.log('========================================');
+    console.log(this.items);
+    console.log('========================================');
   }
 
   ionViewDidLoad() {

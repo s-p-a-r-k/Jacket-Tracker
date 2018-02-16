@@ -28,23 +28,24 @@
 
           <ion-row align-items-center *ngFor="let item of items | async">
             <ion-col> <ion-checkbox [(ngModel)]="item.gtid" (ionChange)="checked(item)"></ion-checkbox> </ion-col>
-            <ion-col> {{item.firstname}} </ion-col>
-            <ion-col> {{item.lastname}} </ion-col>
-            <ion-col> {{item.email}} </ion-col>
-            <ion-col> {{item.section}} </ion-col>
-            <ion-col> {{item.jacket}} </ion-col>
-            <ion-col> {{item.sash}} </ion-col>
-            <ion-col> {{item.bibbus}} </ion-col>
-            <ion-col> {{item.gloves}} </ion-col>
-            <ion-col> {{item.vest}} </ion-col>
-            <ion-col> {{item.note}} </ion-col>
+            <ion-col *ngIf="item.firstname; else none"> {{item.firstname}} </ion-col>
+            <ion-col *ngIf="item.lastname; else none"> {{item.lastname}} </ion-col>
+            <ion-col *ngIf="item.email; else none"> {{item.email}} </ion-col>
+            <ion-col *ngIf="item.section; else none"> {{item.section}} </ion-col>
+            <ion-col *ngIf="item.jacket; else none"> {{item.jacket.id}} </ion-col>
+            <ion-col *ngIf="item.sash; else none"> {{item.sash.id}} </ion-col>
+            <ion-col *ngIf="item.bibbus; else none"> {{item.bibbus.id}} </ion-col>
+            <ion-col *ngIf="item.gloves; else none"> {{item.gloves.id}} </ion-col>
+            <ion-col *ngIf="item.vest; else none"> {{item.vest.id}} </ion-col>
+            <ion-col *ngIf="item.note; else none"> {{item.note}} </ion-col>
+            <ng-template #none><ion-col> N/A </ion-col></ng-template>
           </ion-row>
         </ion-grid>
 
 <!--         <ion-content padding>
           <ion-list>
             <ion-item class="text" *ngFor="let item of items | async">
-              {{item.email}}
+              {{item}}
             </ion-item>
           </ion-list>
         </ion-content> -->
