@@ -27,7 +27,7 @@
           </ion-row>
 
           <ion-row align-items-center *ngFor="let item of items | async">
-            <ion-col> <ion-checkbox [(ngModel)]="item.gtid" (ionChange)="checked(item)"></ion-checkbox> </ion-col>
+            <ion-col> <ion-checkbox [(ngModel)]="item.selected" (ionChange)="checked(item)"></ion-checkbox> </ion-col>
             <ion-col *ngIf="item.firstname; else none"> {{item.firstname}} </ion-col>
             <ion-col *ngIf="item.lastname; else none"> {{item.lastname}} </ion-col>
             <ion-col *ngIf="item.email; else none"> {{item.email}} </ion-col>
@@ -42,33 +42,6 @@
           </ion-row>
         </ion-grid>
 
-<!--         <ion-content padding>
-          <ion-list>
-            <ion-item class="text" *ngFor="let item of items | async">
-              {{item}}
-            </ion-item>
-          </ion-list>
-        </ion-content> -->
-<!--         <div class="row header">
-          <div class="col"> <ion-checkbox [(ngModel)]="selectAll" (ionChange)="allChecked()"></ion-checkbox> Select All </div>
-          <div class="col"> First Name </div>
-          <div class="col"> Last Name </div>
-          <div class="col"> Email </div>
-          <div class="col"> Section </div>
-          <div class="col"> Jacket </div>
-          <div class="col"> Sash </div>
-          <div class="col"> Bibbus </div>
-          <div class="col"> Gloves </div>
-          <div class="col"> Vest </div>
-          <div class="col"> Note </div>
-        </div> -->
-
-<!--         <div class="row" ng-repeat="item">
-          <div class="col">{{item.email}}</div>
-          <div class="col">{{item.gtid}}</div>
-          <div class="col">{{item.firstname}}</div>
-          <div class="col"><button class="button" ng-click="ctrl.add($index)">Add</button></div>
-        </div> -->
     </ion-content>
 
     <div id = "decisions">

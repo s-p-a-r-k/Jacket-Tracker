@@ -20,6 +20,7 @@ import {LoggedinPage} from '../loggedin/loggedin';
 })
 export class QuickmanagementPage {
   items: Observable<any[]>;
+  selectAll = false;
   itemarr = [];
   arrChosen = [];
   radioOpen = false;
@@ -40,14 +41,21 @@ export class QuickmanagementPage {
   }
 
   backToHome() {
-    this.navCtrl.push(LoggedinPage);
+    this.navCtrl.setRoot(LoggedinPage);
+  }
+
+  allChecked() {
+    if (this.selectAll) {
+      this.selectAll = false;
+    } else {
+      this.selectAll = true;
+    }
   }
 
   checked(item) {
     console.log(item);
     this.arrChosen.push(item);
     this.arrChosen = this.arrChosen.reduce((x,y) => x.findIndex(e => e.email==y.email) < 0 ? [...x, y]: x, []);
-
   }
 
   quickManageSubmit(selectedAction) {
@@ -56,8 +64,8 @@ export class QuickmanagementPage {
       } else if (selectedAction == "uniform"){
         console.log('uniform status option selected');
 
-        
-        
+
+
         console.log(this.arrChosen);
         for (let student in this.arrChosen) {
             for (let equiptype in this.arrChosen[student].equipment) {
