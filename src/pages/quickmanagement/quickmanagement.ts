@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 import {LoggedinPage} from '../loggedin/loggedin';
 
@@ -17,8 +18,10 @@ import {LoggedinPage} from '../loggedin/loggedin';
   templateUrl: 'quickmanagement.html',
 })
 export class QuickmanagementPage {
+  items: Observable<any[]>;
 
-  constructor(private fire: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, afDB: AngularFireDatabase) {
+    this.items = afDB.list('students').valueChanges();
   }
 
   ionViewDidLoad() {
@@ -38,5 +41,5 @@ export class QuickmanagementPage {
         console.log('student information option');
       }
   }
-  
+
 }
