@@ -20,12 +20,10 @@ import {LoggedinPage} from '../loggedin/loggedin';
 })
 export class QuickmanagementPage {
   items: Observable<any[]>;
+  selectAll = false;
 
   constructor(public navCtrl: NavController, afDB: AngularFireDatabase) {
     this.items = afDB.list('students').valueChanges();
-    console.log('========================================');
-    console.log(this.items);
-    console.log('========================================');
   }
 
   ionViewDidLoad() {
@@ -33,7 +31,11 @@ export class QuickmanagementPage {
   }
 
   backToHome() {
-    this.navCtrl.push(LoggedinPage);
+    this.navCtrl.setRoot(LoggedinPage);
+  }
+
+  allChecked() {
+    this.selectAll = true;
   }
 
   checked(item) {
