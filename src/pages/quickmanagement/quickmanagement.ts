@@ -20,12 +20,16 @@ import {LoggedinPage} from '../loggedin/loggedin';
 })
 export class QuickmanagementPage {
   items: Observable<any[]>;
+  itemarr = [];
   arrChosen = [];
   radioOpen = false;
   radioResult: any;
+  studentRecordRef;
 
-  constructor(public navCtrl: NavController, afDB: AngularFireDatabase, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController) {
     this.items = afDB.list('students').valueChanges();
+    this.items.subscribe(_afDB => {this.itemarr = _afDB})
+    this.studentRecordRef = this.afDB.list('students');
     console.log('========================================');
     console.log(this.items);
     console.log('========================================');
@@ -51,13 +55,25 @@ export class QuickmanagementPage {
         console.log('email option selected');
       } else if (selectedAction == "uniform"){
         console.log('uniform status option selected');
-        console.log(this.arrChosen);
-        //for (let student in this.arrChosen) {
 
-       // }
+        
+        
+        console.log(this.arrChosen);
+        for (let student in this.arrChosen) {
+            for (let equiptype in this.arrChosen[student].equipment) {
+              this.doRadio();
+              console.log(this.arrChosen[student].equipment[equiptype].status);
+              this.arrChosen[student].equipment[equiptype].status = this.radioResult;
+              console.log(this.itemarr);
+            }
+        }
       } else {
-        console.log('student information option');
+        console.log('student information option selected');
       }
+  }
+
+  updateStatus(result) {
+
   }
 
   doRadio() {
@@ -67,7 +83,7 @@ export class QuickmanagementPage {
     alert.addInput({
       type: 'radio',
       label: 'Clean',
-      value: 'new',
+      value: 'clean',
       checked: true
     });
 
