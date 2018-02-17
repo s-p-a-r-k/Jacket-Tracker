@@ -23,13 +23,13 @@
       <ion-input formControlName="email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Instrument</ion-label>
-      <ion-select [selectOptions]="selectOptions" formControlName="instrument" (ionChange)="initEquipment()">
-        <ion-option *ngFor="let i of instruments" [value]="i">{{i.name}}</ion-option>
+      <ion-label floating>Section</ion-label>
+      <ion-select [selectOptions]="selectOptions" formControlName="section" (ionChange)="initEquipment()">
+        <ion-option *ngFor="let i of sections" [value]="i">{{i.name}}</ion-option>
       </ion-select>
     </ion-item>
     <div formArrayName="equipment">
-      <div *ngFor="let e of uniformRequest.value.instrument.equipment; let i=index" class="panel panel-default">
+      <div *ngFor="let e of uniformRequest.value.section.equipment; let i=index" class="panel panel-default">
         <div [formGroupName]="i">
           <ion-input [readonly]="true" [value]="e" formControlName="type">{{e}}</ion-input>
           <ion-item>

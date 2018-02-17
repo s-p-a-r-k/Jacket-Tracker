@@ -11,12 +11,12 @@ import { Observable } from 'rxjs/Observable';
 export class UniformCheckoutPage {
 
   //TODO: Replace this with actual band values
-  private instruments = [
+  private sections = [
     {'name': 'Drums', 'equipment': ['Hat', 'Jacket', 'Drumsticks']},
     {'name': 'Trombone', 'equipment': ['Cover', 'Wax']}
   ];
   private selectOptions = {
-    title: 'Select your instrument',
+    title: 'Select your section',
     mode: 'md'
   };
   private uniformRequest: FormGroup;
@@ -28,9 +28,9 @@ export class UniformCheckoutPage {
       lastname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z]*'), Validators.required])],
       gtid: ['', Validators.compose([Validators.maxLength(9), Validators.minLength(9), Validators.pattern('[0-9]*'), Validators.required])],
       email: ['', Validators.email],
-      instrument: ['', Validators.required],
+      section: ['', Validators.required],
       equipment: formBuilder.array([
-        //Dynamically created on instrument <select> change
+        //Dynamically created on section <select> change
       ]),
       agree: [false, Validators.requiredTrue],
     })
@@ -39,7 +39,7 @@ export class UniformCheckoutPage {
   initEquipment() {
     const array = <FormArray> this.uniformRequest.controls.equipment;
     array.controls = []
-    for (let equipmentType of this.uniformRequest.value.instrument.equipment) {
+    for (let equipmentType of this.uniformRequest.value.section.equipment) {
       array.push(this.formBuilder.group({
         type: ['', Validators.required],
         id: ['', Validators.required]
@@ -47,17 +47,21 @@ export class UniformCheckoutPage {
     }
   }
 
-  //Disable certain values before saving so that unncessary data not persisted
+  //Reshape form values before saving to index by equipment and remove unncessary data not persisted
   submitForm() {
-    const form = this.uniformRequest.controls;
-    form.agree.disable()
-    form.instrument.disable()
+    const form = Object.assign({}, this.uniformRequest.value);
+    delete form.agree;
+    delete form.section;
+    const equipmentObjs = form.equipment
+    form.equipment = {};
+    for (let equip of equipmentObjs) {
+      var newKey = equip.type;
+      form.equipment[newKey] = {
+        id: equip.id
+      }
+    }
     const studentRecordsRef = this.fire.list('students');
-    console.log(studentRecordsRef)
-    console.log(this.uniformRequest.value)
-    studentRecordsRef.push(this.uniformRequest.value)
+    studentRecordsRef.push(form)
       .then((result) => console.log(result))
-    form.agree.enable()
-    form.instrument.enable()
   }
 }
