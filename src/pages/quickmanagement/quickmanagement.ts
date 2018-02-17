@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
 
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 
 import {LoggedinPage} from '../loggedin/loggedin';
@@ -25,12 +26,15 @@ export class QuickmanagementPage {
   arrChosen = [];
   radioOpen = false;
   radioResult: any;
+  equipRecordRef;
   studentRecordRef;
 
-  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth) {
     this.items = afDB.list('students').valueChanges();
     this.items.subscribe(_afDB => {this.itemarr = _afDB})
+    this.equipRecordRef = this.afDB.list('equipment');
     this.studentRecordRef = this.afDB.list('students');
+
     console.log('========================================');
     console.log(this.items);
     console.log('========================================');
@@ -63,17 +67,9 @@ export class QuickmanagementPage {
         console.log('email option selected');
       } else if (selectedAction == "uniform"){
         console.log('uniform status option selected');
-
-
-
-        console.log(this.arrChosen);
-        for (let student in this.arrChosen) {
-            for (let equiptype in this.arrChosen[student].equipment) {
-              this.doRadio();
-              this.studentRecordRef.update('-L5MwxyyDzZow5oNVIxu/equipment/' + equiptype, {status: 'dirty'})
-              //this.updateStatus(this.radioResult, student, equiptype);
-            }
-        }
+        console.log(this.studentRecordRef);
+        this.equipRecordRef.update('Jacket/17', {status: 'dirty'});
+        this.equipRecordRef.update('Sash/7', {status: 'dirty'});
       } else {
         console.log('student information option selected');
       }
