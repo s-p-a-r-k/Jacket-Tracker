@@ -48,7 +48,7 @@
       <ion-list>
         <ion-item>
             <ion-label>Select Action</ion-label>
-            <ion-select interface = "popover" [(ngModel)]="action" (ngModelChange)="quickManageSubmit(action)" (change) = "doRadio()">
+            <ion-select interface = "popover" [(ngModel)]="action" (ngModelChange)="quickManageSubmit(action);">
               <ion-option value="email">Email selected members</ion-option>
               <ion-option value="uniform">Modify selected uniform status</ion-option>
               <ion-option value="student">Modify selected student information</ion-option>

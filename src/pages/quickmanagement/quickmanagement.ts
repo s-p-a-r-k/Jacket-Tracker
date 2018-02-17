@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Observable';
 
 import {LoggedinPage} from '../loggedin/loggedin';
 
+import { Events } from 'ionic-angular';
+
 /**
  * Generated class for the QuickmanagementPage page.
  *
@@ -29,7 +31,7 @@ export class QuickmanagementPage {
   equipRecordRef;
   studentRecordRef;
 
-  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth, public events: Events) {
     this.items = afDB.list('students').valueChanges();
     this.items.subscribe(_afDB => {this.itemarr = _afDB})
     this.equipRecordRef = this.afDB.list('equipment');
@@ -67,9 +69,12 @@ export class QuickmanagementPage {
         console.log('email option selected');
       } else if (selectedAction == "uniform"){
         console.log('uniform status option selected');
-        console.log(this.studentRecordRef);
+        this.doRadio();
+
         this.equipRecordRef.update('Jacket/17', {status: 'dirty'});
-        this.equipRecordRef.update('Sash/7', {status: 'dirty'});
+
+        this.doRadio();
+        this.equipRecordRef.update('Sash/7', {status: 'alteration needed'});
       } else {
         console.log('student information option selected');
       }
@@ -108,12 +113,40 @@ export class QuickmanagementPage {
       handler: (data: any) => {
         
         console.log('Radio data:', data);
-        let navTransition = alert.dismiss();
+        let navTransition = alert.dismiss().then(() => {this.radioResult = data});
 
-        this.radioResult = data;
+        //this.radioResult = data;
 
         return false;
       }
+    });
+
+    alert.present();
+  }
+  doPrompt() {
+    let alert = this.alertCtrl.create({
+      title: 'Choose status',
+      message: 'Enter status',
+      inputs: [
+        {
+          name: 'status',
+          placeholder: 'Status'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: () => {
+            console.log('Saved clicked');
+          }
+        }
+      ]
     });
 
     alert.present();
