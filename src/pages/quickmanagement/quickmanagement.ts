@@ -111,7 +111,7 @@ export class QuickmanagementPage {
     alert.addButton({
       text: 'Ok',
       handler: (data: any) => {
-        
+
         console.log('Radio data:', data);
         let navTransition = alert.dismiss().then(() => {this.radioResult = data});
 

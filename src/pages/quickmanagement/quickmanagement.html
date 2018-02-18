@@ -12,36 +12,37 @@
     </ion-header-bar> -->
     <ion-content>
         <ion-grid>
-          <ion-row align-items-center>
-            <ion-col> <ion-checkbox [(ngModel)]="selectAll" (ionChange)="allChecked()"></ion-checkbox> Select All </ion-col>
+          <ion-row justify-content-center align-items-center>
+            <ion-col> <ion-checkbox [(ngModel)]="selectedAll" (ionChange)="allChecked($event)"></ion-checkbox> Select All </ion-col>
             <ion-col> First Name </ion-col>
             <ion-col> Last Name </ion-col>
             <ion-col> Email </ion-col>
             <ion-col> Section </ion-col>
             <ion-col> Jacket </ion-col>
             <ion-col> Sash </ion-col>
-            <ion-col> Bibbus </ion-col>
+            <ion-col> Bibbers </ion-col>
+            <ion-col> Shako </ion-col>
             <ion-col> Gloves </ion-col>
             <ion-col> Vest </ion-col>
             <ion-col> Note </ion-col>
           </ion-row>
 
-          <ion-row align-items-center *ngFor="let item of items | async">
-            <ion-col> <ion-checkbox [(ngModel)]="item.selected" (ionChange)="checked(item)"></ion-checkbox> </ion-col>
+          <ion-row justify-content-center align-items-center *ngFor="let item of items | async">
+            <ion-col> <ion-checkbox [(ngModel)]="item.selected" [checked]="selectAll" (ionChange)="checked(item)"></ion-checkbox> </ion-col>
             <ion-col *ngIf="item.firstname; else none"> {{item.firstname}} </ion-col>
             <ion-col *ngIf="item.lastname; else none"> {{item.lastname}} </ion-col>
             <ion-col *ngIf="item.email; else none"> {{item.email}} </ion-col>
             <ion-col *ngIf="item.section; else none"> {{item.section}} </ion-col>
-            <ion-col *ngIf="item.jacket; else none"> {{item.jacket.id}} </ion-col>
-            <ion-col *ngIf="item.sash; else none"> {{item.sash.id}} </ion-col>
-            <ion-col *ngIf="item.bibbus; else none"> {{item.bibbus.id}} </ion-col>
-            <ion-col *ngIf="item.gloves; else none"> {{item.gloves.id}} </ion-col>
-            <ion-col *ngIf="item.vest; else none"> {{item.vest.id}} </ion-col>
+            <ion-col *ngIf="item.equipment && item.equipment.Jacket; else none"> {{item.equipment.Jacket.id}} </ion-col>
+            <ion-col *ngIf="item.equipment && item.equipment.Sash; else none"> {{item.equipment.Sash.id}} </ion-col>
+            <ion-col *ngIf="item.equipment && item.equipment.Pants; else none"> {{item.equipment.Pants.id}} </ion-col>
+            <ion-col *ngIf="item.equipment && item.equipment.Shako; else none"> {{item.equipment.Shako.id}} </ion-col>
+            <ion-col *ngIf="item.equipment && item.equipment.Gloves; else none"> {{item.equipment.Gloves.id}} </ion-col>
+            <ion-col *ngIf="item.equipment && item.equipment.Vest; else none"> {{item.equipment.Vest.id}} </ion-col>
             <ion-col *ngIf="item.note; else none"> {{item.note}} </ion-col>
             <ng-template #none><ion-col> N/A </ion-col></ng-template>
           </ion-row>
         </ion-grid>
-
     </ion-content>
 
     <div id = "decisions">

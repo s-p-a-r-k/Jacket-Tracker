@@ -12,4 +12,8 @@ page-quickmanagement {
     .row:last-child .col {
       border-bottom: solid 1px grey;
     }
+
+    .grid, .row {
+      height: 150%;
+    }
 }
