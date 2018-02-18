@@ -7,6 +7,8 @@ import { LandingPage } from '../pages/landing/landing';
 import { ListPage } from '../pages/list/list';
 import { LoggedinPage } from '../pages/loggedin/loggedin';
 
+import {QuickmanagementPage} from '../pages/quickmanagement/quickmanagement';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -29,7 +31,9 @@ export class MyApp {
       { title: 'View Uniforms', component: LoggedinPage },
       { title: 'Manage Acount', component: LoggedinPage },
       { title: 'Assign Uniforms', component: LoggedinPage },
-      { title: 'Temp Quick Management', component: LoggedinPage }
+      { title: 'Quick Management', component: QuickmanagementPage }
+
+
     ];
 
   }
