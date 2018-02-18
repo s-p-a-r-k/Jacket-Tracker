@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Jacket Tracker</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="uniformRequest" (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label floating>First Name</ion-label>
+      <ion-input formControlName="firstname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Last Name</ion-label>
+      <ion-input formControlName="lastname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>GTID</ion-label>
+      <ion-input formControlName="gtid"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Section</ion-label>
+      <ion-select [selectOptions]="selectOptions" formControlName="section" (ionChange)="initEquipment()">
+        <ion-option *ngFor="let i of sections" [value]="i">{{i.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <div formArrayName="equipment">
+      <div *ngFor="let e of uniformRequest.value.section.equipment; let i=index" class="panel panel-default">
+        <div [formGroupName]="i">
+          <ion-input [readonly]="true" [value]="e" formControlName="type">{{e}}</ion-input>
+          <ion-item>
+            <ion-label floating>ID</ion-label>
+            <ion-input type="text" formControlName="id"></ion-input>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+    <ion-item>
+      <p><span>Waiver Placeholder</span></p>
+    </ion-item>
+    <ion-item>
+      <ion-label>I agree to the terms and conditions above</ion-label>
+      <ion-checkbox formControlName="agree"></ion-checkbox>
+    </ion-item>
+    <div id="submit" padding>
+      <button ion-button large type="submit" [disabled]="!uniformRequest.valid">Submit</button>
+    </div>
+  </form>
+</ion-content>

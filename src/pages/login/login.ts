@@ -43,13 +43,12 @@ export class LoginPage {
       console.log('got some data', this.fire.auth.currentUser);
       //user is logged in
       this.alert('Success! You are logged in');
-      this.navCtrl.setRoot( LoggedinPage);
+      this.navCtrl.setRoot(LoggedinPage);
     })
     .catch( error => {
       console.log('got an error', error);
       this.alert(error.message);
     })
-    
   }
 
 }

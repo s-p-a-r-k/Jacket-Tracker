@@ -3,28 +3,27 @@ import { NavController, AlertController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
-import {LoginPage} from '../login/login';
-import {CreateaccountPage} from '../createaccount/createaccount';
+import { LoginPage } from '../login/login';
+import { CreateaccountPage } from '../createaccount/createaccount';
+import { UniformCheckoutPage } from '../uniformCheckout/uniformCheckout';
 
 @Component({
   selector: 'page-landing',
   templateUrl: 'landing.html'
 })
 export class LandingPage {
-  @ViewChild('username') uname;
-  @ViewChild('password') password;
-  items: Observable<any[]>;
+
   constructor(
-    public db: AngularFireDatabase,
-    public navCtrl: NavController,
-    public alertCtrl: AlertController
-  ) {
-    this.items = db.list('list').valueChanges();
-  }
+    private navCtrl: NavController,
+    private alertCtrl: AlertController
+  ) {}
   logIn() {
     this.navCtrl.push(LoginPage);
   }
   createAcc() {
     this.navCtrl.push(CreateaccountPage);
+  }
+  uniformCheckout() {
+    this.navCtrl.push(UniformCheckoutPage);
   }
 }
