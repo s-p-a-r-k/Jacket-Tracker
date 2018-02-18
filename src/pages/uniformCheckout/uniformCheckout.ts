@@ -3,6 +3,7 @@ import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { AlertController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+import { WaiverService } from '../../waiver.service';
 
 @Component({
   selector: 'page-uniformCheckout',
@@ -19,10 +20,16 @@ export class UniformCheckoutPage {
     title: 'Select your section',
     mode: 'md'
   };
+  private waiverSrc: Observable<String | null>;
   private uniformRequest: FormGroup;
 
   constructor(private fire: AngularFireDatabase,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private waiverService: WaiverService) {
+    waiverService.getWaiverURL()
+      .subscribe(
+        url => this.waiverSrc = waiverService.replaceOrigin(url)
+      )
     this.uniformRequest = formBuilder.group({
       firstname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z]*'), Validators.required])],
       lastname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z]*'), Validators.required])],
