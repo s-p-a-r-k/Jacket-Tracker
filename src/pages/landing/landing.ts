@@ -1,25 +1,29 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, AlertController } from 'ionic-angular';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
-/**
- * Generated class for the LandingPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { LoginPage } from '../login/login';
+import { CreateaccountPage } from '../createaccount/createaccount';
+import { UniformCheckoutPage } from '../uniformCheckout/uniformCheckout';
 
-@IonicPage()
 @Component({
   selector: 'page-landing',
-  templateUrl: 'landing.html',
+  templateUrl: 'landing.html'
 })
 export class LandingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    private navCtrl: NavController,
+    private alertCtrl: AlertController
+  ) {}
+  logIn() {
+    this.navCtrl.push(LoginPage);
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LandingPage');
+  createAcc() {
+    this.navCtrl.push(CreateaccountPage);
   }
-
+  uniformCheckout() {
+    this.navCtrl.push(UniformCheckoutPage);
+  }
 }

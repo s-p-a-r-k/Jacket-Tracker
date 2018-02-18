@@ -9,16 +9,16 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { LandingPage } from '../pages/landing/landing';
+import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import {LoginPage} from '../pages/login/login';
-import {LoggedinPage} from '../pages/loggedin/loggedin';
+import { LoginPage } from '../pages/login/login';
+import { LoggedinPage } from '../pages/loggedin/loggedin';
 import { CreateaccountPage } from '../pages/createaccount/createaccount';
+import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
 
 import {QuickmanagementPage} from '../pages/quickmanagement/quickmanagement';
 
@@ -35,13 +35,14 @@ const firebaseAuth = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    ListPage,
     LandingPage,
+    ListPage,
     LoginPage,
     CreateaccountPage,
     LoggedinPage,
-    QuickmanagementPage
+    QuickmanagementPage,
+    UniformCheckoutPage
+
   ],
   imports: [
     BrowserModule,
@@ -54,13 +55,14 @@ const firebaseAuth = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    ListPage,
     LandingPage,
+    ListPage,
     LoginPage,
     CreateaccountPage,
     LoggedinPage,
-    QuickmanagementPage
+    QuickmanagementPage,
+    UniformCheckoutPage
+
   ],
   providers: [
     StatusBar,

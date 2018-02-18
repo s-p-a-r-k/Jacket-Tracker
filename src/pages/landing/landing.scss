@@ -1,3 +1,16 @@
 page-landing {
-
+    #login-buttons {
+        display: flex;
+        flex-direction: row;
+    }
+    #login-buttons button {
+        flex: 1;
+    }
+    #student-buttons {
+        display: flex;
+        flex-direction: row;
+    }
+    #student-buttons button {
+        flex: 1;
+    }
 }

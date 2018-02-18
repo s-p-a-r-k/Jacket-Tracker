@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import { HomePage } from '../home/home';
+import { LandingPage } from '../landing/landing';
 
 
 /**
@@ -19,7 +19,7 @@ import { HomePage } from '../home/home';
 })
 export class LoggedinPage {
 
-  email: string;
+  email: String;
 
   constructor(private fire: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     this.email = fire.auth.currentUser.email;
@@ -53,11 +53,14 @@ export class LoggedinPage {
   onAssignUniformsClick() {
     console.log("clickedonassignuniformsclick")
   }
+  onTempQuickManagementClick() {
+    console.log("clickedon tempquickmanagementclick")
+  }
   onLogOutClick() {
     this.fire.auth.signOut()
       .then(() => {
         this.alert('Sign out succesful')
-        this.navCtrl.setRoot( HomePage)
+        this.navCtrl.setRoot(LandingPage)
         console.log('logged out');
       })
       .catch( error => {
