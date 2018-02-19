@@ -15,7 +15,6 @@ import { WaiverService } from '../../waiver.service';
 export class UniformCheckoutPage {
 
   private equipment: AngularFireList<any[]>;
-  //TODO: Replace this with actual band values
   private sections = [
     {'name': 'Alto Saxophone', 'equipment': ['Jacket', 'Pants', 'Sash', 'Shako']},
     {'name': 'Baritone', 'equipment': ['Jacket', 'Pants', 'Sash', 'Shako']},
@@ -46,7 +45,7 @@ export class UniformCheckoutPage {
               private alertCtrl: AlertController,
               public db: AngularFireDatabase,
               private navCtrl: NavController) {
-      this.equipment = db.list('/equipment'); 
+    this.equipment = db.list('/equipment');
     waiverService.getWaiverURL()
       .subscribe(
         url => this.waiverSrc = waiverService.replaceOrigin(url)
@@ -75,43 +74,72 @@ export class UniformCheckoutPage {
     }
   }
 
-  uniformOwner: string;
-  i = -1; //-1 if the student field is empty/ otherwise not 1
-  clickSubmit() {
+  //For each equipment, ID pair, checks against the database to ensure
+  //student has not already checked it out
+  async verifyEquipment(form: Object) {
 
+    let failures = [];
+    const firstname = form['firstname'];
+    const lastname = form['lastname'];
+    const equipmentForm = form['equipment']
 
-    // USER_LOCATION: 'https://jacket-tracker-90b5c.firebaseio.com/';
-    // userRef: new Firebase(this.USER_LOCATION);    
+    await Promise.all(Object.keys(equipmentForm).map(k => {
+      const inputId = equipmentForm[k].id
+      return new Promise(resolve => {
+        this.db.object('/equipment/' + k + '/' + inputId)
+          .snapshotChanges()
+          .subscribe(action => {
+            const obj = action.payload.val();
+            if (obj == null || obj['student'] == null) {
+              failures.push(k + ' #' + inputId + ' was not found.');
+            } else if (String(obj['student']) != "") {
+              failures.push(k + ' #' + inputId + ' has already been assigned.')
+            } else {
+              //TODO: update the equipment entry with new student
+            }
+            resolve()
+          })
+      });
+    })).then(() => {
+      //Wait for all database queries to finish
+    });
 
+    return new Promise((resolve, reject) => {
+      if (failures.length == 0) {
+        this.alertSuccess(firstname, lastname)
+        resolve()
+      } else {
+        this.alertFailure(failures)
+        reject(failures)
+      }
+    })
+  }
 
-    //check database
-    // this.equipment.contain('Jacket',{'1':{size: "small", status: "clean", student: "empty"}});
-    // this.uniformOwner = this.equipment.update('Jacket',{'1':{size: "small", status: "clean", student: "empty"}});
-    //add algorithm form checking database 
+  alertSuccess(firstname: String, lastname: String) {
+    let alert = this.alertCtrl.create({
+      title: 'Success',
+      subTitle: firstname + '    ' + lastname,
+      message: 'Successfully Assigned',
+      buttons: ['OK']
+    }).present();
+  }
 
-    //success
-    if(this.i = -1) {
-      let alert = this.alertCtrl.create({
-        title: 'Success',
-
-        //TODO: need to figure out how to get the first and last name
-        // subTitle: this.firstname + ' ' + this.lastname + '\nSuccessfully Assigned',
-        subTitle:'Successfully Assigned',
-        buttons: ['OK']
-      }).present();
-    } else {
-      //when fail
-      let alert2 = this.alertCtrl.create({
-        title: 'Fail',
-        subTitle: 'One of your uniform piece is checked out. \nContact the uniform lieutenant ',
-        buttons: ['OK']
-      }).present();
+  alertFailure(failures) {
+    var msgHtml = '';
+    for (let failure of failures) {
+      msgHtml += (failure + '<br>')
     }
+    let alert = this.alertCtrl.create({
+      title: 'Failure',
+      subTitle: 'Please contact a Uniforms Lieutenant',
+      message: msgHtml,
+      //TODO add navigation to override popup
+      buttons: ['OK']
+    }).present();
   }
 
   //Reshape form values before saving to index by equipment and remove unncessary data not persisted
   submitForm() {
-    this.clickSubmit();
     const form = Object.assign({}, this.uniformRequest.value);
     delete form.agree;
     delete form.section;
@@ -123,14 +151,12 @@ export class UniformCheckoutPage {
         id: equip.id
       }
     }
-    const studentRecordsRef = this.fire.list('students');
-    studentRecordsRef.push(form)
-      .then((result) => console.log(result))
-
-    this.navCtrl.push(UniformCheckoutPage);
-  }
-
-  backToLanding() {
-    this.navCtrl.push(LandingPage);
+    this.verifyEquipment(form).then(() => {
+      const studentRecordsRef = this.fire.list('students');
+      studentRecordsRef.push(form)
+        .then((result) => console.log(result))
+    }).catch((failures) => {
+      //TODO: Clear form or clear error values
+    });
   }
 }
