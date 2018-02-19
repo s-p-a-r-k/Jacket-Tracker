@@ -24,6 +24,7 @@ import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
 import { WaiverService } from '../waiver.service';
 
 import {QuickmanagementPage} from '../pages/quickmanagement/quickmanagement';
+import {SearchPage} from '../pages/search/search'
 
 const firebaseAuth = {
   apiKey: "AIzaSyDPr_smunA_RpcWByjClYrTcWdDJyb0--M",
@@ -44,7 +45,8 @@ const firebaseAuth = {
     CreateaccountPage,
     LoggedinPage,
     QuickmanagementPage,
-    UniformCheckoutPage
+    UniformCheckoutPage,
+    SearchPage
 
   ],
   imports: [
@@ -67,7 +69,8 @@ const firebaseAuth = {
     CreateaccountPage,
     LoggedinPage,
     QuickmanagementPage,
-    UniformCheckoutPage
+    UniformCheckoutPage,
+    SearchPage
 
   ],
   providers: [
