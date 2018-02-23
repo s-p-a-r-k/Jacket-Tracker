@@ -13,4 +13,12 @@ page-landing {
     #student-buttons button {
         flex: 1;
     }
+    #forgot-password-button {
+        display: flex;
+        flex-direction: row;
+    }
+    #forgot-password-button button{
+        flex: 1;
+    }
+
 }

@@ -16,7 +16,7 @@
       <button ion-button ion-button (click) ="logIn()">Log In</button>
     </div>
     <div id = "forgot-password-button">
-      <button ion-button small (click) ="createAcc()">Forgot Password</button>
+      <button ion-button ion-button (click) ="createAcc()">Forgot Password</button>
     </div>
   <ion-item *ngFor="let item of items | async">
     {{item | json}}
