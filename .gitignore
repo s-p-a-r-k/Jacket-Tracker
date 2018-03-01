@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/macos,node,ionic3,windows,firebase
 
+### Environment Config ###
+environment.ts
+
 ### Firebase ###
 .idea
 **/node_modules/*
