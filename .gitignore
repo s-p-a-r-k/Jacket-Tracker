@@ -2,7 +2,7 @@
 # Created by https://www.gitignore.io/api/macos,node,ionic3,windows,firebase
 
 ### Environment Config ###
-environment.ts
+src/environment.ts
 
 ### Firebase ###
 .idea
