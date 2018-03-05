@@ -43,34 +43,39 @@ export class UniformCheckoutPage {
               private formBuilder: FormBuilder,
               private waiverService: WaiverService,
               private alertCtrl: AlertController,
-              public db: AngularFireDatabase,
               private navCtrl: NavController) {
-    this.equipment = db.list('/equipment');
+    this.equipment = fire.list('/equipment');
     waiverService.getWaiverURL()
       .subscribe(
         url => this.waiverSrc = waiverService.replaceOrigin(url)
       )
-    this.uniformRequest = formBuilder.group({
+    this.initForm()
+  }
+
+  initForm() {
+    this.uniformRequest = this.formBuilder.group({
       firstname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z]*'), Validators.required])],
       lastname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z]*'), Validators.required])],
       gtid: ['', Validators.compose([Validators.maxLength(9), Validators.minLength(9), Validators.pattern('[0-9]*'), Validators.required])],
       email: ['', Validators.email],
       section: ['', Validators.required],
-      equipment: formBuilder.array([
+      equipment: this.formBuilder.array([
         //Dynamically created on section <select> change
       ]),
       agree: [false, Validators.requiredTrue],
-    })
+    });
   }
 
   initEquipment() {
     const array = <FormArray> this.uniformRequest.controls.equipment;
     array.controls = []
-    for (let equipmentType of this.uniformRequest.value.section.equipment) {
-      array.push(this.formBuilder.group({
-        type: ['', Validators.required],
-        id: ['', Validators.required]
-      }));
+    if (this.uniformRequest.value.section.equipment) {
+      for (let equipmentType of this.uniformRequest.value.section.equipment) {
+        array.push(this.formBuilder.group({
+          type: ['', Validators.required],
+          id: ['', Validators.required]
+        }));
+      }
     }
   }
 
@@ -86,16 +91,24 @@ export class UniformCheckoutPage {
     await Promise.all(Object.keys(equipmentForm).map(k => {
       const inputId = equipmentForm[k].id
       return new Promise(resolve => {
-        this.db.object('/equipment/' + k + '/' + inputId)
+        this.fire.object('/equipment/' + k + '/' + inputId)
           .snapshotChanges()
           .subscribe(action => {
             const obj = action.payload.val();
-            if (obj == null || obj['student'] == null) {
-              failures.push(k + ' #' + inputId + ' was not found.');
-            } else if (String(obj['student']) != "") {
-              failures.push(k + ' #' + inputId + ' has already been assigned.')
-            } else {
-              //TODO: update the equipment entry with new student
+            if (obj == null) {
+              let msg = k + ' #' + inputId + ' was not found.';
+              let failure = {
+                'message': msg,
+                'equipment': k
+              };
+              failures.push(failure);
+            } else if (obj['student'] != null && String(obj['student']) != "") {
+              let msg = k + ' #' + inputId + ' has already been assigned.';
+              let failure = {
+                'message': msg,
+                'equipment': k
+              };
+              failures.push(failure);
             }
             resolve()
           })
@@ -127,7 +140,7 @@ export class UniformCheckoutPage {
   alertFailure(failures) {
     var msgHtml = '';
     for (let failure of failures) {
-      msgHtml += (failure + '<br>')
+      msgHtml += (failure.message + '<br>')
     }
     let alert = this.alertCtrl.create({
       title: 'Failure',
@@ -152,11 +165,37 @@ export class UniformCheckoutPage {
       }
     }
     this.verifyEquipment(form).then(() => {
-      const studentRecordsRef = this.fire.list('students');
-      studentRecordsRef.push(form)
-        .then((result) => console.log(result))
+      this.saveStudentAndEquipment(form);
+      this.initForm();
     }).catch((failures) => {
-      //TODO: Clear form or clear error values
+      this.clearFormOfFailures(failures)
     });
+  }
+
+  saveStudentAndEquipment(form) {
+    const studentRecordsRef = this.fire.list('students');
+    studentRecordsRef.push(form)
+      .then((result) => {
+        let student = result.key;
+        Object.keys(form.equipment).forEach((equipType, details) => {
+          const id = form.equipment[equipType].id;
+          const equipRecordsRef = this.fire.object('/equipment/' + equipType + '/' + id + '/student/');
+          equipRecordsRef.set(student)
+            .then(result => console.log(result));
+        });
+      }
+    );
+  }
+
+  clearFormOfFailures(failures) {
+    let equipArr = this.uniformRequest.value.equipment;
+    for (let failure of failures) {
+      for (let equip of equipArr) {
+        if (equip.type == failure.equipment) {
+          equip.id = '';
+        }
+      }
+    }
+    this.uniformRequest.patchValue({equipment: equipArr});
   }
 }
