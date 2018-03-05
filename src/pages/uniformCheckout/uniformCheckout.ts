@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { AlertController, NavController } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { updateDate } from 'ionic-angular/util/datetime-util';
 import { LandingPage } from '../landing/landing';
@@ -40,6 +41,7 @@ export class UniformCheckoutPage {
   private uniformRequest: FormGroup;
 
   constructor(private fire: AngularFireDatabase,
+              private fireAuth: AngularFireAuth,
               private formBuilder: FormBuilder,
               private waiverService: WaiverService,
               private alertCtrl: AlertController,
@@ -102,15 +104,25 @@ export class UniformCheckoutPage {
                 'equipment': k
               };
               failures.push(failure);
+              resolve()
             } else if (obj['student'] != null && String(obj['student']) != "") {
-              let msg = k + ' #' + inputId + ' has already been assigned.';
-              let failure = {
-                'message': msg,
-                'equipment': k
-              };
-              failures.push(failure);
+              //Get student that is assigned the equipment
+              const studentRecordsRef = this.fire.object('/students/' + obj['student']);
+              studentRecordsRef.snapshotChanges()
+                .subscribe(action => {
+                  const student = action.payload.val();
+                  const otherStudentName = student['firstname'] + ' ' + student['lastname'];
+                  let msg = k + ' #' + inputId + ' has already been assigned to ' + otherStudentName + '.';
+                  let failure = {
+                    'message': msg,
+                    'equipment': k
+                  };
+                  failures.push(failure);
+                  resolve()
+                });
+            } else if (obj['student'] == "") {
+              resolve()
             }
-            resolve()
           })
       });
     })).then(() => {
@@ -123,7 +135,6 @@ export class UniformCheckoutPage {
         resolve()
       } else {
         this.alertFailure(failures)
-        reject(failures)
       }
     })
   }
@@ -133,7 +144,12 @@ export class UniformCheckoutPage {
       title: 'Success',
       subTitle: firstname + '    ' + lastname,
       message: 'Successfully Assigned',
-      buttons: ['OK']
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.navCtrl.pop();
+        }
+      }]
     }).present();
   }
 
@@ -142,17 +158,59 @@ export class UniformCheckoutPage {
     for (let failure of failures) {
       msgHtml += (failure.message + '<br>')
     }
-    let alert = this.alertCtrl.create({
+    let override = this.alertCtrl.create({
+      title: 'Override',
+      subTitle: 'Enter Uniforms Lieutenant username and password to override the checkout',
+      inputs: [{
+        name: 'username',
+        placeholder: 'Username'
+      },
+      {
+        name: 'password',
+        placeholder: 'Password',
+        type: 'password'
+      }],
+      buttons: [{
+        text: 'SUBMIT',
+        handler: data => {
+          this.fireAuth.auth.signInWithEmailAndPassword(data.username, data.password)
+          .then(() => {
+            const form = this.reshapeForm();
+            this.saveStudentAndEquipment(form);
+            this.fireAuth.auth.signOut();
+            this.navCtrl.pop();
+          });
+        }
+      }]
+    });
+    let failure = this.alertCtrl.create({
       title: 'Failure',
       subTitle: 'Please contact a Uniforms Lieutenant',
       message: msgHtml,
-      //TODO add navigation to override popup
-      buttons: ['OK']
+      buttons: [{
+        text:'RETURN',
+        handler: () => {
+          this.clearFormOfFailures(failures);
+        }
+      },
+      {
+        text: 'OVERRIDE',
+        handler: () => {
+          override.present();
+        }
+      }]
     }).present();
   }
 
   //Reshape form values before saving to index by equipment and remove unncessary data not persisted
   submitForm() {
+    const form = this.reshapeForm()
+    this.verifyEquipment(form).then(() => {
+      this.saveStudentAndEquipment(form);
+    });
+  }
+
+  reshapeForm() {
     const form = Object.assign({}, this.uniformRequest.value);
     delete form.agree;
     delete form.section;
@@ -164,12 +222,7 @@ export class UniformCheckoutPage {
         id: equip.id
       }
     }
-    this.verifyEquipment(form).then(() => {
-      this.saveStudentAndEquipment(form);
-      this.initForm();
-    }).catch((failures) => {
-      this.clearFormOfFailures(failures)
-    });
+    return form;
   }
 
   saveStudentAndEquipment(form) {
