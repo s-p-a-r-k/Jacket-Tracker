@@ -8,6 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { LoggedinPage } from '../pages/loggedin/loggedin';
 
 import {QuickmanagementPage} from '../pages/quickmanagement/quickmanagement';
+import {SearchPage} from '../pages/search/search'
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,7 @@ export class MyApp {
     // Menu list but Temp Quick Management was made since we do not have search screen yet.
     this.pages = [
       { title: 'Add New Uniform', component: LoggedinPage },
-      { title: 'Search', component: LoggedinPage },
+      { title: 'Search', component: SearchPage },
       { title: 'View Current Assignments', component: LoggedinPage },
       { title: 'View Uniforms', component: LoggedinPage },
       { title: 'Manage Acount', component: LoggedinPage },

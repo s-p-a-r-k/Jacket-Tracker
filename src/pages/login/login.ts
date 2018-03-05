@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import {LoggedinPage} from '../loggedin/loggedin';
+import { CreateaccountPage } from '../createaccount/createaccount';
 
 
 /**
@@ -26,6 +27,7 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    
   }
 
   alert(message: string) {
@@ -49,6 +51,10 @@ export class LoginPage {
       console.log('got an error', error);
       this.alert(error.message);
     })
+  }
+
+  createAcc() {
+    this.navCtrl.push(CreateaccountPage);
   }
 
 }
