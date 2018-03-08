@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoggedinPage } from '../loggedin/loggedin';
+import { QuickmanagementPage } from '../quickmanagement/quickmanagement';
+import { AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
+
 
 /**
  * Generated class for the SearchPage page.
@@ -16,7 +20,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class SearchPage {
   searchLocation: any;
   type: any;
+  uniformID: any;
+  other: any;
+  firstName: any;
+  lastName: any;
+  gtid: any;
+  email: any;
   section: any;
+
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -25,6 +36,16 @@ export class SearchPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchPage');
+  }
+
+  
+  backToHome() {
+    this.navCtrl.setRoot(LoggedinPage);
+  }
+
+  searchClicked() {
+    this.navCtrl.setRoot(QuickmanagementPage);
+
   }
 
 }

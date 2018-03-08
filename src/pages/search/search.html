@@ -37,29 +37,29 @@
       </ion-item>
       <ion-item>
           <ion-label color="primary">ID</ion-label>
-          <ion-input placeholder="Enter Uniform ID" #id></ion-input>
+          <ion-input placeholder="Enter Uniform ID" [(ngModel)] ="uniformId"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary">Other</ion-label>
-            <ion-input placeholder="Other" #other></ion-input>
+            <ion-input placeholder="Other" [(ngModel)] ="other"></ion-input>
           </ion-item>
       </ion-list>
       <ion-list *ngIf="searchLocation == 'student'">
           <ion-item>
               <ion-label color="primary">First Name</ion-label>
-              <ion-input placeholder="First Name" #firstName></ion-input>
+              <ion-input placeholder="First Name" [(ngModel)] ="firstName"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label color="primary">Last Name</ion-label>
-                <ion-input placeholder="Last Name" #lastName></ion-input>
+                <ion-input placeholder="Last Name" [(ngModel)] ="lastName"></ion-input>
               </ion-item>
             <ion-item>
               <ion-label color="primary">GTID</ion-label>
-              <ion-input placeholder="GTID" #gtid></ion-input>
+              <ion-input placeholder="GTID" [(ngModel)] ="gtid"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label color="primary">Email</ion-label>
-                <ion-input placeholder="Email" #email></ion-input>
+                <ion-input placeholder="Email" [(ngModel)] ="email"></ion-input>
             </ion-item>
           <ion-item>
             <ion-label>Choose Section</ion-label>
@@ -70,13 +70,13 @@
           </ion-item>
           <ion-item>
               <ion-label color="primary">Other</ion-label>
-              <ion-input placeholder="Other" #other></ion-input>
+              <ion-input placeholder="Other" [(ngModel)] ="other"></ion-input>
             </ion-item>
         </ion-list>
       <div id = "search-buttons">
-          <button ion-button ion-button >Cancel</button>
+          <button ion-button ion-button (click) ="backToHome()"> Back to Home </button>
     
-          <button ion-button ion-button>Search</button>
+          <button ion-button ion-button (click) ="searchClicked()">Search</button>
       </div>
 </ion-content>
   
