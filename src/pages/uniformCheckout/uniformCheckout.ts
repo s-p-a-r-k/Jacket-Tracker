@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { AlertController, NavController } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { updateDate } from 'ionic-angular/util/datetime-util';
 import { LandingPage } from '../landing/landing';
@@ -15,7 +16,6 @@ import { WaiverService } from '../../waiver.service';
 export class UniformCheckoutPage {
 
   private equipment: AngularFireList<any[]>;
-  //TODO: Replace this with actual band values
   private sections = [
     {'name': 'Alto Saxophone', 'equipment': ['Jacket', 'Pants', 'Sash', 'Shako']},
     {'name': 'Baritone', 'equipment': ['Jacket', 'Pants', 'Sash', 'Shako']},
@@ -41,77 +41,176 @@ export class UniformCheckoutPage {
   private uniformRequest: FormGroup;
 
   constructor(private fire: AngularFireDatabase,
+              private fireAuth: AngularFireAuth,
               private formBuilder: FormBuilder,
               private waiverService: WaiverService,
               private alertCtrl: AlertController,
-              public db: AngularFireDatabase,
               private navCtrl: NavController) {
-      this.equipment = db.list('/equipment'); 
+    this.equipment = fire.list('/equipment');
     waiverService.getWaiverURL()
       .subscribe(
         url => this.waiverSrc = waiverService.replaceOrigin(url)
       )
-    this.uniformRequest = formBuilder.group({
+    this.initForm()
+  }
+
+  initForm() {
+    this.uniformRequest = this.formBuilder.group({
       firstname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z]*'), Validators.required])],
       lastname: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z]*'), Validators.required])],
       gtid: ['', Validators.compose([Validators.maxLength(9), Validators.minLength(9), Validators.pattern('[0-9]*'), Validators.required])],
       email: ['', Validators.email],
       section: ['', Validators.required],
-      equipment: formBuilder.array([
+      equipment: this.formBuilder.array([
         //Dynamically created on section <select> change
       ]),
       agree: [false, Validators.requiredTrue],
-    })
+    });
   }
 
   initEquipment() {
     const array = <FormArray> this.uniformRequest.controls.equipment;
     array.controls = []
-    for (let equipmentType of this.uniformRequest.value.section.equipment) {
-      array.push(this.formBuilder.group({
-        type: ['', Validators.required],
-        id: ['', Validators.required]
-      }));
+    if (this.uniformRequest.value.section.equipment) {
+      for (let equipmentType of this.uniformRequest.value.section.equipment) {
+        array.push(this.formBuilder.group({
+          type: ['', Validators.required],
+          id: ['', Validators.required]
+        }));
+      }
     }
   }
 
-  uniformOwner: string;
-  i = -1; //-1 if the student field is empty/ otherwise not 1
-  clickSubmit() {
+  //For each equipment, ID pair, checks against the database to ensure
+  //student has not already checked it out
+  async verifyEquipment(form: Object) {
 
+    let failures = [];
+    const firstname = form['firstname'];
+    const lastname = form['lastname'];
+    const equipmentForm = form['equipment']
 
-    // USER_LOCATION: 'https://jacket-tracker-90b5c.firebaseio.com/';
-    // userRef: new Firebase(this.USER_LOCATION);    
+    await Promise.all(Object.keys(equipmentForm).map(k => {
+      const inputId = equipmentForm[k].id
+      return new Promise(resolve => {
+        this.fire.object('/equipment/' + k + '/' + inputId)
+          .snapshotChanges()
+          .subscribe(action => {
+            const obj = action.payload.val();
+            if (obj == null) {
+              let msg = k + ' #' + inputId + ' was not found.';
+              let failure = {
+                'message': msg,
+                'equipment': k
+              };
+              failures.push(failure);
+              resolve()
+            } else if (obj['student'] != null && String(obj['student']) != "") {
+              //Get student that is assigned the equipment
+              const studentRecordsRef = this.fire.object('/students/' + obj['student']);
+              studentRecordsRef.snapshotChanges()
+                .subscribe(action => {
+                  const student = action.payload.val();
+                  const otherStudentName = student['firstname'] + ' ' + student['lastname'];
+                  let msg = k + ' #' + inputId + ' has already been assigned to ' + otherStudentName + '.';
+                  let failure = {
+                    'message': msg,
+                    'equipment': k
+                  };
+                  failures.push(failure);
+                  resolve()
+                });
+            } else if (obj['student'] == "") {
+              resolve()
+            }
+          })
+      });
+    })).then(() => {
+      //Wait for all database queries to finish
+    });
 
+    return new Promise((resolve, reject) => {
+      if (failures.length == 0) {
+        this.alertSuccess(firstname, lastname)
+        resolve()
+      } else {
+        this.alertFailure(failures)
+      }
+    })
+  }
 
-    //check database
-    // this.equipment.contain('Jacket',{'1':{size: "small", status: "clean", student: "empty"}});
-    // this.uniformOwner = this.equipment.update('Jacket',{'1':{size: "small", status: "clean", student: "empty"}});
-    //add algorithm form checking database 
+  alertSuccess(firstname: String, lastname: String) {
+    let alert = this.alertCtrl.create({
+      title: 'Success',
+      subTitle: firstname + '    ' + lastname,
+      message: 'Successfully Assigned',
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.navCtrl.pop();
+        }
+      }]
+    }).present();
+  }
 
-    //success
-    if(this.i = -1) {
-      let alert = this.alertCtrl.create({
-        title: 'Success',
-
-        //TODO: need to figure out how to get the first and last name
-        // subTitle: this.firstname + ' ' + this.lastname + '\nSuccessfully Assigned',
-        subTitle:'Successfully Assigned',
-        buttons: ['OK']
-      }).present();
-    } else {
-      //when fail
-      let alert2 = this.alertCtrl.create({
-        title: 'Fail',
-        subTitle: 'One of your uniform piece is checked out. \nContact the uniform lieutenant ',
-        buttons: ['OK']
-      }).present();
+  alertFailure(failures) {
+    var msgHtml = '';
+    for (let failure of failures) {
+      msgHtml += (failure.message + '<br>')
     }
+    let override = this.alertCtrl.create({
+      title: 'Override',
+      subTitle: 'Enter Uniforms Lieutenant username and password to override the checkout',
+      inputs: [{
+        name: 'username',
+        placeholder: 'Username'
+      },
+      {
+        name: 'password',
+        placeholder: 'Password',
+        type: 'password'
+      }],
+      buttons: [{
+        text: 'SUBMIT',
+        handler: data => {
+          this.fireAuth.auth.signInWithEmailAndPassword(data.username, data.password)
+          .then(() => {
+            const form = this.reshapeForm();
+            this.saveStudentAndEquipment(form);
+            this.fireAuth.auth.signOut();
+            this.navCtrl.pop();
+          });
+        }
+      }]
+    });
+    let failure = this.alertCtrl.create({
+      title: 'Failure',
+      subTitle: 'Please contact a Uniforms Lieutenant',
+      message: msgHtml,
+      buttons: [{
+        text:'RETURN',
+        handler: () => {
+          this.clearFormOfFailures(failures);
+        }
+      },
+      {
+        text: 'OVERRIDE',
+        handler: () => {
+          override.present();
+        }
+      }]
+    }).present();
   }
 
   //Reshape form values before saving to index by equipment and remove unncessary data not persisted
   submitForm() {
-    this.clickSubmit();
+    const form = this.reshapeForm()
+    this.verifyEquipment(form).then(() => {
+      this.saveStudentAndEquipment(form);
+    });
+  }
+
+  reshapeForm() {
     const form = Object.assign({}, this.uniformRequest.value);
     delete form.agree;
     delete form.section;
@@ -123,14 +222,33 @@ export class UniformCheckoutPage {
         id: equip.id
       }
     }
-    const studentRecordsRef = this.fire.list('students');
-    studentRecordsRef.push(form)
-      .then((result) => console.log(result))
-
-    this.navCtrl.push(UniformCheckoutPage);
+    return form;
   }
 
-  backToLanding() {
-    this.navCtrl.push(LandingPage);
+  saveStudentAndEquipment(form) {
+    const studentRecordsRef = this.fire.list('students');
+    studentRecordsRef.push(form)
+      .then((result) => {
+        let student = result.key;
+        Object.keys(form.equipment).forEach((equipType, details) => {
+          const id = form.equipment[equipType].id;
+          const equipRecordsRef = this.fire.object('/equipment/' + equipType + '/' + id + '/student/');
+          equipRecordsRef.set(student)
+            .then(result => console.log(result));
+        });
+      }
+    );
+  }
+
+  clearFormOfFailures(failures) {
+    let equipArr = this.uniformRequest.value.equipment;
+    for (let failure of failures) {
+      for (let equip of equipArr) {
+        if (equip.type == failure.equipment) {
+          equip.id = '';
+        }
+      }
+    }
+    this.uniformRequest.patchValue({equipment: equipArr});
   }
 }
