@@ -44,7 +44,7 @@ export class SearchPage {
     this.searchLocation = "student";
     this.studentRecord = afDB.list('students').valueChanges();
     this.studentRecord.subscribe(_afDB => {this.studentlist = _afDB})
-    this.equipRecord = afDB.list('equipment').valueChanges();
+    this.equipRecord = afDB.list('students/equipment').valueChanges();
     this.equipRecord.subscribe(_afDB => {this.equiplist = _afDB})
 
   }
@@ -122,22 +122,26 @@ export class SearchPage {
 
       if(this.type != null && this.uniformID != null) {
         this.templist = this.studentlist.filter((item)=> {
-          return item.equipment == this.type && item.equipment.id == this.uniformID;
+          return item.equipment[this.type] != null && item.equipment[this.type].id == this.uniformID;
         });
         this.templist.forEach(item=> this.matchlist.push(item));
-      }
-      if(this.type != null) {
+      } else if (this.type != null && this.uniformID == null) {
         this.templist = this.studentlist.filter((item)=> {
-          return item == this.type;
+          return item.equipment[this.type] != null;
         });
         this.templist.forEach(item=> this.matchlist.push(item));
-      }
-      if(this.uniformID != null) {
-        this.templist = this.equiplist.filter((item)=> {
-          return item.equipment.id == this.uniformID;
-        });
+      } else {
+        for(let i in this.studentlist) {
+          for(let j in this.studentlist[i].equipment){
+            if(this.studentlist[i].equipment[j].id == this.uniformID) {
+              this.templist.push(this.studentlist[+i]);
+            }
+          }
+        }
         this.templist.forEach(item=> this.matchlist.push(item));
+      
       }
+
       /* Commented out until storing other is implemented
       if(this.other != null) {
         this.templist = this.studentlist.filter((item)=> {
@@ -148,10 +152,10 @@ export class SearchPage {
     }
     //delete duplicates
     this.matchlist = this.matchlist.reduce((x,y) => x.findIndex(e => e.email==y.email) < 0 ? [...x, y]: x, []);
-    
-    console.log(this.equiplist[0]);
-    console.log(this.studentlist);
     console.log(this.matchlist);
+    console.log("=====================================================");
+
+
 
     
 
