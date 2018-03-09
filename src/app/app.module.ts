@@ -25,6 +25,7 @@ import { WaiverService } from '../waiver.service';
 
 import {QuickmanagementPage} from '../pages/quickmanagement/quickmanagement';
 import {SearchPage} from '../pages/search/search'
+import { RestProvider } from '../providers/rest/rest';
 
 const firebaseAuth = {
   apiKey: "AIzaSyDPr_smunA_RpcWByjClYrTcWdDJyb0--M",
@@ -77,7 +78,8 @@ const firebaseAuth = {
     StatusBar,
     SplashScreen,
     WaiverService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    RestProvider
   ]
 })
 export class AppModule {}

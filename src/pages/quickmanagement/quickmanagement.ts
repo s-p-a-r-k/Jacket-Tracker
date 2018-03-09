@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
 
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { RestProvider } from '../../providers/rest/rest';
+
 import { AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
@@ -31,11 +34,19 @@ export class QuickmanagementPage {
   equipRecordRef;
   studentRecordRef;
 
-  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth, public events: Events) {
+  http: HttpClient;
+  mailgunUrl: string;
+  mailgunApiKey: string;
+
+  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth, public events: Events, http: HttpClient, rest: RestProvider) {
     this.items = afDB.list('students').valueChanges();
     this.items.subscribe(_afDB => {this.itemarr = _afDB})
     this.equipRecordRef = this.afDB.list('equipment');
     this.studentRecordRef = this.afDB.list('students');
+
+    this.http = http;
+    this.mailgunUrl = "https://api.mailgun.net/v3/addRealDomainHere";
+    this.mailgunApiKey = window.btoa("key-addKeyHere");
 
     console.log('========================================');
     console.log(this.items);
@@ -67,6 +78,7 @@ export class QuickmanagementPage {
   quickManageSubmit(selectedAction) {
       if (selectedAction == "email") {
         console.log('email option selected');
+        this.send();
       } else if (selectedAction == "uniform"){
         console.log('uniform status option selected');
         this.doRadio();
@@ -82,6 +94,16 @@ export class QuickmanagementPage {
 
   updateStatus(result, student, equiptype) {
     this.arrChosen[student].equipment[equiptype].status = this.radioResult;
+  }
+
+  send() {
+      var requestHeaders = new HttpHeaders();
+      requestHeaders.set("Authorization", "Basic " + this.mailgunApiKey);
+      requestHeaders.set("Content-Type", "application/x-www-form-urlencoded");
+
+      this.http.get(this.mailgunUrl + "/messages", {
+        headers: {'Authorization': 'Basic ' + this.mailgunApiKey}
+      }).subscribe(data => {console.log(data);});
   }
 
   doRadio() {
