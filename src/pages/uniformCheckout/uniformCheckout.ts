@@ -15,7 +15,6 @@ import { WaiverService } from '../../waiver.service';
 export class UniformCheckoutPage {
 
   private equipment: AngularFireList<any[]>;
-  //TODO: Replace this with actual band values
   private sections = [
     {'name': 'Alto Saxophone', 'equipment': ['Jacket', 'Pants', 'Sash', 'Shako']},
     {'name': 'Baritone', 'equipment': ['Jacket', 'Pants', 'Sash', 'Shako']},

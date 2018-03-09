@@ -46,6 +46,15 @@ export class SearchPage {
   searchClicked() {
     this.navCtrl.setRoot(QuickmanagementPage);
 
+    console.log(this.type);
+    console.log(this.uniformID);
+    console.log(this.other);
+    console.log(this.firstName);
+    console.log(this.lastName);
+    console.log(this.gtid);
+    console.log(this.email);
+    console.log(this.section);
+
   }
 
 }
