@@ -61,6 +61,8 @@ export class SearchPage {
 
   }
   searchClicked() {
+    //make sure list resets every time user searches
+    this.matchlist = [];
 
     //Lieutenant searches through student tab
     if(this.searchLocation == "student") {
@@ -112,20 +114,27 @@ export class SearchPage {
         });
         this.templist.forEach(item=> this.matchlist.push(item));
       }*/
+
     }
+
     //Lieutenant searches through uniform tab
     if(this.searchLocation == "uniform") {
 
+      if(this.type != null && this.uniformID != null) {
+        this.templist = this.studentlist.filter((item)=> {
+          return item.equipment == this.type && item.equipment.id == this.uniformID;
+        });
+        this.templist.forEach(item=> this.matchlist.push(item));
+      }
       if(this.type != null) {
-        this.templist = this.equiplist.filter((item)=> {
+        this.templist = this.studentlist.filter((item)=> {
           return item == this.type;
         });
         this.templist.forEach(item=> this.matchlist.push(item));
       }
-
       if(this.uniformID != null) {
         this.templist = this.equiplist.filter((item)=> {
-          return item.uniformID == this.uniformID;
+          return item.equipment.id == this.uniformID;
         });
         this.templist.forEach(item=> this.matchlist.push(item));
       }
@@ -139,7 +148,8 @@ export class SearchPage {
     }
     //delete duplicates
     this.matchlist = this.matchlist.reduce((x,y) => x.findIndex(e => e.email==y.email) < 0 ? [...x, y]: x, []);
-    console.log(this.equiplist);
+    
+    console.log(this.equiplist[0]);
     console.log(this.studentlist);
     console.log(this.matchlist);
 
