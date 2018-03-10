@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
 
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import { RestProvider } from '../../providers/rest/rest';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import { AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -38,15 +37,15 @@ export class QuickmanagementPage {
   mailgunUrl: string;
   mailgunApiKey: string;
 
-  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth, public events: Events, http: HttpClient, rest: RestProvider) {
+  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth, public events: Events, http: HttpClient) {
     this.items = afDB.list('students').valueChanges();
     this.items.subscribe(_afDB => {this.itemarr = _afDB})
     this.equipRecordRef = this.afDB.list('equipment');
     this.studentRecordRef = this.afDB.list('students');
 
     this.http = http;
-    this.mailgunUrl = "https://api.mailgun.net/v3/addRealDomainHere";
-    this.mailgunApiKey = window.btoa("key-addKeyHere");
+    this.mailgunUrl = "https://api.mailgun.net/v3/sandbox302c0e88ee224fe7b7f423ca1223b1e1.mailgun.org";
+    this.mailgunApiKey = window.btoa("key-58a0dc4b021e1217881264efb92a6627");
 
     console.log('========================================');
     console.log(this.items);
@@ -101,9 +100,27 @@ export class QuickmanagementPage {
       requestHeaders.set("Authorization", "Basic " + this.mailgunApiKey);
       requestHeaders.set("Content-Type", "application/x-www-form-urlencoded");
 
-      this.http.get(this.mailgunUrl + "/messages", {
+      this.http.post(this.mailgunUrl + "/messages",
+      "from=test@example.com&to=" + "recipient@example.com" + "&subject=" + "test subject" + "&text=" + "test message sent",
+      {
         headers: {'Authorization': 'Basic ' + this.mailgunApiKey}
-      }).subscribe(data => {console.log(data);});
+      }).subscribe(success => {
+        console.log("SUCCESS -> " + JSON.stringify(success));
+      }, error => {
+        console.log("ERROR -> " + JSON.stringify(error));
+      });
+
+
+      this.http.request(
+        "POST", "https://api.mailgun.net/v3/" + this.mailgunUrl + "/messages",
+        {
+          body: "from=test@example.com&to=" + "com9368@hotmail.com" + "&subject=" + "Test Subject" + "&text=" + "message sent.",
+          headers: {'Authorization': 'Basic ' + this.mailgunApiKey}
+        }).subscribe(success => {
+        console.log("SUCCESS -> " + JSON.stringify(success));
+      }, error => {
+        console.log("ERROR -> " + JSON.stringify(error));
+      });
   }
 
   doRadio() {
