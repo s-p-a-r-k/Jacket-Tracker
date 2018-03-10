@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
 
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Mailgun } from 'mailgun-js';
 
 import { AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -32,6 +33,7 @@ export class QuickmanagementPage {
   radioResult: any;
   equipRecordRef;
   studentRecordRef;
+  mailgun: any
 
   http: HttpClient;
   mailgunUrl: string;
@@ -44,8 +46,9 @@ export class QuickmanagementPage {
     this.studentRecordRef = this.afDB.list('students');
 
     this.http = http;
-    this.mailgunUrl = "https://api.mailgun.net/v3/usemydomain.mailgun.org";
-    this.mailgunApiKey = window.btoa("key-mykey");
+    this.mailgunUrl = "https://api.mailgun.net/v3/sandbox302c0e88ee224fe7b7f423ca1223b1e1.mailgun.org";
+    this.mailgunApiKey = window.btoa("key-f0467a5340d0a4b3c82d5592dd65e1f5");
+    this.mailgun = Mailgun({apiKey: this.mailgunApiKey, domain: this.mailgunUrl});
 
     console.log('========================================');
     console.log(this.items);
@@ -77,7 +80,7 @@ export class QuickmanagementPage {
   quickManageSubmit(selectedAction) {
       if (selectedAction == "email") {
         console.log('email option selected');
-        this.send();
+        this.send2();
       } else if (selectedAction == "uniform"){
         console.log('uniform status option selected');
         this.doRadio();
@@ -110,7 +113,6 @@ export class QuickmanagementPage {
         console.log("ERROR -> " + JSON.stringify(error));
       });
 
-
       this.http.request(
         "POST", "https://api.mailgun.net/v3/" + this.mailgunUrl + "/messages",
         {
@@ -121,6 +123,19 @@ export class QuickmanagementPage {
       }, error => {
         console.log("ERROR -> " + JSON.stringify(error));
       });
+  }
+
+  send2() {
+    let data = {
+      from: 'Excited User <me@samples.mailgun.org>',
+      to: 'bar@example.com, YOU@YOUR_DOMAIN_NAME',
+      subject: 'Hello',
+      text: 'Testing some Mailgun awesomness!'
+    };
+
+    this.mailgun.messages().send(data, function (error, body) {
+      console.log(body);
+    });
   }
 
   doRadio() {

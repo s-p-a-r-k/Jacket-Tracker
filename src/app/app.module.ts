@@ -22,6 +22,7 @@ import { LoggedinPage } from '../pages/loggedin/loggedin';
 import { CreateaccountPage } from '../pages/createaccount/createaccount';
 import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
 import { WaiverService } from '../waiver.service';
+import mailgun from 'mailgun-js';
 
 import {QuickmanagementPage} from '../pages/quickmanagement/quickmanagement';
 import {SearchPage} from '../pages/search/search'
