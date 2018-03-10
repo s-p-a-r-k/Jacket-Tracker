@@ -46,8 +46,8 @@ export class QuickmanagementPage {
     this.studentRecordRef = this.afDB.list('students');
 
     this.http = http;
-    this.mailgunUrl = "https://api.mailgun.net/v3/sandbox302c0e88ee224fe7b7f423ca1223b1e1.mailgun.org";
-    this.mailgunApiKey = window.btoa("key-f0467a5340d0a4b3c82d5592dd65e1f5");
+    this.mailgunUrl = "https://api.mailgun.net/v3/somesandbox.mailgun.org";
+    this.mailgunApiKey = window.btoa("key-somenumber");
     this.mailgun = Mailgun({apiKey: this.mailgunApiKey, domain: this.mailgunUrl});
 
     console.log('========================================');
