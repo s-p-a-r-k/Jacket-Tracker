@@ -4,11 +4,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LandingPage } from '../pages/landing/landing';
-import { ListPage } from '../pages/list/list';
 import { LoggedinPage } from '../pages/loggedin/loggedin';
 
-import {QuickmanagementPage} from '../pages/quickmanagement/quickmanagement';
-import {SearchPage} from '../pages/search/search'
+import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
+import { SearchPage } from '../pages/search/search';
+import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
 
 @Component({
   templateUrl: 'app.html'
@@ -32,9 +32,8 @@ export class MyApp {
       { title: 'View Uniforms', component: LoggedinPage },
       { title: 'Manage Acount', component: LoggedinPage },
       { title: 'Assign Uniforms', component: LoggedinPage },
-      { title: 'Quick Management', component: QuickmanagementPage }
-
-
+      { title: 'Quick Management', component: QuickmanagementPage },
+      { title: 'Email Management', component: EmailManagementPage }
     ];
 
   }

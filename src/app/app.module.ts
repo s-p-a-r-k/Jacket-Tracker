@@ -12,7 +12,6 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { MyApp } from './app.component';
 import { LandingPage } from '../pages/landing/landing';
-import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,8 +22,9 @@ import { CreateaccountPage } from '../pages/createaccount/createaccount';
 import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
 import { WaiverService } from '../waiver.service';
 
-import {QuickmanagementPage} from '../pages/quickmanagement/quickmanagement';
-import {SearchPage} from '../pages/search/search'
+import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
+import { SearchPage } from '../pages/search/search';
+import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
 
 const firebaseAuth = {
   apiKey: "AIzaSyDPr_smunA_RpcWByjClYrTcWdDJyb0--M",
@@ -40,14 +40,13 @@ const firebaseAuth = {
   declarations: [
     MyApp,
     LandingPage,
-    ListPage,
     LoginPage,
     CreateaccountPage,
     LoggedinPage,
     QuickmanagementPage,
     UniformCheckoutPage,
-    SearchPage
-
+    SearchPage,
+    EmailManagementPage
   ],
   imports: [
     BrowserModule,
@@ -64,14 +63,13 @@ const firebaseAuth = {
   entryComponents: [
     MyApp,
     LandingPage,
-    ListPage,
     LoginPage,
     CreateaccountPage,
     LoggedinPage,
     QuickmanagementPage,
     UniformCheckoutPage,
-    SearchPage
-
+    SearchPage,
+    EmailManagementPage
   ],
   providers: [
     StatusBar,
