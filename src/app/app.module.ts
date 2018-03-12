@@ -4,11 +4,19 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from 'angularfire2';
-import { firebaseConfig } from '../environment';
+import { firebaseConfig, gapiKeys } from '../environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import {
+  GoogleApiModule,
+  GoogleApiService,
+  GoogleAuthService,
+  NgGapiClientConfig,
+  NG_GAPI_CONFIG,
+  GoogleApiConfig
+} from 'ng-gapi';
 
 import { MyApp } from './app.component';
 import { LandingPage } from '../pages/landing/landing';
@@ -21,20 +29,19 @@ import { LoginPage } from '../pages/login/login';
 import { LoggedinPage } from '../pages/loggedin/loggedin';
 import { CreateaccountPage } from '../pages/createaccount/createaccount';
 import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
-import { WaiverService } from '../waiver.service';
+import { WaiverService } from '../service/waiver.service';
+import { MailService } from '../service/mail.service';
 
 import {QuickmanagementPage} from '../pages/quickmanagement/quickmanagement';
 import {SearchPage} from '../pages/search/search'
 
-const firebaseAuth = {
-  apiKey: "AIzaSyDPr_smunA_RpcWByjClYrTcWdDJyb0--M",
-  authDomain: "jacket-tracker-90b5c.firebaseapp.com",
-  databaseURL: "https://jacket-tracker-90b5c.firebaseio.com",
-  projectId: "jacket-tracker-90b5c",
-  storageBucket: "jacket-tracker-90b5c.appspot.com",
-  messagingSenderId: "674608756377"
-};
-
+export const gapiClientConfig = {
+    client_id: gapiKeys.client_id,
+    discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"],
+    scope: [
+        "https://www.googleapis.com/auth/gmail.readonly"
+    ].join(" ")
+}
 
 @NgModule({
   declarations: [
@@ -56,9 +63,12 @@ const firebaseAuth = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(firebaseAuth),
     PdfViewerModule,
-    HttpClientModule
+    HttpClientModule,
+    GoogleApiModule.forRoot({
+      provide: NG_GAPI_CONFIG,
+      useValue: gapiClientConfig
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -77,6 +87,7 @@ const firebaseAuth = {
     StatusBar,
     SplashScreen,
     WaiverService,
+    MailService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

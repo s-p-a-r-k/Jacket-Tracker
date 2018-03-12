@@ -6,7 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { updateDate } from 'ionic-angular/util/datetime-util';
 import { LandingPage } from '../landing/landing';
-import { WaiverService } from '../../waiver.service';
+import { WaiverService } from '../../service/waiver.service';
 
 
 @Component({
