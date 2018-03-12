@@ -213,7 +213,9 @@ export class UniformCheckoutPage {
   reshapeForm() {
     const form = Object.assign({}, this.uniformRequest.value);
     delete form.agree;
+    let sectionName = form.section.name;
     delete form.section;
+    form.section = sectionName;
     const equipmentObjs = form.equipment
     form.equipment = {};
     for (let equip of equipmentObjs) {
