@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { MailService } from '../../service/mail.service';
 
 import { LandingPage } from '../landing/landing';
 
@@ -21,7 +22,7 @@ export class LoggedinPage {
 
   email: String;
 
-  constructor(private fire: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public fire: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public mailer: MailService) {
     this.email = fire.auth.currentUser.email;
   }
   alert(message: string) {
@@ -68,6 +69,17 @@ export class LoggedinPage {
         this.alert(error.message);
       })
     console.log("clicked onlogoutclick")
+  }
+
+  //Example for how to use the MailService
+  onTestGmail() {
+    this.mailer.testGmailCall()
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
 }
