@@ -6,5 +6,12 @@ page-login {
     #forgot-password-button button{
         flex: 1;
     }
+    #sign-in-button {
+        display: flex;
+        flex-direction: row;
+    }
+    #sign-in-button button{
+        flex: 1;
+    }
 
 }
