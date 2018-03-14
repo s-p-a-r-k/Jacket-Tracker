@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Email Management</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="newEmail" (ngSubmit)="saveEmail()">
+    <ion-item>
+      <ion-label floating>Subject</ion-label>
+      <ion-input formControlName="subject"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Body</ion-label>
+      <ion-textarea formControlName="body"></ion-textarea>
+    </ion-item>
+    <div padding>
+      <button ion-button large type="submit" [disabled]="!newEmail.valid">Save Email</button>
+    </div>
+  </form>
+</ion-content>

@@ -20,7 +20,6 @@ import {
 
 import { MyApp } from './app.component';
 import { LandingPage } from '../pages/landing/landing';
-import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -32,8 +31,9 @@ import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
 import { WaiverService } from '../service/waiver.service';
 import { MailService } from '../service/mail.service';
 
-import {QuickmanagementPage} from '../pages/quickmanagement/quickmanagement';
-import {SearchPage} from '../pages/search/search'
+import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
+import { SearchPage } from '../pages/search/search';
+import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
 
 export const gapiClientConfig = {
     client_id: gapiKeys.client_id,
@@ -47,14 +47,13 @@ export const gapiClientConfig = {
   declarations: [
     MyApp,
     LandingPage,
-    ListPage,
     LoginPage,
     CreateaccountPage,
     LoggedinPage,
     QuickmanagementPage,
     UniformCheckoutPage,
-    SearchPage
-
+    SearchPage,
+    EmailManagementPage
   ],
   imports: [
     BrowserModule,
@@ -74,14 +73,13 @@ export const gapiClientConfig = {
   entryComponents: [
     MyApp,
     LandingPage,
-    ListPage,
     LoginPage,
     CreateaccountPage,
     LoggedinPage,
     QuickmanagementPage,
     UniformCheckoutPage,
-    SearchPage
-
+    SearchPage,
+    EmailManagementPage
   ],
   providers: [
     StatusBar,
