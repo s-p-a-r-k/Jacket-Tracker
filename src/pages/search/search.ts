@@ -100,13 +100,13 @@ export class SearchPage {
         });
         this.templist.forEach(item=> this.matchlist.push(item));
       }
-      /* Commented out until storing section is implemented when checking out
+
       if(this.section != null) {
         this.templist = this.studentlist.filter((item)=> {
-          return item.section == this.section;
+          return item.section.toLowerCase() == this.section.toLowerCase();
         });
         this.templist.forEach(item=> this.matchlist.push(item));
-      }*/
+      }
       /* Commented out until storing other is implemented
       if(this.other != null) {
         this.templist = this.studentlist.filter((item)=> {
