@@ -11,6 +11,8 @@ import {LoggedinPage} from '../loggedin/loggedin';
 
 import { Events } from 'ionic-angular';
 
+import { mailgun } from '../../environment';
+
 /**
  * Generated class for the QuickmanagementPage page.
  *
@@ -34,8 +36,6 @@ export class QuickmanagementPage {
   studentRecordRef;
 
   http: HttpClient;
-  mailgunUrl: string;
-  mailgunApiKey: string;
 
   constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth, public events: Events, http: HttpClient) {
     this.items = afDB.list('students').valueChanges();
@@ -44,8 +44,6 @@ export class QuickmanagementPage {
     this.studentRecordRef = this.afDB.list('students');
 
     this.http = http;
-    this.mailgunUrl = "sandboxSeeSlackForCorrectAddress.mailgun.org";
-    this.mailgunApiKey = "key-SeeSlcakForCorrectKey";
 
     console.log('========================================');
     console.log(this.items);
@@ -98,10 +96,10 @@ export class QuickmanagementPage {
   send() {
 
       this.http.request(
-        "POST", "https://api.mailgun.net/v3/" + this.mailgunUrl + "/messages",
+        "POST", "https://api.mailgun.net/v3/" + mailgun.mailgunUrl + "/messages",
         {
           body: "from=sender@example.com&to=" + "recipient@example.com" + "&subject=" + "Test Email" + "&text=" + "Example message sent.",
-          headers: {"Authorization": "Basic " + window.btoa("api:" + this.mailgunApiKey),
+          headers: {"Authorization": "Basic " + window.btoa("api:" + mailgun.mailgunApiKey),
           "Content-Type": "application/x-www-form-urlencoded"}
         }).subscribe(success => {
         console.log("SUCCESS -> " + JSON.stringify(success));
