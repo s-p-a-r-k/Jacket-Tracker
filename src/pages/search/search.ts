@@ -36,6 +36,49 @@ export class SearchPage {
   equiplist;
   studentlist;
 
+  example = [
+    {
+      "First Name": "a",
+      "Last Name": "a1",
+      "GTID": "aid",
+      "Email": "ae",
+      "Section": "as",
+      "Other": "ao"
+    },
+    {
+      "First Name": "b",
+      "Last Name": "b1",
+      "GTID": "bid",
+      "Email": "be",
+      "Section": "bs",
+      "Other": "bo"
+    },
+    {
+      "First Name": "c",
+      "Last Name": "c1",
+      "GTID": "cid",
+      "Email": "ce",
+      "Section": "cs",
+      "Other": "co"
+    },
+    {
+      "First Name": "d",
+      "Last Name": "d1",
+      "GTID": "did",
+      "Email": "de",
+      "Section": "ds",
+      "Other": "do"
+    },
+    {
+      "First Name": "e",
+      "Last Name": "e1",
+      "GTID": "eid",
+      "Email": "ee",
+      "Section": "es",
+      "Other": "eo"
+    },
+  ];
+
   templist = [];
   matchlist = [];
   
@@ -61,6 +104,7 @@ export class SearchPage {
 
   }
   searchClicked() {
+
     //make sure list resets every time user searches
     this.matchlist = [];
 
@@ -68,7 +112,7 @@ export class SearchPage {
     if(this.searchLocation == "student") {
       if(this.firstName != null) {
         this.templist = this.studentlist.filter((item)=> {
-          return item.firstname.toLowerCase() == this.firstName.toLowerCase();
+          return item.firstname.toLowerCase() == this.firstName.toLowerCase(); 
         });
         this.templist.forEach(item=> this.matchlist.push(item));
       }
@@ -116,7 +160,6 @@ export class SearchPage {
       }*/
 
     }
-
     //Lieutenant searches through uniform tab
     if(this.searchLocation == "uniform") {
 
@@ -150,12 +193,16 @@ export class SearchPage {
         this.templist.forEach(item=> this.matchlist.push(item));
       }*/
     }
+
     //delete duplicates
     this.matchlist = this.matchlist.reduce((x,y) => x.findIndex(e => e.email==y.email) < 0 ? [...x, y]: x, []);
     console.log(this.matchlist);
+    console.log(this.templist);
     console.log("=====================================================");
 
+    // let alert = this.alertCtrl.create({
 
+    // })
 
     
 
