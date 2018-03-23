@@ -41,7 +41,7 @@
       </ion-item>
       <ion-item>
           <ion-label color="primary">ID</ion-label>
-          <ion-input placeholder="Enter Uniform ID" [(ngModel)] ="uniformID"></ion-input>
+      <ion-input placeholder="Enter Uniform ID" [(ngModel)]="uniformID"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary">Other</ion-label>
@@ -95,13 +95,11 @@
     
           <button ion-button ion-button (click) ="searchClicked()">Search</button>
       </div>
-</ion-content>
 
 
-<ion-content>
-  <ion-list>
+      <!-- <ion-list>
     <ion-list-header>
-      HEADER
+            HEADERL: List
     </ion-list-header>
 
     <ion-item>
@@ -119,3 +117,13 @@
 </ion-content>>
 
 
+  <ion-title>Search Resuly</ion-title>
+</ion-navbar>
+<ion-content class="search">
+  <ion-list *ngFor="let type of info_type">
+    <ion-list-header>{{type}}</ion-list-header>
+    <ion-item-sliding class="slider" *ngFor="let member of example[type]">
+      <ion-item>{{name}}</ion-item>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
