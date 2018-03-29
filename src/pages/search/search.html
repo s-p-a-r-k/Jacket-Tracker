@@ -8,7 +8,7 @@
 
   <ion-navbar>
     <ion-title>Search</ion-title>
-        <button ion-button menuToggle>
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
   </ion-navbar>
@@ -27,103 +27,111 @@
 
 
 <ion-content padding>
-    <ion-list *ngIf="searchLocation == 'uniform'">
-      <ion-item>
-        <ion-label>Choose Uniform Type</ion-label>
-        <ion-select [(ngModel)]="type">
-          <ion-option value="Gloves">Gloves</ion-option>
-          <ion-option value="Jacket">Jacket</ion-option>
-          <ion-option value="Pants">Pants</ion-option>
-          <ion-option value="Sash">Sash</ion-option>
-          <ion-option value="Shako">Shako</ion-option>
-          <ion-option value="Vest">Vest</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-          <ion-label color="primary">ID</ion-label>
-      <ion-input placeholder="Enter Uniform ID" [(ngModel)]="uniformID"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label color="primary">Other</ion-label>
-            <ion-input placeholder="Other" [(ngModel)] ="other"></ion-input>
-          </ion-item>
-      </ion-list>
-      <ion-list *ngIf="searchLocation == 'student'">
-          <ion-item>
-              <ion-label color="primary">First Name</ion-label>
-              <ion-input placeholder="First Name" [(ngModel)] ="firstName"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label color="primary">Last Name</ion-label>
-                <ion-input placeholder="Last Name" [(ngModel)] ="lastName"></ion-input>
-              </ion-item>
-            <ion-item>
-              <ion-label color="primary">GTID</ion-label>
-              <ion-input placeholder="GTID" [(ngModel)] ="gtid"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label color="primary">Email</ion-label>
-                <ion-input placeholder="Email" [(ngModel)] ="email"></ion-input>
-            </ion-item>
-          <ion-item>
-            <ion-label>Choose Section</ion-label>
-            <ion-select [(ngModel)]="section">
-              <ion-option value="alto saxophone">Alto Saxophone</ion-option>
-              <ion-option value="baritone">Baritone</ion-option>
-              <ion-option value="bass drum">Bass Drum</ion-option>
-              <ion-option value="clarinet">Clarinet</ion-option>
-              <ion-option value="cymbals">Cymbals</ion-option>
-              <ion-option value="drum majors">Drum Majors</ion-option>
-              <ion-option value="mellophone">Mellophone</ion-option>
-              <ion-option value="piccolo">Piccolo</ion-option>
-              <ion-option value="ensemble">Pit/Front Ensemble</ion-option>
-              <ion-option value="quads">Quads</ion-option>
-              <ion-option value="snare">Snare</ion-option>
-              <ion-option value="tenor sax">Tenor Sax</ion-option>
-              <ion-option value="trombone">Trombone</ion-option>
-              <ion-option value="trumpet">Trumpet</ion-option>
-              <ion-option value="tuba">Tuba</ion-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-              <ion-label color="primary">Other</ion-label>
-              <ion-input placeholder="Other" [(ngModel)] ="other"></ion-input>
-            </ion-item>
-        </ion-list>
-      <div id = "search-buttons">
-          <button ion-button ion-button (click) ="backToHome()"> Back to Home </button>
-    
-          <button ion-button ion-button (click) ="searchClicked()">Search</button>
-      </div>
-
-
-      <!-- <ion-list>
-    <ion-list-header>
-            HEADERL: List
-    </ion-list-header>
-
+  <ion-list *ngIf="searchLocation == 'uniform'">
     <ion-item>
-      <ion-avatar item-start>
-        
-      </ion-avatar>
-
-      <h2>H2</h2>
-      <h3>H3</h3>
-      <h4>H4</h4>
-      <p>p</p>
+      <ion-label>Choose Uniform Type</ion-label>
+      <ion-select [(ngModel)]="type">
+        <ion-option value="Gloves">Gloves</ion-option>
+        <ion-option value="Jacket">Jacket</ion-option>
+        <ion-option value="Pants">Pants</ion-option>
+        <ion-option value="Sash">Sash</ion-option>
+        <ion-option value="Shako">Shako</ion-option>
+        <ion-option value="Vest">Vest</ion-option>
+      </ion-select>
     </ion-item>
-
+    <ion-item>
+      <ion-label color="primary">ID</ion-label>
+      <ion-input placeholder="Enter Uniform ID" [(ngModel)]="uniformID"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Other</ion-label>
+      <ion-input placeholder="Other" [(ngModel)]="other"></ion-input>
+    </ion-item>
   </ion-list>
-</ion-content>>
+  <ion-list *ngIf="searchLocation == 'student'">
+    <ion-item>
+      <ion-label color="primary">First Name</ion-label>
+      <ion-input placeholder="First Name" [(ngModel)]="firstName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Last Name</ion-label>
+      <ion-input placeholder="Last Name" [(ngModel)]="lastName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">GTID</ion-label>
+      <ion-input placeholder="GTID" [(ngModel)]="gtid"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Email</ion-label>
+      <ion-input placeholder="Email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Choose Section</ion-label>
+      <ion-select [(ngModel)]="section">
+        <ion-option value="alto saxophone">Alto Saxophone</ion-option>
+        <ion-option value="baritone">Baritone</ion-option>
+        <ion-option value="bass drum">Bass Drum</ion-option>
+        <ion-option value="clarinet">Clarinet</ion-option>
+        <ion-option value="cymbals">Cymbals</ion-option>
+        <ion-option value="drum majors">Drum Majors</ion-option>
+        <ion-option value="mellophone">Mellophone</ion-option>
+        <ion-option value="piccolo">Piccolo</ion-option>
+        <ion-option value="ensemble">Pit/Front Ensemble</ion-option>
+        <ion-option value="quads">Quads</ion-option>
+        <ion-option value="snare">Snare</ion-option>
+        <ion-option value="tenor sax">Tenor Sax</ion-option>
+        <ion-option value="trombone">Trombone</ion-option>
+        <ion-option value="trumpet">Trumpet</ion-option>
+        <ion-option value="tuba">Tuba</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Other</ion-label>
+      <ion-input placeholder="Other" [(ngModel)]="other"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div id="search-buttons">
+    <button ion-button ion-button (click)="backToHome()"> Back to Home </button>
 
+    <button ion-button ion-button (click)="searchClicked()">Search</button>
+  </div>
+<!-- Example of list display -->
+  <!-- <ion-list>
+    <ion-list-header>
+      result of Search
+    </ion-list-header>
+    <ion-item *ngFor="let result of examples">
+      <div item>
+        <ion-avatar item-start>
+          <h1>{{result.First_Name}} {{result.Last_Name}}</h1>
+        </ion-avatar>
+      </div>
+      
+      <h2 item>GTID: {{result.GTID}}</h2>
+      <h2 item>Email: {{result.Email}}</h2>
+      <h2 item>Section: {{result.Section}}</h2>
+      <h2 item>Other: {{result.Other}}</h2>
 
-  <ion-title>Search Resuly</ion-title>
-</ion-navbar>
-<ion-content class="search">
-  <ion-list *ngFor="let type of info_type">
-    <ion-list-header>{{type}}</ion-list-header>
-    <ion-item-sliding class="slider" *ngFor="let member of example[type]">
-      <ion-item>{{name}}</ion-item>
-    </ion-item-sliding>
+    </ion-item>
+  </ion-list> -->
+
+  <!-- IF THE LIST IS WORKING -->
+  <ion-list>
+    <br><br>
+    <ion-list-header>
+        Result of Search
+    </ion-list-header>
+    <ion-item *ngFor="let result of matchlist">
+      <div item>
+        <ion-avatar item-start>
+          <h1>{{result.firstname}} {{result.lastname}}</h1>
+        </ion-avatar>
+      </div>
+      
+      <h2 item>GTID: {{result.gtid}}</h2>
+      <h2 item>Email: {{result.email}}</h2>
+      <h2 item>Section: {{result.section}}</h2>
+      <h2 item>Other: {{result.other}}</h2>
+    </ion-item>
   </ion-list>
 </ion-content>

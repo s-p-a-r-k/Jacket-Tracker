@@ -36,49 +36,6 @@ export class SearchPage {
   equiplist;
   studentlist;
 
-  example = [
-    {
-      "First Name": "a",
-      "Last Name": "a1",
-      "GTID": "aid",
-      "Email": "ae",
-      "Section": "as",
-      "Other": "ao"
-    },
-    {
-      "First Name": "b",
-      "Last Name": "b1",
-      "GTID": "bid",
-      "Email": "be",
-      "Section": "bs",
-      "Other": "bo"
-    },
-    {
-      "First Name": "c",
-      "Last Name": "c1",
-      "GTID": "cid",
-      "Email": "ce",
-      "Section": "cs",
-      "Other": "co"
-    },
-    {
-      "First Name": "d",
-      "Last Name": "d1",
-      "GTID": "did",
-      "Email": "de",
-      "Section": "ds",
-      "Other": "do"
-    },
-    {
-      "First Name": "e",
-      "Last Name": "e1",
-      "GTID": "eid",
-      "Email": "ee",
-      "Section": "es",
-      "Other": "eo"
-    },
-  ];
-
   templist = [];
   matchlist = [];
   
@@ -89,7 +46,6 @@ export class SearchPage {
     this.studentRecord.subscribe(_afDB => {this.studentlist = _afDB})
     this.equipRecord = afDB.list('students/equipment').valueChanges();
     this.equipRecord.subscribe(_afDB => {this.equiplist = _afDB})
-
   }
 
   ionViewDidLoad() {
@@ -199,11 +155,6 @@ export class SearchPage {
     console.log(this.matchlist);
     console.log(this.templist);
     console.log("=====================================================");
-
-    // let alert = this.alertCtrl.create({
-
-    // })
-
     
 
   }
