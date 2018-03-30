@@ -156,7 +156,8 @@ export class SearchPage {
     console.log(this.templist);
     console.log("=====================================================");
     
-
+    this.navCtrl.push(QuickmanagementPage,{match: this.matchlist});
   }
 
+  
 }
