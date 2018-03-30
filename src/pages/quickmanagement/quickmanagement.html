@@ -11,7 +11,11 @@
       <h1 class="title">Service Provider Details</h1>
     </ion-header-bar> -->
     <ion-content>
-        <ion-grid>
+      <ion-item *ngFor="let item of items | async">
+          <ion-label *ngIf="item.firstname; else none"> {{item.firstname}} {{item.lastname}} {{item.section}}</ion-label>
+          <ion-checkbox ></ion-checkbox>
+      </ion-item>
+        <!-- <ion-grid>
           <ion-row justify-content-center align-items-center>
             <ion-col> <ion-checkbox [(ngModel)]="selectedAll" (ionChange)="allChecked($event)"></ion-checkbox> Select All </ion-col>
             <ion-col> First Name </ion-col>
@@ -42,9 +46,9 @@
             <ion-col *ngIf="item.note; else none"> {{item.note}} </ion-col>
             <ng-template #none><ion-col> N/A </ion-col></ng-template>
           </ion-row>
-        </ion-grid>
+        </ion-grid> -->
     </ion-content>
-
+    <ion-footer>
     <div id = "decisions">
       <ion-list>
         <ion-item>
@@ -58,6 +62,8 @@
             <!-- Using popover doesn't require submit button as it automatically closes overlay and selects that value
             <button ion-button ion-button (click) = "quickManageSubmit(action)"> Submit </button>-->
             <button ion-button ion-button (click) ="backToHome()"> Back to Home </button>
+            <button ion-button ion-button> GO </button>
       </ion-list>
     </div>
+  </ion-footer>
 </ion-content>
