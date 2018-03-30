@@ -6,6 +6,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 
 import {LoggedinPage} from '../loggedin/loggedin';
+import { SendEmailPage } from '../send-email/send-email'
+
 
 import { Events } from 'ionic-angular';
 
@@ -67,6 +69,8 @@ export class QuickmanagementPage {
   quickManageSubmit(selectedAction) {
       if (selectedAction == "email") {
         console.log('email option selected');
+        this.navCtrl.push(SendEmailPage);
+
       } else if (selectedAction == "uniform"){
         console.log('uniform status option selected');
         this.doRadio();

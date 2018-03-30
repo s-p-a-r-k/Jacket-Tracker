@@ -9,6 +9,7 @@ import { LoggedinPage } from '../pages/loggedin/loggedin';
 import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
 import { SearchPage } from '../pages/search/search';
 import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
+import { SendEmailPage } from '../pages/send-email/send-email'
 
 @Component({
   templateUrl: 'app.html'

@@ -34,6 +34,8 @@ import { MailService } from '../service/mail.service';
 import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
 import { SearchPage } from '../pages/search/search';
 import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
+import { SendEmailPage } from '../pages/send-email/send-email'
+
 
 export const gapiClientConfig = {
     client_id: gapiKeys.client_id,
@@ -53,7 +55,8 @@ export const gapiClientConfig = {
     QuickmanagementPage,
     UniformCheckoutPage,
     SearchPage,
-    EmailManagementPage
+    EmailManagementPage,
+    SendEmailPage
   ],
   imports: [
     BrowserModule,
@@ -79,7 +82,8 @@ export const gapiClientConfig = {
     QuickmanagementPage,
     UniformCheckoutPage,
     SearchPage,
-    EmailManagementPage
+    EmailManagementPage,
+    SendEmailPage
   ],
   providers: [
     StatusBar,

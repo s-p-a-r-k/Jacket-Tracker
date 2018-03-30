@@ -1,0 +1,56 @@
+<!--
+  Generated template for the SendEmailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>sendEmail</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list radio-group [(ngModel)]="emailType" (ngModelChange)="emailSubmit(emailType);">
+  <ion-list-header>
+    Choose email type
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>Send pre-composed email</ion-label>
+    <ion-radio checked="true" value="saved"></ion-radio>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Customize your email</ion-label>
+    <ion-radio value="custom"></ion-radio>
+  </ion-item>
+</ion-list>
+
+<ion-item *ngIf="emailType == 'saved'">
+    <ion-label>Choose Email</ion-label>
+    <ion-select [(ngModel)]="action" (ngModelChange)="chooseAction(action);">
+      <ion-option value="default1">Default 1</ion-option>
+    </ion-select>
+</ion-item>
+<ion-item *ngIf="emailType == 'custom'">
+    <ion-textarea placeholder="Enter a description"></ion-textarea>
+  </ion-item>
+
+</ion-content>
+
+<ion-footer>
+  <ion-item *ngIf="emailType == 'saved'">
+        <!-- Using popover doesn't require submit button as it automatically closes overlay and selects that value
+        <button ion-button ion-button (click) = "quickManageSubmit(action)"> Submit </button>-->
+        <button ion-button ion-button (click) ="sendEmail()"> Send Email </button>
+  </ion-item>
+  <ion-item *ngIf="emailType == 'custom'">
+        <!-- Using popover doesn't require submit button as it automatically closes overlay and selects that value
+        <button ion-button ion-button (click) = "quickManageSubmit(action)"> Submit </button>-->
+        <button ion-button ion-button (click) ="sendEmail()"> Send Custom Email </button>
+  </ion-item>
+</ion-footer>
