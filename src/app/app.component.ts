@@ -15,10 +15,9 @@ import {SearchPage} from '../pages/search/search'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  // just so we don't have to login every time.
-  // MUST CHANGE BACK BEFORE COMMITING TO MASTER
-  //rootPage: any = LandingPage;
-  rootPage: any = SearchPage;
+
+  rootPage: any = LandingPage;
+
 
   pages: Array<{title: string, component: any}>;
 
