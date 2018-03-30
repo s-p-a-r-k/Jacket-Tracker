@@ -1,17 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
-
-import { HttpClient } from '@angular/common/http';
+import { IonicPage, NavController, NavParams , AlertController } from 'ionic-angular';
 
 import { AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 
-import {LoggedinPage} from '../loggedin/loggedin';
+import { LoggedinPage } from '../loggedin/loggedin';
+import { CustomEmailPage } from '../customEmail/customEmail';
 
 import { Events } from 'ionic-angular';
-
-import { mailgun } from '../../environment';
 
 /**
  * Generated class for the QuickmanagementPage page.
@@ -35,15 +32,11 @@ export class QuickmanagementPage {
   equipRecordRef;
   studentRecordRef;
 
-  http: HttpClient;
-
-  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth, public events: Events, http: HttpClient) {
+  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth, public events: Events) {
     this.items = afDB.list('students').valueChanges();
     this.items.subscribe(_afDB => {this.itemarr = _afDB})
     this.equipRecordRef = this.afDB.list('equipment');
     this.studentRecordRef = this.afDB.list('students');
-
-    this.http = http;
 
     console.log('========================================');
     console.log(this.items);
@@ -68,14 +61,18 @@ export class QuickmanagementPage {
 
   checked(item) {
     console.log(item);
-    this.arrChosen.push(item);
-    this.arrChosen = this.arrChosen.reduce((x,y) => x.findIndex(e => e.email==y.email) < 0 ? [...x, y]: x, []);
+    if (item.selected) {
+      this.arrChosen.push(item);
+      this.arrChosen = this.arrChosen.reduce((x,y) => x.findIndex(e => e.email==y.email) < 0 ? [...x, y]: x, []);
+    } else {
+      this.arrChosen.splice(this.arrChosen.indexOf(item), 1);
+    }
   }
 
   quickManageSubmit(selectedAction) {
       if (selectedAction == "email") {
         console.log('email option selected');
-        this.send();
+        this.chooseEmail();
       } else if (selectedAction == "uniform"){
         console.log('uniform status option selected');
         this.doRadio();
@@ -93,19 +90,39 @@ export class QuickmanagementPage {
     this.arrChosen[student].equipment[equiptype].status = this.radioResult;
   }
 
-  send() {
+  chooseEmail() {
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Choose Email Type');
 
-      this.http.request(
-        "POST", "https://api.mailgun.net/v3/" + mailgun.mailgunUrl + "/messages",
-        {
-          body: "from=sender@example.com&to=" + "recipient@example.com" + "&subject=" + "Test Email" + "&text=" + "Example message sent.",
-          headers: {"Authorization": "Basic " + window.btoa("api:" + mailgun.mailgunApiKey),
-          "Content-Type": "application/x-www-form-urlencoded"}
-        }).subscribe(success => {
-        console.log("SUCCESS -> " + JSON.stringify(success));
-      }, error => {
-        console.log("ERROR -> " + JSON.stringify(error));
-      });
+    alert.addInput({
+      type: 'radio',
+      label: 'Default Email',
+      value: 'DefaultEmailPage',
+      checked: true
+    });
+
+    alert.addInput({
+      type: 'radio',
+      label: 'Custom Email',
+      value: CustomEmailPage
+    });
+
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Ok',
+      handler: (data: any) => {
+
+        console.log('Radio data:', data);
+
+        let navTransition = alert.dismiss().then(() => {this.navCtrl.push(data, {arrChosen: this.arrChosen})});
+
+        //this.radioResult = data;
+
+        return false;
+      }
+    });
+
+    alert.present();
   }
 
   doRadio() {

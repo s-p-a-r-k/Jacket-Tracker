@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Send Custom Email</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>To: {{arrNames}}</h3>
+  <form [formGroup]="customEmail" (ngSubmit)="send()">
+    <ion-item>
+      <ion-label floating>Subject</ion-label>
+      <ion-input formControlName="subject"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Body</ion-label>
+      <ion-textarea formControlName="body"></ion-textarea>
+    </ion-item>
+    <div padding>
+      <button ion-button large type = "Send"> Send Email </button>
+    </div>
+  </form>
+</ion-content>

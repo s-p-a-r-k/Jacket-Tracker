@@ -35,6 +35,8 @@ import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
 import { SearchPage } from '../pages/search/search';
 import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
 
+import { CustomEmailPage } from '../pages/customEmail/customEmail';
+
 export const gapiClientConfig = {
     client_id: gapiKeys.client_id,
     discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"],
@@ -53,7 +55,8 @@ export const gapiClientConfig = {
     QuickmanagementPage,
     UniformCheckoutPage,
     SearchPage,
-    EmailManagementPage
+    EmailManagementPage,
+    CustomEmailPage
   ],
   imports: [
     BrowserModule,
@@ -79,7 +82,8 @@ export const gapiClientConfig = {
     QuickmanagementPage,
     UniformCheckoutPage,
     SearchPage,
-    EmailManagementPage
+    EmailManagementPage,
+    CustomEmailPage
   ],
   providers: [
     StatusBar,
