@@ -107,6 +107,10 @@ export class SearchPage {
         });
         this.templist.forEach(item=> this.matchlist.push(item));
       }
+
+      if(this.firstName == null && this.lastName == null && this.email == null && this.section == null && this.gtid == null) {
+        this.matchlist = this.studentlist;
+      }
       /* Commented out until storing other is implemented
       if(this.other != null) {
         this.templist = this.studentlist.filter((item)=> {
@@ -140,7 +144,9 @@ export class SearchPage {
         this.templist.forEach(item=> this.matchlist.push(item));
       
       }
-
+      if (this.type == null && this.uniformID == null) {
+        this.matchlist = this.studentlist;
+      }
       /* Commented out until storing other is implemented
       if(this.other != null) {
         this.templist = this.studentlist.filter((item)=> {
@@ -153,7 +159,7 @@ export class SearchPage {
     //delete duplicates
     this.matchlist = this.matchlist.reduce((x,y) => x.findIndex(e => e.email==y.email) < 0 ? [...x, y]: x, []);
     console.log(this.matchlist);
-    console.log(this.templist);
+    console.log(this.studentlist);
     console.log("=====================================================");
     
     this.navCtrl.push(QuickmanagementPage,{match: this.matchlist});
