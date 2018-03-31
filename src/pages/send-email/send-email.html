@@ -31,10 +31,18 @@
 </ion-list>
 
 <ion-item *ngIf="emailType == 'saved'">
+    <div *ngfor = "let element of emailList">{{element}}</div>
+    <h1></h1>
     <ion-label>Choose Email</ion-label>
     <ion-select [(ngModel)]="action" (ngModelChange)="chooseAction(action);">
+      <ion-option value="check">emailList[0]</ion-option>
+
+
+
+      
       <ion-option value="default1">Default 1</ion-option>
     </ion-select>
+  <!-- </ion-item> -->
 </ion-item>
 <ion-item *ngIf="emailType == 'custom'">
     <ion-textarea placeholder="Enter a description"></ion-textarea>

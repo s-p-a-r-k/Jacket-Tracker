@@ -22,15 +22,18 @@ export class SendEmailPage {
   email: any;
 
   defaultEmail: Observable<any[]>;
-  iter = [];
+  emailList = [];
+
+  searchLocation: any;
+  
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private afDB: AngularFireDatabase, private afAuth: AngularFireAuth) {
     this.defaultEmail = afDB.list('email-messages').valueChanges();
-    this.defaultEmail.subscribe(_afDB => {this.iter = _afDB});
-    console.log("============================");
-    console.log("default Email list");
-    console.log(this.defaultEmail);
-    console.log("============================");
+    this.defaultEmail.subscribe(_afDB => {this.emailList = _afDB});
+    // console.log("============================");
+    // console.log("default Email list");
+    // console.log(this.defaultEmail);
+    // console.log("============================");
   }
 
   emailSubmit(emailType) {
