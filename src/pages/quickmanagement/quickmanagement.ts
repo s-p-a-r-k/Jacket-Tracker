@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
 
-import { AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 import {LoggedinPage} from '../loggedin/loggedin';
@@ -33,8 +32,8 @@ export class QuickmanagementPage {
   equipRecordRef;
   studentRecordRef;
   matchlist: any[];
-  
-  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth, public events: Events, private navParams: NavParams) {
+
+  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, public events: Events, private navParams: NavParams) {
     this.items = afDB.list('students').valueChanges();
     this.items.subscribe(_afDB => {this.itemarr = _afDB})
     this.equipRecordRef = this.afDB.list('equipment');
@@ -64,14 +63,18 @@ export class QuickmanagementPage {
 
   checked(item) {
     console.log(item);
-    this.arrChosen.push(item);
-    this.arrChosen = this.arrChosen.reduce((x,y) => x.findIndex(e => e.email==y.email) < 0 ? [...x, y]: x, []);
+    if (item.selected) {
+      this.arrChosen.push(item);
+      this.arrChosen = this.arrChosen.reduce((x,y) => x.findIndex(e => e.email==y.email) < 0 ? [...x, y]: x, []);
+    } else {
+      this.arrChosen.splice(this.arrChosen.indexOf(item), 1);
+    }
   }
 
   quickManageSubmit(selectedAction) {
       if (selectedAction == "email") {
         console.log('email option selected');
-        this.navCtrl.push(SendEmailPage);
+        this.navCtrl.push(SendEmailPage, {arrChosen: this.arrChosen});
 
       } else if (selectedAction == "uniform"){
         console.log('uniform status option selected');
