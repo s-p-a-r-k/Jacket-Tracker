@@ -14,7 +14,7 @@ export class MailgunService {
 
   sendMail(emailList, subject, body) {
     return this.http.request(
-      "POST", "/mailgun/v3/" + mailgun.mailgunUrl + "/messages",
+      "POST", "https://api.mailgun.net/v3/" + mailgun.mailgunUrl + "/messages",
       {
         body: "from=sender@example.com&to=" + emailList + "&subject=" + subject + "&text=" + body,
         headers: {"Authorization": "Basic " + window.btoa("api:" + mailgun.mailgunApiKey),
