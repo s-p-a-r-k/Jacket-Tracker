@@ -17,7 +17,7 @@ import { SendEmailPage } from '../pages/send-email/send-email'
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LandingPage;
+  rootPage: any = QuickmanagementPage;
 
   pages: Array<{title: string, component: any}>;
 
