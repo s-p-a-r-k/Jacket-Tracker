@@ -61,9 +61,8 @@ export class QuickmanagementPage {
     }
   }
 
-  checked(item) {
-    console.log(item);
-    if (item.selected) {
+  checked(event, item) {
+    if (event.checked) {
       this.arrChosen.push(item);
       this.arrChosen = this.arrChosen.reduce((x,y) => x.findIndex(e => e.email==y.email) < 0 ? [...x, y]: x, []);
     } else {

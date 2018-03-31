@@ -9,6 +9,10 @@
     {
       "path": "/firebase",
       "proxyUrl": "https://firebasestorage.googleapis.com/"
+    },
+    {
+      "path": "/mailgun",
+      "proxyUrl": "https://api.mailgun.net/"
     }
   ]
 }
