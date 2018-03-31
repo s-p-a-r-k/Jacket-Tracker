@@ -4,7 +4,7 @@ import { LoggedinPage } from './loggedin';
 
 @NgModule({
   declarations: [
-    LoggedinPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(LoggedinPage),
