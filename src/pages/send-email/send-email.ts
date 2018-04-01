@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { mailgun } from '../../environment';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -26,14 +26,9 @@ export class SendEmailPage {
   emailList = [];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private afDB: AngularFireDatabase, private afAuth: AngularFireAuth) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private afDB: AngularFireDatabase, private afAuth: AngularFireAuth, public alertCtrl: AlertController) {
     this.defaultEmail = afDB.list('email-messages').valueChanges();
     this.defaultEmail.subscribe(_afDB => {this.emailList = _afDB});
-    // this.emailList = ["1", "2", "3"];
-    // console.log("============================");
-    // console.log("default Email list");
-    // console.log(this.defaultEmail);
-    // console.log("============================");
   }
 
   emailSubmit(emailType) {
@@ -54,4 +49,21 @@ export class SendEmailPage {
     console.log('ionViewDidLoad SendEmailPage');
   }
 
+  // a draft before to do real email sending process
+  sendDefaultEmail(message) {
+    let alert = this.alertCtrl.create({
+      title: 'Email Content',
+      message: 'default email content',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            console.log('OK clicked');
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
 }

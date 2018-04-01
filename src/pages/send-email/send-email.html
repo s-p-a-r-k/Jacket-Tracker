@@ -30,11 +30,12 @@
     </ion-item>
   </ion-list>
 
+  <!-- For listing options of default email -->
   <ion-item *ngIf="emailType == 'saved'">
     <ion-label>Choose Email</ion-label>
     <ion-select [(ngModel)]="action" (ngModelChange)="chooseAction(action);">
       <div *ngFor="let element of emailList">
-        <ion-option value="1">{{element.title}}</ion-option>
+        <ion-option value="option">{{element.title}}</ion-option>
       </div>
     </ion-select>
   </ion-item>
@@ -49,7 +50,7 @@
   <ion-item *ngIf="emailType == 'saved'">
     <!-- Using popover doesn't require submit button as it automatically closes overlay and selects that value
         <button ion-button ion-button (click) = "quickManageSubmit(action)"> Submit </button>-->
-    <button ion-button ion-button (click)="sendEmail()"> Send Email </button>
+    <button ion-button ion-button (click)="sendDefaultEmail()"> Send Email </button>
   </ion-item>
   <ion-item *ngIf="emailType == 'custom'">
     <!-- Using popover doesn't require submit button as it automatically closes overlay and selects that value
