@@ -31,14 +31,35 @@
   </ion-list>
 
   <!-- For listing options of default email -->
-  <ion-item *ngIf="emailType == 'saved'">
+  <!-- <ion-item *ngIf="emailType == 'saved'">
     <ion-label>Choose Email</ion-label>
     <ion-select [(ngModel)]="action" (ngModelChange)="chooseAction(action);">
       <div *ngFor="let element of emailList">
         <ion-option value="option">{{element.title}}</ion-option>
       </div>
     </ion-select>
+  </ion-item> -->
+  <ion-item *ngIf="emailType == 'saved'">
+    <ion-label>Choose Email</ion-label>
+
+    <ion-select [(ngModel)]="action" (ngModelChange)="chooseAction(element);">
+      <div *ngFor="let element of emailList">
+        <ion-option value ='element'>{{element.body}}</ion-option>
+      </div>
+    </ion-select>
+
   </ion-item>
+
+
+
+
+
+
+
+
+
+
+
 
   <ion-item *ngIf="emailType == 'custom'">
     <ion-textarea placeholder="Enter a description"></ion-textarea>
