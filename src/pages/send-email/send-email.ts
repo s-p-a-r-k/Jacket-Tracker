@@ -5,6 +5,7 @@ import { mailgun } from '../../environment';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+
 /**
  * Generated class for the SendEmailPage page.
  *
@@ -24,12 +25,11 @@ export class SendEmailPage {
   defaultEmail: Observable<any[]>;
   emailList = [];
 
-  searchLocation: any;
-  
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private afDB: AngularFireDatabase, private afAuth: AngularFireAuth) {
     this.defaultEmail = afDB.list('email-messages').valueChanges();
     this.defaultEmail.subscribe(_afDB => {this.emailList = _afDB});
+    // this.emailList = ["1", "2", "3"];
     // console.log("============================");
     // console.log("default Email list");
     // console.log(this.defaultEmail);
