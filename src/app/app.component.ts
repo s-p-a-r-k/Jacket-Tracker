@@ -9,7 +9,8 @@ import { LoggedinPage } from '../pages/loggedin/loggedin';
 import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
 import { SearchPage } from '../pages/search/search';
 import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
-import { SendEmailPage } from '../pages/send-email/send-email'
+import { SendEmailPage } from '../pages/send-email/send-email';
+import { AccountManagementPage } from '../pages/accountManagement/accountManagement';
 
 @Component({
   templateUrl: 'app.html'
@@ -32,10 +33,10 @@ export class MyApp {
       { title: 'Search', component: SearchPage },
       { title: 'View Current Assignments', component: LoggedinPage },
       { title: 'View Uniforms', component: LoggedinPage },
-      { title: 'Manage Acount', component: LoggedinPage },
       { title: 'Assign Uniforms', component: LoggedinPage },
       { title: 'Quick Management', component: QuickmanagementPage },
-      { title: 'Email Management', component: EmailManagementPage }
+      { title: 'Email Management', component: EmailManagementPage },
+      { title: 'Account Management', component: AccountManagementPage }
     ];
 
   }

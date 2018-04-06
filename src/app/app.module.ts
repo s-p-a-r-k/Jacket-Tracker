@@ -20,21 +20,21 @@ import {
 
 import { MyApp } from './app.component';
 import { LandingPage } from '../pages/landing/landing';
+import { LoginPage } from '../pages/login/login';
+import { LoggedinPage } from '../pages/loggedin/loggedin';
+import { ResetPasswordPage } from '../pages/resetPassword/resetPassword';
+import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
+import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
+import { SearchPage } from '../pages/search/search';
+import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
+import { SendEmailPage } from '../pages/send-email/send-email';
+import { AccountManagementPage } from '../pages/accountManagement/accountManagement';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { LoginPage } from '../pages/login/login';
-import { LoggedinPage } from '../pages/loggedin/loggedin';
-import { CreateaccountPage } from '../pages/createaccount/createaccount';
-import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
 import { WaiverService } from '../service/waiver.service';
 import { MailService } from '../service/mail.service';
-
-import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
-import { SearchPage } from '../pages/search/search';
-import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
-import { SendEmailPage } from '../pages/send-email/send-email'
 
 
 export const gapiClientConfig = {
@@ -51,13 +51,14 @@ export const gapiClientConfig = {
     MyApp,
     LandingPage,
     LoginPage,
-    CreateaccountPage,
+    ResetPasswordPage,
     LoggedinPage,
     QuickmanagementPage,
     UniformCheckoutPage,
     SearchPage,
     EmailManagementPage,
-    SendEmailPage
+    SendEmailPage,
+    AccountManagementPage
   ],
   imports: [
     BrowserModule,
@@ -78,13 +79,14 @@ export const gapiClientConfig = {
     MyApp,
     LandingPage,
     LoginPage,
-    CreateaccountPage,
+    ResetPasswordPage,
     LoggedinPage,
     QuickmanagementPage,
     UniformCheckoutPage,
     SearchPage,
     EmailManagementPage,
-    SendEmailPage
+    SendEmailPage,
+    AccountManagementPage
   ],
   providers: [
     StatusBar,
