@@ -14,11 +14,13 @@ export class MailgunService {
 
   sendMail(emailList, subject, body) {
     return this.http.request(
-      "POST", "https://api.mailgun.net/v3/" + mailgun.mailgunUrl + "/messages",
+      "POST", "/mailgunProxy",
       {
         body: "from=sender@example.com&to=" + emailList + "&subject=" + subject + "&text=" + body,
-        headers: {"Authorization": "Basic " + window.btoa("api:" + mailgun.mailgunApiKey),
-        "Content-Type": "application/x-www-form-urlencoded"}
+        headers: {
+          "Authorization": "Basic " + window.btoa("api:" + mailgun.mailgunApiKey),
+          "Content-Type": "application/x-www-form-urlencoded",
+        }
       }
     );
   }
