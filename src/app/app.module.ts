@@ -31,6 +31,7 @@ import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
 import { WaiverService } from '../service/waiver.service';
 import { MailService } from '../service/mail.service';
 import { MailgunService } from '../service/mailgun.service';
+import { RegisterPage } from '../pages/register/register';
 
 import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
 import { SearchPage } from '../pages/search/search';
@@ -57,7 +58,8 @@ export const gapiClientConfig = {
     UniformCheckoutPage,
     SearchPage,
     EmailManagementPage,
-    SendEmailPage
+    SendEmailPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -84,7 +86,8 @@ export const gapiClientConfig = {
     UniformCheckoutPage,
     SearchPage,
     EmailManagementPage,
-    SendEmailPage
+    SendEmailPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,

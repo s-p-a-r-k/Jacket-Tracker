@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import {LoggedinPage} from '../loggedin/loggedin';
+import { LoggedinPage } from '../loggedin/loggedin';
 import { CreateaccountPage } from '../createaccount/createaccount';
+import { RegisterPage } from '../register/register';
 
 
 /**
@@ -55,6 +56,10 @@ export class LoginPage {
 
   createAcc() {
     this.navCtrl.push(CreateaccountPage);
+  }
+
+  registerAcc() {
+    this.navCtrl.push(RegisterPage);
   }
 
 }
