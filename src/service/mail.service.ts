@@ -3,11 +3,8 @@ import { GoogleApiService } from 'ng-gapi';
 import { gapiClientConfig } from '../app/app.module';
 import { gapiKeys } from '../environment';
 
-
 @Injectable()
 export class MailService {
-
-  private loaded = false;
 
   constructor(gapiService: GoogleApiService) {
     gapiService.onLoad().subscribe(() => {
@@ -19,8 +16,7 @@ export class MailService {
           scope: gapiClientConfig.scope
         }).then(() => {
             //Not needed when MailService used after user is signed in
-            // gapi.auth2.getAuthInstance().signIn();
-            this.loaded = true;
+            gapi.auth2.getAuthInstance().signIn();
         });
       });
     });
@@ -29,17 +25,35 @@ export class MailService {
   //Replace this with the actual mailing method(s)
   testGmailCall() {
     return new Promise((resolve, reject) => {
-      if (this.loaded) {
-        (gapi.client as any).gmail.users.labels.list({
-          //'me' is currently signed-in user
-          'userId': 'me'
-        }).then((result) => {
-          resolve(result);
-        });
-      } else {
+      (gapi.client as any).gmail.users.labels.list({
+        'userId': 'me'
+      }).then((result) => {
+        resolve(result);
+      }).catch((error) => {
         reject('gapi not initialized');
-      }
+      });
     });
   }
 
+  sendMail(emailList, subject, body) {
+    //To and Subject are formatted in the encoded email
+    let email = 'To: ' + emailList.join(",");
+    email += '\r\n';
+    email += 'Subject: ' + subject + '\r\n';
+    email += '\r\n' + body;
+    let base64EncodedEmail = window.btoa(email);
+    return new Promise((resolve, reject) => {
+      (gapi.client as any).gmail.users.messages.send({
+        //'me' is currently signed-in (authenticated) user
+        'userId': 'me',
+        'resource': {
+          'raw': base64EncodedEmail
+        }
+      }).then(result => {
+        resolve('Success: ' + JSON.stringify(result));
+      }).catch(error => {
+        reject('Email failed to send: ' + JSON.stringify(error));
+      });
+    });
+  }
 }

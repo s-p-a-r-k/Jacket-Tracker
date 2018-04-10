@@ -34,7 +34,7 @@
   <h4>To: {{arrNames}}</h4>
   <ion-item>
     <ion-label>Choose Email</ion-label>
-    <ion-select [(ngModel)]="action" (ngModelChange)="chooseAction(action);">
+    <ion-select [(ngModel)]="action">
       <div *ngFor="let item of items | async">
         <ion-option value="{{item.body}}">{{item.body}}
         </ion-option>

@@ -30,7 +30,6 @@ import { CreateaccountPage } from '../pages/createaccount/createaccount';
 import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
 import { WaiverService } from '../service/waiver.service';
 import { MailService } from '../service/mail.service';
-import { MailgunService } from '../service/mailgun.service';
 
 import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
 import { SearchPage } from '../pages/search/search';
@@ -42,7 +41,8 @@ export const gapiClientConfig = {
     client_id: gapiKeys.client_id,
     discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"],
     scope: [
-        "https://www.googleapis.com/auth/gmail.readonly"
+        "https://www.googleapis.com/auth/gmail.readonly",
+        "https://www.googleapis.com/auth/gmail.send"
     ].join(" ")
 }
 
@@ -91,7 +91,6 @@ export const gapiClientConfig = {
     SplashScreen,
     WaiverService,
     MailService,
-    MailgunService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
