@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MailgunService } from '../../service/mailgun.service';
+import { MailService } from '../../service/mail.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
@@ -21,15 +21,15 @@ export class SendEmailPage {
   private customEmail: FormGroup;
   private arrChosen = [];
   private arrNames = [];
-  private emailList = "";
+  private emailList = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private afDB: AngularFireDatabase, private formBuilder: FormBuilder, private alertCtrl: AlertController, private mailgun: MailgunService) {
-    this.items = afDB.list('email-messages').valueChanges();
+  constructor(private navParams: NavParams, private afDB: AngularFireDatabase, private formBuilder: FormBuilder, private alertCtrl: AlertController, private mailer: MailService) {
+    this.items = this.afDB.list('email-messages').valueChanges();
     this.items.subscribe(_afDB => {this.itemarr = _afDB});
-    this.arrChosen = navParams.get('arrChosen');
+    this.arrChosen = this.navParams.get('arrChosen');
     for (let student of this.arrChosen) {
       this.arrNames.push(" " + student.firstname + " " + student.lastname);
-      this.emailList += student.email + ", ";
+      this.emailList.push(student.email);
     }
 
     this.customEmail = this.getBlankForm();
@@ -43,22 +43,17 @@ export class SendEmailPage {
   }
 
   sendEmail() {
-    if (this.emailList == "" || this.customEmail.value.subject == "" || this.customEmail.value.body == "") {
+    if (this.emailList.length == 0 || this.customEmail.value.subject == "" || this.customEmail.value.body == "") {
       this.alertBlank();
     } else {
-      this.mailgun.sendMail(this.emailList, this.customEmail.value.subject, this.customEmail.value.body)
-        .subscribe(success => {
-          this.alertSuccess();
-          console.log("SUCCESS -> " + JSON.stringify(success));
-        }, error => {
-          this.alertFailure(JSON.stringify(error));
-          console.log("ERROR -> " + JSON.stringify(error));
-        });
+      this.mailer.sendMail(this.emailList, this.customEmail.value.subject, this.customEmail.value.body)
+        .then(success => console.log(success))
+        .catch(error => console.log());
     }
   }
 
   alertBlank() {
-    let alert = this.alertCtrl.create({
+    this.alertCtrl.create({
       title: 'Cannot Send Email',
       message: "Not enough information!" + "<br/>" + "One or more fields are empty.",
       buttons: [{
@@ -71,7 +66,7 @@ export class SendEmailPage {
   }
 
   alertSuccess() {
-    let alert = this.alertCtrl.create({
+    this.alertCtrl.create({
       title: 'Success',
       message: "Successfully sent email to " + this.arrNames + ".",
       buttons: [{
@@ -84,7 +79,7 @@ export class SendEmailPage {
   }
 
   alertFailure(errorMessage: String) {
-    let alert = this.alertCtrl.create({
+    this.alertCtrl.create({
       title: 'Failure',
       message: 'Reason: ' + errorMessage,
       buttons: [{
@@ -105,13 +100,4 @@ export class SendEmailPage {
       this.email = "custom";
     }
   }
-
-  chooseAction(action) {
-    console.log("Action chose");
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SendEmailPage');
-  }
-
 }
