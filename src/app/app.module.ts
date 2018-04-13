@@ -29,6 +29,7 @@ import { SearchPage } from '../pages/search/search';
 import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
 import { SendEmailPage } from '../pages/send-email/send-email';
 import { AccountManagementPage } from '../pages/accountManagement/accountManagement';
+import { ChangeUserEmailPage } from '../pages/changeUserEmail/changeUserEmail';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -58,7 +59,8 @@ export const gapiClientConfig = {
     SearchPage,
     EmailManagementPage,
     SendEmailPage,
-    AccountManagementPage
+    AccountManagementPage,
+    ChangeUserEmailPage
   ],
   imports: [
     BrowserModule,
@@ -86,7 +88,8 @@ export const gapiClientConfig = {
     SearchPage,
     EmailManagementPage,
     SendEmailPage,
-    AccountManagementPage
+    AccountManagementPage,
+    ChangeUserEmailPage
   ],
   providers: [
     StatusBar,
