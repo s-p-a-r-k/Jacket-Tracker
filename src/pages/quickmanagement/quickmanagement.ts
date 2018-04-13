@@ -1,10 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
-import {LoggedinPage} from '../loggedin/loggedin';
 import { SendEmailPage } from '../send-email/send-email'
 
 
@@ -47,10 +46,6 @@ export class QuickmanagementPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad QuickmanagementPage');
-  }
-
-  backToHome() {
-    this.navCtrl.setRoot(LoggedinPage);
   }
 
   allChecked() {
@@ -121,7 +116,7 @@ export class QuickmanagementPage {
       handler: (data: any) => {
 
         console.log('Radio data:', data);
-        let navTransition = alert.dismiss().then(() => {this.radioResult = data});
+        alert.dismiss().then(() => {this.radioResult = data});
 
         //this.radioResult = data;
 

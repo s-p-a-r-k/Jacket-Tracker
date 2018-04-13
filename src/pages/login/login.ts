@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import {LoggedinPage} from '../loggedin/loggedin';
+import { SearchPage } from '../search/search';
 import { ResetPasswordPage } from '../resetPassword/resetPassword';
 
 
@@ -25,11 +25,6 @@ export class LoginPage {
   constructor(private fire:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-
-  }
-
   alert(message: string) {
     this.alertCtrl.create({
       title: 'Info',
@@ -45,7 +40,7 @@ export class LoginPage {
       console.log('got some data', this.fire.auth.currentUser);
       //user is logged in
       this.alert('Success! You are logged in');
-      this.navCtrl.setRoot(LoggedinPage);
+      this.navCtrl.setRoot(SearchPage);
     })
     .catch( error => {
       console.log('got an error', error);

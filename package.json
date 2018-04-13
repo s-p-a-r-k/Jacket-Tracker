@@ -1,8 +1,8 @@
 {
-  "name": "test-ionic",
+  "name": "jacket-tracker",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Junior Design Team 7350",
+  "homepage": "https://github.com/s-p-a-r-k/Jacket-Tracker",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -46,5 +46,5 @@
     "isarray": "^2.0.4",
     "typescript": "2.4.2"
   },
-  "description": "An Ionic project"
+  "description": "An item management tool for the GT Band.  Uniform Lieutenants can log in to manage/update uniform assignments, email band members, and update uniform information.  Band members can complete a questionnaire to checkout uniform pieces."
 }

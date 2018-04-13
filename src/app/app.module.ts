@@ -21,7 +21,6 @@ import {
 import { MyApp } from './app.component';
 import { LandingPage } from '../pages/landing/landing';
 import { LoginPage } from '../pages/login/login';
-import { LoggedinPage } from '../pages/loggedin/loggedin';
 import { ResetPasswordPage } from '../pages/resetPassword/resetPassword';
 import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
 import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
@@ -53,7 +52,6 @@ export const gapiClientConfig = {
     LandingPage,
     LoginPage,
     ResetPasswordPage,
-    LoggedinPage,
     QuickmanagementPage,
     UniformCheckoutPage,
     SearchPage,
@@ -82,7 +80,6 @@ export const gapiClientConfig = {
     LandingPage,
     LoginPage,
     ResetPasswordPage,
-    LoggedinPage,
     QuickmanagementPage,
     UniformCheckoutPage,
     SearchPage,
