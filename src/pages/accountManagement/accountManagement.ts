@@ -1,7 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ResetPasswordPage } from '../resetPassword/resetPassword';
+import { ChangeUserEmailPage } from '../changeUserEmail/changeUserEmail';
 
 @Component({
   selector: 'page-accountManagement',
@@ -9,10 +10,10 @@ import { ResetPasswordPage } from '../resetPassword/resetPassword';
 })
 export class AccountManagementPage {
 
-  constructor(private fire: AngularFireAuth, private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController) { }
 
   changeEmail() {
-
+    this.navCtrl.push(ChangeUserEmailPage);
   }
 
   resetPassword() {
