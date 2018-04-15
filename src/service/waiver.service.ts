@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireStorage } from 'angularfire2/storage';
-import { Observable } from 'rxjs/Observable';
-
 
 @Injectable()
 export class WaiverService {
@@ -14,5 +12,9 @@ export class WaiverService {
   getWaiverURL() {
     const ref = this.storage.ref(this.WAIVER_LOCATION);
     return ref.getDownloadURL();
+  }
+
+  uploadWaiver(waiverData) {
+    return this.storage.upload(this.WAIVER_LOCATION, waiverData);
   }
 }

@@ -11,6 +11,7 @@ import { SearchPage } from '../pages/search/search';
 import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
 import { SendEmailPage } from '../pages/send-email/send-email';
 import { AccountManagementPage } from '../pages/accountManagement/accountManagement';
+import { WaiverManagementPage } from '../pages/waiverManagement/waiverManagement';
 
 @Component({
   templateUrl: 'app.html'
@@ -35,7 +36,8 @@ export class MyApp {
       { title: 'View Uniforms', component: SearchPage },
       { title: 'Assign Uniforms', component: SearchPage },
       { title: 'Email Management', component: EmailManagementPage },
-      { title: 'Account Management', component: AccountManagementPage }
+      { title: 'Account Management', component: AccountManagementPage },
+      { title: 'Waiver Management', component: WaiverManagementPage }
     ];
 
   }
