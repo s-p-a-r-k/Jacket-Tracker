@@ -6,8 +6,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 
 import {LoggedinPage} from '../loggedin/loggedin';
-import { SendEmailPage } from '../send-email/send-email'
-
 
 import { Events } from 'ionic-angular';
 
@@ -32,15 +30,17 @@ export class QuickmanagementPage {
   radioResult: any;
   equipRecordRef;
   studentRecordRef;
-
-  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth, public events: Events) {
+  matchlist: any[];
+  
+  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth, public events: Events, private navParams: NavParams) {
     this.items = afDB.list('students').valueChanges();
     this.items.subscribe(_afDB => {this.itemarr = _afDB})
     this.equipRecordRef = this.afDB.list('equipment');
     this.studentRecordRef = this.afDB.list('students');
+    this.matchlist = navParams.get('match');
 
     console.log('========================================');
-    console.log(this.items);
+    console.log(this.matchlist);
     console.log('========================================');
   }
 
@@ -69,8 +69,6 @@ export class QuickmanagementPage {
   quickManageSubmit(selectedAction) {
       if (selectedAction == "email") {
         console.log('email option selected');
-        this.navCtrl.push(SendEmailPage);
-
       } else if (selectedAction == "uniform"){
         console.log('uniform status option selected');
         this.doRadio();
