@@ -36,6 +36,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { WaiverService } from '../service/waiver.service';
 import { MailService } from '../service/mail.service';
+import { UniformRegistrationPage } from '../pages/uniform-registration/uniform-registration';
 
 
 export const gapiClientConfig = {
@@ -60,7 +61,8 @@ export const gapiClientConfig = {
     SendEmailPage,
     AccountManagementPage,
     ChangeUserEmailPage,
-    WaiverManagementPage
+    WaiverManagementPage,
+    UniformRegistrationPage
   ],
   imports: [
     BrowserModule,
@@ -89,7 +91,8 @@ export const gapiClientConfig = {
     SendEmailPage,
     AccountManagementPage,
     ChangeUserEmailPage,
-    WaiverManagementPage
+    WaiverManagementPage,
+    UniformRegistrationPage
   ],
   providers: [
     StatusBar,

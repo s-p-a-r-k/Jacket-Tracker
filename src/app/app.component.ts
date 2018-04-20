@@ -12,6 +12,7 @@ import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
 import { SendEmailPage } from '../pages/send-email/send-email';
 import { AccountManagementPage } from '../pages/accountManagement/accountManagement';
 import { WaiverManagementPage } from '../pages/waiverManagement/waiverManagement';
+import { UniformRegistrationPage } from '../pages/uniform-registration/uniform-registration';
 
 @Component({
   templateUrl: 'app.html'
@@ -31,7 +32,7 @@ export class MyApp {
     // Menu list but Temp Quick Management was made since we do not have search screen yet.
     this.pages = [
       { title: 'Home', component: SearchPage },
-      { title: 'Add New Uniform', component: SearchPage },
+      { title: 'Add New Uniform', component: UniformRegistrationPage },
       { title: 'View Current Assignments', component: SearchPage },
       { title: 'View Uniforms', component: SearchPage },
       { title: 'Assign Uniforms', component: SearchPage },
