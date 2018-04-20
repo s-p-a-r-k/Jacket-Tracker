@@ -31,6 +31,10 @@ export class QuickmanagementPage {
   equipRecordRef;
   studentRecordRef;
   matchlist: any[];
+  returnlist = [];
+  len = 0;
+
+ 
 
   constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, public events: Events, private navParams: NavParams) {
     this.items = afDB.list('students').valueChanges();
@@ -38,6 +42,8 @@ export class QuickmanagementPage {
     this.equipRecordRef = this.afDB.list('equipment');
     this.studentRecordRef = this.afDB.list('students');
     this.matchlist = navParams.get('match');
+    this.returnlist = [];
+
 
     console.log('========================================');
     console.log(this.matchlist);
@@ -74,12 +80,23 @@ export class QuickmanagementPage {
         console.log('uniform status option selected');
         this.doRadio();
 
+
         this.equipRecordRef.update('Jacket/17', {status: 'dirty'});
 
         this.doRadio();
         this.equipRecordRef.update('Sash/7', {status: 'alteration needed'});
-      } else {
+      } else if (selectedAction == "student"){
         console.log('student information option selected');
+
+      } else if (selectedAction == "return"){
+        this.arrChosen.forEach(item => this.returnlist.push(item.equipment));
+        for (var i = 0; i < this.returnlist.length; i++) {
+
+          for (var name1 in this.returnlist[i]) {
+
+            this.equipRecordRef.update(name1 + "/" + this.returnlist[i][name1].id, {student: ''});
+          }
+        }
       }
   }
 
