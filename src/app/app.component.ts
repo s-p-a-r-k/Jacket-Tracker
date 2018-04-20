@@ -20,7 +20,7 @@ import { UniformRegistrationPage } from '../pages/uniform-registration/uniform-r
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = QuickmanagementPage;
+  rootPage: any = LandingPage;
 
 
   pages: Array<{title: string, component: any}>;
