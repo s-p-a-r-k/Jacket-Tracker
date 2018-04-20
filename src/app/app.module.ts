@@ -38,16 +38,20 @@ import { WaiverService } from '../service/waiver.service';
 import { MailService } from '../service/mail.service';
 import { UniformRegistrationPage } from '../pages/uniform-registration/uniform-registration';
 
+
 import { RegisterPage } from '../pages/register/register';
 
-import { UniformRegistrationPage } from '../pages/uniform-registration/uniform-registration';
+
+
+
 
 
 export const gapiClientConfig = {
     client_id: gapiKeys.client_id,
     discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"],
     scope: [
-        "https://www.googleapis.com/auth/gmail.readonly"
+        "https://www.googleapis.com/auth/gmail.readonly",
+        "https://www.googleapis.com/auth/gmail.send"
     ].join(" ")
 }
 
@@ -56,8 +60,7 @@ export const gapiClientConfig = {
     MyApp,
     LandingPage,
     LoginPage,
-    CreateaccountPage,
-    LoggedinPage,
+    ResetPasswordPage,
     QuickmanagementPage,
     UniformCheckoutPage,
     SearchPage,
@@ -88,8 +91,7 @@ export const gapiClientConfig = {
     MyApp,
     LandingPage,
     LoginPage,
-    CreateaccountPage,
-    LoggedinPage,
+    ResetPasswordPage,
     QuickmanagementPage,
     UniformCheckoutPage,
     SearchPage,
@@ -106,7 +108,6 @@ export const gapiClientConfig = {
     SplashScreen,
     WaiverService,
     MailService,
-    MailgunService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

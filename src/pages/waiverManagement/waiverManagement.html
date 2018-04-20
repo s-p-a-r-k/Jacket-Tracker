@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Waiver Management</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <input type="file" (change)="updateData($event)" />
+    <div>{{ uploadPercent | async }}% Uploaded</div>
+  </ion-item>
+</ion-content>

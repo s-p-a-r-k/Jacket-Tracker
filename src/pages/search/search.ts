@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { LoggedinPage } from '../loggedin/loggedin';
 import { QuickmanagementPage } from '../quickmanagement/quickmanagement';
 import { AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -38,7 +37,7 @@ export class SearchPage {
 
   templist = [];
   matchlist = [];
-  
+
 
   constructor(private afDB: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
     this.searchLocation = "student";
@@ -52,10 +51,7 @@ export class SearchPage {
     console.log('ionViewDidLoad SearchPage');
   }
 
-  
-  backToHome() {
-    this.navCtrl.setRoot(LoggedinPage);
-  }
+
   matchFirstName() {
 
   }
@@ -68,7 +64,7 @@ export class SearchPage {
     if(this.searchLocation == "student") {
       if(this.firstName != null) {
         this.templist = this.studentlist.filter((item)=> {
-          return item.firstname.toLowerCase() == this.firstName.toLowerCase(); 
+          return item.firstname.toLowerCase() == this.firstName.toLowerCase();
         });
         this.templist.forEach(item=> this.matchlist.push(item));
       }
@@ -78,7 +74,7 @@ export class SearchPage {
           return item.lastname.toLowerCase() == this.lastName.toLowerCase();
         });
         this.templist.forEach(item=> this.matchlist.push(item));
-      }      
+      }
 
       if(this.gtid != null) {
         this.templist = this.studentlist.filter((item)=> {
@@ -142,7 +138,7 @@ export class SearchPage {
           }
         }
         this.templist.forEach(item=> this.matchlist.push(item));
-      
+
       }
       if (this.type == null && this.uniformID == null) {
         this.matchlist = this.studentlist;
@@ -161,9 +157,9 @@ export class SearchPage {
     console.log(this.matchlist);
     console.log(this.studentlist);
     console.log("=====================================================");
-    
+
     this.navCtrl.push(QuickmanagementPage,{match: this.matchlist});
   }
 
-  
+
 }

@@ -91,9 +91,7 @@
     </ion-item>
   </ion-list>
   <div id="search-buttons">
-    <button ion-button ion-button (click)="backToHome()"> Back to Home </button>
-
-    <button ion-button ion-button (click)="searchClicked()">Search</button>
+    <button block ion-button (click)="searchClicked()">Search</button>
   </div>
 
   <!-- <ion-list>
@@ -107,7 +105,7 @@
           <h1>{{result.firstname}} {{result.lastname}}</h1>
         </ion-avatar>
       </div>
-      
+
       <h2 item>GTID: {{result.gtid}}</h2>
       <h2 item>Email: {{result.email}}</h2>
       <h2 item>Section: {{result.section}}</h2>

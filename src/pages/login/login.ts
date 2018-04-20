@@ -6,6 +6,7 @@ import { ResetPasswordPage } from '../resetPassword/resetPassword';
 import { RegisterPage } from '../register/register';
 
 
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -26,11 +27,6 @@ export class LoginPage {
   constructor(private fire:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-    
-  }
-
   alert(message: string) {
     this.alertCtrl.create({
       title: 'Info',
@@ -46,7 +42,7 @@ export class LoginPage {
       console.log('got some data', this.fire.auth.currentUser);
       //user is logged in
       this.alert('Success! You are logged in');
-      this.navCtrl.setRoot(LoggedinPage);
+      this.navCtrl.setRoot(SearchPage);
     })
     .catch( error => {
       console.log('got an error', error);
@@ -55,7 +51,7 @@ export class LoginPage {
   }
 
   createAcc() {
-    this.navCtrl.push(CreateaccountPage);
+    this.navCtrl.push(ResetPasswordPage);
   }
 
   registerAcc() {

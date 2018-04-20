@@ -4,15 +4,5 @@
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  },
-  "proxies": [
-    {
-      "path": "/firebase",
-      "proxyUrl": "https://firebasestorage.googleapis.com/"
-    },
-    {
-      "path": "/mailgun",
-      "proxyUrl": "https://api.mailgun.net/"
-    }
-  ]
+  }
 }

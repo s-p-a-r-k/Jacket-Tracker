@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "jacket-tracker",
+  "short_name": "jacket-tracker",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

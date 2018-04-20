@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Change Email
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="newEmail" (ngSubmit)="saveEmail()">
+    <ion-item>
+      <ion-label floating>New email</ion-label>
+      <ion-input formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Confirm new email</ion-label>
+      <ion-input formControlName="emailConfirm"></ion-input>
+    </ion-item>
+    <div padding>
+      <button block ion-button type="submit" [disabled]="!newEmail.valid">Submit</button>
+    </div>
+  </form>
+</ion-content>
