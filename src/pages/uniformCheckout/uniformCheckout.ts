@@ -49,8 +49,8 @@ export class UniformCheckoutPage {
     this.equipment = fire.list('/equipment');
     waiverService.getWaiverURL()
       .subscribe(
-        url => this.waiverSrc = waiverService.replaceOrigin(url)
-      )
+        url => this.waiverSrc = url
+      );
     this.initForm()
   }
 

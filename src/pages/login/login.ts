@@ -1,8 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import {LoggedinPage} from '../loggedin/loggedin';
-import { CreateaccountPage } from '../createaccount/createaccount';
+import { SearchPage } from '../search/search';
+import { ResetPasswordPage } from '../resetPassword/resetPassword';
+import { RegisterPage } from '../register/register';
+
 
 
 /**
@@ -25,11 +27,6 @@ export class LoginPage {
   constructor(private fire:AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-    
-  }
-
   alert(message: string) {
     this.alertCtrl.create({
       title: 'Info',
@@ -45,7 +42,7 @@ export class LoginPage {
       console.log('got some data', this.fire.auth.currentUser);
       //user is logged in
       this.alert('Success! You are logged in');
-      this.navCtrl.setRoot(LoggedinPage);
+      this.navCtrl.setRoot(SearchPage);
     })
     .catch( error => {
       console.log('got an error', error);
@@ -54,7 +51,11 @@ export class LoginPage {
   }
 
   createAcc() {
-    this.navCtrl.push(CreateaccountPage);
+    this.navCtrl.push(ResetPasswordPage);
+  }
+
+  registerAcc() {
+    this.navCtrl.push(RegisterPage);
   }
 
 }

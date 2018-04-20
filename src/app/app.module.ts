@@ -20,28 +20,38 @@ import {
 
 import { MyApp } from './app.component';
 import { LandingPage } from '../pages/landing/landing';
+import { LoginPage } from '../pages/login/login';
+import { ResetPasswordPage } from '../pages/resetPassword/resetPassword';
+import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
+import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
+import { SearchPage } from '../pages/search/search';
+import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
+import { SendEmailPage } from '../pages/send-email/send-email';
+import { AccountManagementPage } from '../pages/accountManagement/accountManagement';
+import { ChangeUserEmailPage } from '../pages/changeUserEmail/changeUserEmail';
+import { WaiverManagementPage } from '../pages/waiverManagement/waiverManagement';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { LoginPage } from '../pages/login/login';
-import { LoggedinPage } from '../pages/loggedin/loggedin';
-import { CreateaccountPage } from '../pages/createaccount/createaccount';
-import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
 import { WaiverService } from '../service/waiver.service';
 import { MailService } from '../service/mail.service';
+import { UniformRegistrationPage } from '../pages/uniform-registration/uniform-registration';
 
-import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
-import { SearchPage } from '../pages/search/search';
-import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
-import { SendEmailPage } from '../pages/send-email/send-email'
+
+import { RegisterPage } from '../pages/register/register';
+
+
+
+
 
 
 export const gapiClientConfig = {
     client_id: gapiKeys.client_id,
     discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"],
     scope: [
-        "https://www.googleapis.com/auth/gmail.readonly"
+        "https://www.googleapis.com/auth/gmail.readonly",
+        "https://www.googleapis.com/auth/gmail.send"
     ].join(" ")
 }
 
@@ -50,13 +60,17 @@ export const gapiClientConfig = {
     MyApp,
     LandingPage,
     LoginPage,
-    CreateaccountPage,
-    LoggedinPage,
+    ResetPasswordPage,
     QuickmanagementPage,
     UniformCheckoutPage,
     SearchPage,
     EmailManagementPage,
-    SendEmailPage
+    SendEmailPage,
+    RegisterPage,
+    AccountManagementPage,
+    ChangeUserEmailPage,
+    WaiverManagementPage,
+    UniformRegistrationPage
   ],
   imports: [
     BrowserModule,
@@ -77,13 +91,17 @@ export const gapiClientConfig = {
     MyApp,
     LandingPage,
     LoginPage,
-    CreateaccountPage,
-    LoggedinPage,
+    ResetPasswordPage,
     QuickmanagementPage,
     UniformCheckoutPage,
     SearchPage,
     EmailManagementPage,
-    SendEmailPage
+    SendEmailPage,
+    RegisterPage,
+    AccountManagementPage,
+    ChangeUserEmailPage,
+    WaiverManagementPage,
+    UniformRegistrationPage
   ],
   providers: [
     StatusBar,

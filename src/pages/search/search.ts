@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+<<<<<<< HEAD
 import { LoggedinPage } from '../loggedin/loggedin';
+=======
+>>>>>>> 9c57dd9b31dfdc0a4b36f8be4d7b60bad297b808
 import { QuickmanagementPage } from '../quickmanagement/quickmanagement';
 import { AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -30,6 +33,7 @@ export class SearchPage {
   gtid: any;
   email: any;
   section: any;
+<<<<<<< HEAD
 
   equipRecord: Observable<any[]>;
   studentRecord: Observable<any[]>;
@@ -40,6 +44,18 @@ export class SearchPage {
   matchlist = [];
   
 
+=======
+
+  equipRecord: Observable<any[]>;
+  studentRecord: Observable<any[]>;
+  equiplist;
+  studentlist;
+
+  templist = [];
+  matchlist = [];
+
+
+>>>>>>> 9c57dd9b31dfdc0a4b36f8be4d7b60bad297b808
   constructor(private afDB: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
     this.searchLocation = "student";
     this.studentRecord = afDB.list('students').valueChanges();
@@ -52,10 +68,14 @@ export class SearchPage {
     console.log('ionViewDidLoad SearchPage');
   }
 
+<<<<<<< HEAD
   
   backToHome() {
     this.navCtrl.setRoot(LoggedinPage);
   }
+=======
+
+>>>>>>> 9c57dd9b31dfdc0a4b36f8be4d7b60bad297b808
   matchFirstName() {
 
   }
@@ -68,7 +88,11 @@ export class SearchPage {
     if(this.searchLocation == "student") {
       if(this.firstName != null) {
         this.templist = this.studentlist.filter((item)=> {
+<<<<<<< HEAD
           return item.firstname.toLowerCase() == this.firstName.toLowerCase(); 
+=======
+          return item.firstname.toLowerCase() == this.firstName.toLowerCase();
+>>>>>>> 9c57dd9b31dfdc0a4b36f8be4d7b60bad297b808
         });
         this.templist.forEach(item=> this.matchlist.push(item));
       }
@@ -78,7 +102,11 @@ export class SearchPage {
           return item.lastname.toLowerCase() == this.lastName.toLowerCase();
         });
         this.templist.forEach(item=> this.matchlist.push(item));
+<<<<<<< HEAD
       }      
+=======
+      }
+>>>>>>> 9c57dd9b31dfdc0a4b36f8be4d7b60bad297b808
 
       if(this.gtid != null) {
         this.templist = this.studentlist.filter((item)=> {
@@ -107,6 +135,13 @@ export class SearchPage {
         });
         this.templist.forEach(item=> this.matchlist.push(item));
       }
+<<<<<<< HEAD
+=======
+
+      if(this.firstName == null && this.lastName == null && this.email == null && this.section == null && this.gtid == null) {
+        this.matchlist = this.studentlist;
+      }
+>>>>>>> 9c57dd9b31dfdc0a4b36f8be4d7b60bad297b808
       /* Commented out until storing other is implemented
       if(this.other != null) {
         this.templist = this.studentlist.filter((item)=> {
@@ -138,9 +173,17 @@ export class SearchPage {
           }
         }
         this.templist.forEach(item=> this.matchlist.push(item));
+<<<<<<< HEAD
       
       }
 
+=======
+
+      }
+      if (this.type == null && this.uniformID == null) {
+        this.matchlist = this.studentlist;
+      }
+>>>>>>> 9c57dd9b31dfdc0a4b36f8be4d7b60bad297b808
       /* Commented out until storing other is implemented
       if(this.other != null) {
         this.templist = this.studentlist.filter((item)=> {
@@ -153,6 +196,7 @@ export class SearchPage {
     //delete duplicates
     this.matchlist = this.matchlist.reduce((x,y) => x.findIndex(e => e.email==y.email) < 0 ? [...x, y]: x, []);
     console.log(this.matchlist);
+<<<<<<< HEAD
     console.log(this.templist);
     console.log("=====================================================");
     
@@ -161,3 +205,13 @@ export class SearchPage {
 
   
 }
+=======
+    console.log(this.studentlist);
+    console.log("=====================================================");
+
+    this.navCtrl.push(QuickmanagementPage,{match: this.matchlist});
+  }
+
+
+}
+>>>>>>> 9c57dd9b31dfdc0a4b36f8be4d7b60bad297b808

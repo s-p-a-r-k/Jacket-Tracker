@@ -30,15 +30,43 @@
   </ion-item>
 </ion-list>
 
-<ion-item *ngIf="emailType == 'saved'">
+<div *ngIf="emailType == 'saved'">
+  <h4>To: {{arrNames}}</h4>
+  <ion-item>
     <ion-label>Choose Email</ion-label>
-    <ion-select [(ngModel)]="action" (ngModelChange)="chooseAction(action);">
-      <ion-option value="default1">Default 1</ion-option>
+    <ion-select [(ngModel)]="action">
+      <div *ngFor="let item of items | async">
+        <ion-option value="{{item.body}}">{{item.body}}
+        </ion-option>
+      </div>
     </ion-select>
-</ion-item>
-<ion-item *ngIf="emailType == 'custom'">
-    <ion-textarea placeholder="Enter a description"></ion-textarea>
   </ion-item>
+</div>
+
+<div *ngIf="emailType == 'custom'">
+<!--     <ion-item>
+        <ion-textarea placeholder="Subject"></ion-textarea>
+    </ion-item>
+    <ion-item>
+        <ion-textarea placeholder="Enter a description"></ion-textarea>
+    </ion-item> -->
+  <h4>To: {{arrNames}}</h4>
+  <form [formGroup]="customEmail">
+    <ion-item>
+      <ion-label floating>Subject</ion-label>
+      <ion-input formControlName="subject"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Body</ion-label>
+      <ion-textarea formControlName="body"></ion-textarea>
+    </ion-item>
+    <ion-footer>
+      <ion-item>
+        <button ion-button ion-button (click) ="sendEmail()"> Send Custom Email </button>
+      </ion-item>
+    </ion-footer>
+  </form>
+</div>
 
 </ion-content>
 
@@ -48,9 +76,9 @@
         <button ion-button ion-button (click) = "quickManageSubmit(action)"> Submit </button>-->
         <button ion-button ion-button (click) ="sendEmail()"> Send Email </button>
   </ion-item>
-  <ion-item *ngIf="emailType == 'custom'">
-        <!-- Using popover doesn't require submit button as it automatically closes overlay and selects that value
-        <button ion-button ion-button (click) = "quickManageSubmit(action)"> Submit </button>-->
+<!--   <ion-item *ngIf="emailType == 'custom'">
+         Using popover doesn't require submit button as it automatically closes overlay and selects that value
+        <button ion-button ion-button (click) = "quickManageSubmit(action)"> Submit </button>
         <button ion-button ion-button (click) ="sendEmail()"> Send Custom Email </button>
-  </ion-item>
+  </ion-item> -->
 </ion-footer>

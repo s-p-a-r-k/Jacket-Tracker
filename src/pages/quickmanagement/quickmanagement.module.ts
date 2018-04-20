@@ -4,7 +4,7 @@ import { QuickmanagementPage } from './quickmanagement';
 
 @NgModule({
   declarations: [
-    QuickmanagementPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(QuickmanagementPage),

@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Account Management</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div id="change-email-button">
+    <button block ion-button (click)="changeEmail()">Change Email</button>
+  </div>
+
+  <div id="reset-password-button">
+    <button block ion-button (click)="resetPassword()">Reset Password</button>
+  </div>
+</ion-content>
