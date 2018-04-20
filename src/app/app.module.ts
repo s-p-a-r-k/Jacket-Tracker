@@ -39,6 +39,13 @@ import { MailService } from '../service/mail.service';
 import { UniformRegistrationPage } from '../pages/uniform-registration/uniform-registration';
 
 
+import { RegisterPage } from '../pages/register/register';
+
+
+
+
+
+
 export const gapiClientConfig = {
     client_id: gapiKeys.client_id,
     discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"],
@@ -59,6 +66,7 @@ export const gapiClientConfig = {
     SearchPage,
     EmailManagementPage,
     SendEmailPage,
+    RegisterPage,
     AccountManagementPage,
     ChangeUserEmailPage,
     WaiverManagementPage,
@@ -89,6 +97,7 @@ export const gapiClientConfig = {
     SearchPage,
     EmailManagementPage,
     SendEmailPage,
+    RegisterPage,
     AccountManagementPage,
     ChangeUserEmailPage,
     WaiverManagementPage,

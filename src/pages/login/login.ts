@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams , AlertController} from 'ionic-angu
 import { AngularFireAuth } from 'angularfire2/auth';
 import { SearchPage } from '../search/search';
 import { ResetPasswordPage } from '../resetPassword/resetPassword';
+import { RegisterPage } from '../register/register';
+
 
 
 /**
@@ -50,6 +52,10 @@ export class LoginPage {
 
   createAcc() {
     this.navCtrl.push(ResetPasswordPage);
+  }
+
+  registerAcc() {
+    this.navCtrl.push(RegisterPage);
   }
 
 }

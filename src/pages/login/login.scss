@@ -13,5 +13,13 @@ page-login {
     #sign-in-button button{
         flex: 1;
     }
+    #register-button {
+        display: flex;
+        flex-direction: row;
+    }
+    #register-button button{
+        flex: 1;
+    }
+
 
 }
