@@ -20,23 +20,27 @@ import {
 
 import { MyApp } from './app.component';
 import { LandingPage } from '../pages/landing/landing';
+import { LoginPage } from '../pages/login/login';
+import { ResetPasswordPage } from '../pages/resetPassword/resetPassword';
+import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
+import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
+import { SearchPage } from '../pages/search/search';
+import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
+import { SendEmailPage } from '../pages/send-email/send-email';
+import { AccountManagementPage } from '../pages/accountManagement/accountManagement';
+import { ChangeUserEmailPage } from '../pages/changeUserEmail/changeUserEmail';
+import { WaiverManagementPage } from '../pages/waiverManagement/waiverManagement';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { LoginPage } from '../pages/login/login';
-import { LoggedinPage } from '../pages/loggedin/loggedin';
-import { CreateaccountPage } from '../pages/createaccount/createaccount';
-import { UniformCheckoutPage } from '../pages/uniformCheckout/uniformCheckout';
 import { WaiverService } from '../service/waiver.service';
 import { MailService } from '../service/mail.service';
-import { MailgunService } from '../service/mailgun.service';
+import { UniformRegistrationPage } from '../pages/uniform-registration/uniform-registration';
+
 import { RegisterPage } from '../pages/register/register';
 
-import { QuickmanagementPage } from '../pages/quickmanagement/quickmanagement';
-import { SearchPage } from '../pages/search/search';
-import { EmailManagementPage } from '../pages/emailManagement/emailManagement';
-import { SendEmailPage } from '../pages/send-email/send-email'
+import { UniformRegistrationPage } from '../pages/uniform-registration/uniform-registration';
 
 
 export const gapiClientConfig = {
@@ -59,7 +63,11 @@ export const gapiClientConfig = {
     SearchPage,
     EmailManagementPage,
     SendEmailPage,
-    RegisterPage
+    RegisterPage,
+    AccountManagementPage,
+    ChangeUserEmailPage,
+    WaiverManagementPage,
+    UniformRegistrationPage
   ],
   imports: [
     BrowserModule,
@@ -87,7 +95,11 @@ export const gapiClientConfig = {
     SearchPage,
     EmailManagementPage,
     SendEmailPage,
-    RegisterPage
+    RegisterPage,
+    AccountManagementPage,
+    ChangeUserEmailPage,
+    WaiverManagementPage,
+    UniformRegistrationPage
   ],
   providers: [
     StatusBar,
