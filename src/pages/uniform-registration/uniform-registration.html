@@ -15,15 +15,17 @@
 
 <ion-content padding>
 
-    <ion-item>
+<!--     <ion-item>
         <ion-label color="primary">ID</ion-label>
         <ion-input placeholder="ID" [(ngModel)]="id"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label>Type</ion-label>
           <ion-select [(ngModel)]="type">
-            <ion-option value="alto saxophone">Alto Saxophone</ion-option>
-            <ion-option value="baritone">Baritone</ion-option>
+            <ion-option value="jacket">Jacket</ion-option>
+            <ion-option value="pants">Pants</ion-option>
+            <ion-option value="sash">Sash</ion-option>
+            <ion-option value="shako">Shako</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
@@ -33,7 +35,24 @@
               <ion-option value="size2">X-Large</ion-option>
             </ion-select>
           </ion-item>
-      <ion-item>
+      <ion-item> -->
+        <ion-item>
+          <ion-label floating>Type</ion-label>
+          <ion-select [selectOptions]="selectOptions" formControlName="type" (ionChange)="initEquipment()">
+            <ion-option *ngFor="let i of types" [value]="i">{{i.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <div formArrayName="equipment">
+          <div *ngFor="let e of uniformRequest.value.type.size; let i=index" class="panel panel-default">
+            <div [formGroupName]="i">
+              <ion-input [readonly]="true" [value]="e" formControlName="size">{{e}}</ion-input>
+              <ion-item>
+                <ion-label floating>ID</ion-label>
+                <ion-input type="text" formControlName="id"></ion-input>
+              </ion-item>
+            </div>
+          </div>
+        </div>
         <ion-label color="primary">Owner</ion-label>
         <ion-input placeholder="Owner" [(ngModel)]="owner"></ion-input>
       </ion-item>
