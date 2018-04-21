@@ -4,12 +4,8 @@ import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angul
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
-<<<<<<< HEAD
-import {LoggedinPage} from '../loggedin/loggedin';
-=======
 import { SendEmailPage } from '../send-email/send-email'
 
->>>>>>> 9c57dd9b31dfdc0a4b36f8be4d7b60bad297b808
 
 import { Events } from 'ionic-angular';
 
@@ -35,27 +31,19 @@ export class QuickmanagementPage {
   equipRecordRef;
   studentRecordRef;
   matchlist: any[];
-<<<<<<< HEAD
-  
-  constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, private afAuth: AngularFireAuth, public events: Events, private navParams: NavParams) {
-=======
   returnlist = [];
   len = 0;
 
  
 
   constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, public events: Events, private navParams: NavParams) {
->>>>>>> 9c57dd9b31dfdc0a4b36f8be4d7b60bad297b808
     this.items = afDB.list('students').valueChanges();
     this.items.subscribe(_afDB => {this.itemarr = _afDB})
     this.equipRecordRef = this.afDB.list('equipment');
     this.studentRecordRef = this.afDB.list('students');
     this.matchlist = navParams.get('match');
-<<<<<<< HEAD
-=======
     this.returnlist = [];
 
->>>>>>> 9c57dd9b31dfdc0a4b36f8be4d7b60bad297b808
 
     console.log('========================================');
     console.log(this.matchlist);
@@ -86,11 +74,8 @@ export class QuickmanagementPage {
   quickManageSubmit(selectedAction) {
       if (selectedAction == "email") {
         console.log('email option selected');
-<<<<<<< HEAD
-=======
         this.navCtrl.push(SendEmailPage, {arrChosen: this.arrChosen});
 
->>>>>>> 9c57dd9b31dfdc0a4b36f8be4d7b60bad297b808
       } else if (selectedAction == "uniform"){
         console.log('uniform status option selected');
         this.doRadio();
