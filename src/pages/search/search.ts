@@ -61,51 +61,15 @@ export class SearchPage {
 
     //Lieutenant searches through student tab
     if(this.searchLocation == "student") {
-      if(this.firstName != null) {
         this.templist = this.studentlist.filter((item)=> {
-          return item.firstname.toLowerCase() == this.firstName.toLowerCase();
+          return (this.firstName == null || this.firstName == "" || item.firstname.toLowerCase() == this.firstName.toLowerCase())
+              && (this.lastName == null || this.lastName == "" || item.lastname.toLowerCase() == this.lastName.toLowerCase())
+              && (this.gtid == null || this.gtid == "" || item.gtid == this.gtid)
+              && (this.email == null || this.email == "" || item.email == this.email)
+              && (this.section == null || this.section == "" || item.section.toLowerCase() == this.section.toLowerCase());
         });
         this.templist.forEach(item=> this.matchlist.push(item));
-      }
 
-      if(this.lastName != null) {
-        this.templist = this.studentlist.filter((item)=> {
-          return item.lastname.toLowerCase() == this.lastName.toLowerCase();
-        });
-        this.templist.forEach(item=> this.matchlist.push(item));
-      }
-
-      if(this.gtid != null) {
-        this.templist = this.studentlist.filter((item)=> {
-          return item.gtid == this.gtid;
-        });
-        this.templist.forEach(item=> this.matchlist.push(item));
-      }
-
-      if(this.email != null) {
-        this.templist = this.studentlist.filter((item)=> {
-          return item.email == this.email;
-        });
-        this.templist.forEach(item=> this.matchlist.push(item));
-      }
-
-      if(this.email != null) {
-        this.templist = this.studentlist.filter((item)=> {
-          return item.email == this.email;
-        });
-        this.templist.forEach(item=> this.matchlist.push(item));
-      }
-
-      if(this.section != null) {
-        this.templist = this.studentlist.filter((item)=> {
-          return item.section.toLowerCase() == this.section.toLowerCase();
-        });
-        this.templist.forEach(item=> this.matchlist.push(item));
-      }
-
-      if(this.firstName == null && this.lastName == null && this.email == null && this.section == null && this.gtid == null) {
-        this.matchlist = this.studentlist;
-      }
       /* Commented out until storing other is implemented
       if(this.other != null) {
         this.templist = this.studentlist.filter((item)=> {
@@ -117,13 +81,13 @@ export class SearchPage {
     }
     //Lieutenant searches through uniform tab
     if(this.searchLocation == "uniform") {
-
-      if(this.type != null && this.uniformID != null) {
+      console.log(this.uniformID);
+      if(this.type != null && this.uniformID != null && this.uniformID != "") {
         this.templist = this.studentlist.filter((item)=> {
           return item.equipment[this.type] != null && item.equipment[this.type].id == this.uniformID;
         });
         this.templist.forEach(item=> this.matchlist.push(item));
-      } else if (this.type != null && this.uniformID == null) {
+      } else if (this.type != null && (this.uniformID == null || this.uniformID == "")) {
         this.templist = this.studentlist.filter((item)=> {
           return item.equipment[this.type] != null;
         });
@@ -139,7 +103,7 @@ export class SearchPage {
         this.templist.forEach(item=> this.matchlist.push(item));
 
       }
-      if (this.type == null && this.uniformID == null) {
+      if (this.type == null && (this.uniformID == null || this.uniformID == "")) {
         this.matchlist = this.studentlist;
       }
       /* Commented out until storing other is implemented

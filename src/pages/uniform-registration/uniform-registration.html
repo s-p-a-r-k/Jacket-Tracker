@@ -15,32 +15,67 @@
 
 <ion-content padding>
 
-    <ion-item>
+      <ion-item>
         <ion-label color="primary">ID</ion-label>
         <ion-input placeholder="ID" [(ngModel)]="id"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label>Type</ion-label>
-          <ion-select [(ngModel)]="type">
-            <ion-option value="alto saxophone">Alto Saxophone</ion-option>
-            <ion-option value="baritone">Baritone</ion-option>
+          <ion-select [(ngModel)]="type" name="type" (ionChange)="selected(type)" placeholder="Type">
+            <ion-option *ngFor="let type of types" value="{{type.name}}">{{type.name}}</ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label>Size</ion-label>
+            <ion-select [(ngModel)]="size" name="size" (ionChange)="sizeSelected(size)" placeholder="Size">
+              <ion-option value="small">Small</ion-option>
+              <ion-option value="medium">Medium</ion-option>
+              <ion-option value="large">Large</ion-option>
+              <ion-option value="x-large">X-Large</ion-option>
+            </ion-select>
+<!--           <ion-select [(ngModel)]="size" name="size" placeholder="Size">
+            <ion-option *ngFor="let i of currType.size" value="{{i}}">{{i}}</ion-option>
+          </ion-select> -->
+      </ion-item>
+      <ion-item>
+          <ion-label>Status</ion-label>
+          <ion-select [(ngModel)]="status" name="status" placeholder="Status">
+              <ion-option value="clean">Clean</ion-option>
+              <ion-option value="dirty">Dirty</ion-option>
+              <ion-option value="alteration needed">Alteration Needed</ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Owner</ion-label>
+        <ion-input placeholder="Owner First Name" [(ngModel)]="firstname"></ion-input>
+        <ion-input placeholder="Owner Last Name" [(ngModel)]="lastname"></ion-input>
+      </ion-item>
+<!--       <form [formGroup]="uniformRequest" (ngSubmit)="submitForm()">
+        <ion-item>
+          <ion-label floating>Section</ion-label>
+          <ion-select [selectOptions]="selectOptions" formControlName="section" (ionChange)="initEquipment()">
+            <ion-option *ngFor="let i of types" [value]="i">{{i.name}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label>Size</ion-label>
-            <ion-select [(ngModel)]="size">
-              <ion-option value="size1">Large</ion-option>
-              <ion-option value="size2">X-Large</ion-option>
-            </ion-select>
-          </ion-item>
-      <ion-item>
-        <ion-label color="primary">Owner</ion-label>
-        <ion-input placeholder="Owner" [(ngModel)]="owner"></ion-input>
-      </ion-item>
-
+          <ion-label floating>Section</ion-label>
+          <ion-select [selectOptions]="selectOptions" formArrayName="size" [formGroupName]="i" (ionChange)="selected()">
+            <ion-option *ngFor="let e of uniformRequest.value.section.size" [value]="e">{{e}}</ion-option>
+          </ion-select>
+        </ion-item> -->
+<!--         <div formArrayName="size">
+          <div *ngFor="let e of uniformRequest.value.section.size; let i=index" class="panel panel-default">
+            <div [formGroupName]="i">
+              <ion-select [selectOptions]="selectOptions" formControlName="type" (ionChange)="selected()">
+                <ion-option *ngFor="let i of uniformRequest.value.section.size" [value]="i">{{i}}</ion-option>
+              </ion-select>
+            </div>
+          </div>
+        </div> -->
       <div id="search-buttons">
           <button block ion-button (click)="registerClicked()">Register</button>
           <button block ion-button (click)="clearClicked()">Clear</button>
-        </div>
+      </div>
+      <!-- </form> -->
 
 </ion-content>

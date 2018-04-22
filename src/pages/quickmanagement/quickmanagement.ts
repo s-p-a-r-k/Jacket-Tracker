@@ -34,7 +34,7 @@ export class QuickmanagementPage {
   returnlist = [];
   len = 0;
 
- 
+
 
   constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, public events: Events, private navParams: NavParams) {
     this.items = afDB.list('students').valueChanges();
@@ -172,4 +172,7 @@ export class QuickmanagementPage {
     alert.present();
   }
 
+  backToHome() {
+    this.navCtrl.pop();
+  }
 }
