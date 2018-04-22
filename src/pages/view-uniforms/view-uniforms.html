@@ -1,6 +1,12 @@
+<!--
+  Generated template for the ViewUniformsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
   <ion-navbar>
-    <ion-title>View Current Assignments</ion-title>
+    <ion-title>View Uniforms</ion-title>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -15,9 +21,7 @@
           <ion-grid>
             <ion-row justify-content-center align-items-center>
               <ion-col> <ion-checkbox [(ngModel)]="selectedAll" (ionChange)="allChecked($event)"></ion-checkbox> Select All </ion-col>
-              <ion-col> First Name </ion-col>
-              <ion-col> Last Name </ion-col>
-              <ion-col> Email </ion-col>
+              <ion-col> Uniform </ion-col>
               <ion-col> Section </ion-col>
               <ion-col> Jacket </ion-col>
               <ion-col> Sash </ion-col>
@@ -31,9 +35,7 @@
             <!-- <ion-row justify-content-center align-items-center *ngFor="let item of matchlist | async"> -->
             <ion-row justify-content-center align-items-center *ngFor="let item of matchlist">
               <ion-col> <ion-checkbox [(ngModel)]="item.selected" [checked]="selectAll" (ionChange)="checked($event, item)"></ion-checkbox> </ion-col>
-              <ion-col *ngIf="item.firstname; else none"> {{item.firstname}} </ion-col>
-              <ion-col *ngIf="item.lastname; else none"> {{item.lastname}} </ion-col>
-              <ion-col *ngIf="item.email; else none"> {{item.email}} </ion-col>
+              <ion-col *ngIf="item.firstname; else none"> Replace with ID </ion-col>
               <ion-col *ngIf="item.section; else none"> {{item.section}} </ion-col>
               <ion-col *ngIf="item.equipment.Jacket; else none"> {{item.equipment.Jacket.id}} </ion-col>
               <ion-col *ngIf="item.equipment.Sash; else none"> {{item.equipment.Sash.id}} </ion-col>
@@ -54,20 +56,4 @@
           </ion-grid>
       </ion-content>
   
-      <div id = "decisions">
-        <ion-list>
-          <ion-item>
-              <ion-label>Select Action</ion-label>
-              <ion-select interface = "popover" [(ngModel)]="action" (ngModelChange)="quickManageSubmit(action);">
-                <ion-option value="email">Email selected members</ion-option>
-                <ion-option value="uniform">Modify selected uniform status</ion-option>
-                <ion-option value="student">Modify selected student information</ion-option>
-                <ion-option value="return">Return selected student information</ion-option>
-              </ion-select>
-          </ion-item>
-              <!-- Using popover doesn't require submit button as it automatically closes overlay and selects that value
-              <button ion-button ion-button (click) = "quickManageSubmit(action)"> Submit </button>-->
-              <button ion-button ion-button (click) ="backToHome()"> Back to Home </button>
-        </ion-list>
-      </div>
   </ion-content>

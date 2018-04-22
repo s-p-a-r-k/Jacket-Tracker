@@ -13,6 +13,9 @@ import { SendEmailPage } from '../pages/send-email/send-email';
 import { AccountManagementPage } from '../pages/accountManagement/accountManagement';
 import { WaiverManagementPage } from '../pages/waiverManagement/waiverManagement';
 import { UniformRegistrationPage } from '../pages/uniform-registration/uniform-registration';
+import { QuickmanagementPage2 } from '../pages/quickmanagement2/quickmanagement2';
+import { ViewUniformsPage } from '../pages/view-uniforms/view-uniforms';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -33,8 +36,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: SearchPage },
       { title: 'Add New Uniform', component: UniformRegistrationPage },
-      { title: 'View Current Assignments', component: SearchPage },
-      { title: 'View Uniforms', component: SearchPage },
+      { title: 'View Current Assignments', component: QuickmanagementPage },
+      { title: 'View Uniforms', component: ViewUniformsPage },
       { title: 'Assign Uniforms', component: SearchPage },
       { title: 'Email Management', component: EmailManagementPage },
       { title: 'Account Management', component: AccountManagementPage },
