@@ -29,7 +29,7 @@
   
             <!-- <ion-row justify-content-center align-items-center *ngFor="let item of matchlist | async"> -->
             <ion-row justify-content-center align-items-center *ngFor="let item of matchlist">
-              <ion-col> <ion-checkbox [(ngModel)]="item.selected" [checked]="selectAll" (ionChange)="checked(item)"></ion-checkbox> </ion-col>
+              <ion-col> <ion-checkbox [(ngModel)]="item.selected" [checked]="selectAll" (ionChange)="checked($event, item)"></ion-checkbox> </ion-col>
               <ion-col *ngIf="item.firstname; else none"> {{item.firstname}} </ion-col>
               <ion-col *ngIf="item.lastname; else none"> {{item.lastname}} </ion-col>
               <ion-col *ngIf="item.email; else none"> {{item.email}} </ion-col>
@@ -61,6 +61,7 @@
                 <ion-option value="email">Email selected members</ion-option>
                 <ion-option value="uniform">Modify selected uniform status</ion-option>
                 <ion-option value="student">Modify selected student information</ion-option>
+                <ion-option value="return">Return selected student information</ion-option>
               </ion-select>
           </ion-item>
               <!-- Using popover doesn't require submit button as it automatically closes overlay and selects that value
