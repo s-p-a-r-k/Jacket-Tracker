@@ -20,9 +20,9 @@ Status: v0.0.1 Release candidate
 ## Requirements
 
 ### Globally installed packages
-- ionic v3.20.0+
-- node v9.8.0+
-- npm v5.6.0+
+- [ionic](https://ionicframework.com/getting-started) v3.20.0+
+- [node](https://nodejs.org/en/download/) v9.8.0+
+- [npm](https://docs.npmjs.com/getting-started/installing-node#install-npm--manage-npm-versions) v5.6.0+
 
 ### API Key config file
 - Contact our team through our [slack channel](https://spring2018team7350.slack.com)  for the environment.ts file and copy it to the /src directory
