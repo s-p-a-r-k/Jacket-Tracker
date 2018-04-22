@@ -128,6 +128,7 @@ export class UniformRegistrationPage {
                           const studentUniformRef = fire.object('/students/' + key + '/equipment/' + tempType + '/');
                           studentUniformRef.update({id: tempId});
                         }
+                        return false;
                     });
                 });
       }
