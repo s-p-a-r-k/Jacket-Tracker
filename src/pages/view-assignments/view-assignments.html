@@ -1,12 +1,12 @@
 <!--
-  Generated template for the ViewUniformsPage page.
+  Generated template for the ViewAssignmentsPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>View Uniforms</ion-title>
+    <ion-title>View Current Assignments</ion-title>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -21,7 +21,8 @@
           <ion-grid>
             <ion-row justify-content-center align-items-center>
               <ion-col> <ion-checkbox [(ngModel)]="selectedAll" (ionChange)="allChecked($event)"></ion-checkbox> Select All </ion-col>
-              <ion-col> Name </ion-col>
+              <ion-col> First Name </ion-col>
+              <ion-col> Last Name </ion-col>
               <ion-col> Section </ion-col>
               <ion-col> Jacket </ion-col>
               <ion-col> Sash </ion-col>
@@ -35,7 +36,8 @@
             <!-- <ion-row justify-content-center align-items-center *ngFor="let item of matchlist | async"> -->
             <ion-row justify-content-center align-items-center *ngFor="let item of studentlist">
               <ion-col> <ion-checkbox [(ngModel)]="item.selected" [checked]="selectAll" (ionChange)="checked($event, item)"></ion-checkbox> </ion-col>
-              <ion-col *ngIf="item.firstname; else none"> {{item.firstname}} </ion-col>
+              <ion-col *ngIf="item.firstname; else none"> {{item.firstName}} </ion-col>
+              <ion-col *ngIf="item.lastName; else none"> {{item.lastName}} </ion-col>
               <ion-col *ngIf="item.section; else none"> {{item.section}} </ion-col>
               <ion-col *ngIf="item.equipment.Jacket; else none"> {{item.equipment.Jacket.id}} </ion-col>
               <ion-col *ngIf="item.equipment.Sash; else none"> {{item.equipment.Sash.id}} </ion-col>

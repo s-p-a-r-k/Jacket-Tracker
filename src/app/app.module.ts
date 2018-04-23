@@ -42,6 +42,7 @@ import { UniformRegistrationPage } from '../pages/uniform-registration/uniform-r
 import { RegisterPage } from '../pages/register/register';
 import { QuickmanagementPage2 } from '../pages/quickmanagement2/quickmanagement2';
 import { ViewUniformsPage } from '../pages/view-uniforms/view-uniforms';
+import { ViewAssignmentsPage } from '../pages/view-assignments/view-assignments';
 
 
 
@@ -74,7 +75,8 @@ export const gapiClientConfig = {
     WaiverManagementPage,
     UniformRegistrationPage,
     QuickmanagementPage2,
-    ViewUniformsPage
+    ViewUniformsPage,
+    ViewAssignmentsPage
   ],
   imports: [
     BrowserModule,
@@ -107,7 +109,8 @@ export const gapiClientConfig = {
     WaiverManagementPage,
     UniformRegistrationPage,
     QuickmanagementPage2,
-    ViewUniformsPage
+    ViewUniformsPage,
+    ViewAssignmentsPage
 
   ],
   providers: [
