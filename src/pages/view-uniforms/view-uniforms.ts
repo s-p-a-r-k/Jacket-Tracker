@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
 
+
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
@@ -10,7 +11,7 @@ import { SendEmailPage } from '../send-email/send-email'
 import { Events } from 'ionic-angular';
 
 /**
- * Generated class for the QuickmanagementPage page.
+ * Generated class for the ViewUniformsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -18,10 +19,11 @@ import { Events } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-quickmanagement',
-  templateUrl: 'quickmanagement.html',
+  selector: 'page-view-uniforms',
+  templateUrl: 'view-uniforms.html',
 })
-export class QuickmanagementPage {
+export class ViewUniformsPage {
+
   items: Observable<any[]>;
   selectAll = false;
   itemarr = [];
@@ -175,4 +177,8 @@ export class QuickmanagementPage {
   backToHome() {
     this.navCtrl.pop();
   }
+
+
+
+
 }

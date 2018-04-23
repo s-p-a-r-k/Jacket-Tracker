@@ -18,10 +18,10 @@ import { Events } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-quickmanagement',
-  templateUrl: 'quickmanagement.html',
+  selector: 'page-quickmanagement2',
+  templateUrl: 'quickmanagement2.html',
 })
-export class QuickmanagementPage {
+export class QuickmanagementPage2 {
   items: Observable<any[]>;
   selectAll = false;
   itemarr = [];
