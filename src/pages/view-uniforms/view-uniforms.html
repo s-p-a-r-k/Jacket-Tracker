@@ -33,13 +33,13 @@
             </ion-row>
   
             <!-- <ion-row justify-content-center align-items-center *ngFor="let item of matchlist | async"> -->
-            <ion-row justify-content-center align-items-center *ngFor="let item of matchlist">
+            <ion-row justify-content-center align-items-center *ngFor="let item of studentlist">
               <ion-col> <ion-checkbox [(ngModel)]="item.selected" [checked]="selectAll" (ionChange)="checked($event, item)"></ion-checkbox> </ion-col>
               <ion-col *ngIf="item.firstname; else none"> Replace with ID </ion-col>
               <ion-col *ngIf="item.section; else none"> {{item.section}} </ion-col>
               <ion-col *ngIf="item.equipment.Jacket; else none"> {{item.equipment.Jacket.id}} </ion-col>
               <ion-col *ngIf="item.equipment.Sash; else none"> {{item.equipment.Sash.id}} </ion-col>
-              <ion-col *ngIf="item.equipment.Bibbles; else none"> {{item.equipment.Bibbles.id}} </ion-col>
+              <ion-col *ngIf="item.equipment.Pants; else none"> {{item.equipment.Pants.id}} </ion-col>
               <ion-col *ngIf="item.equipment.Shako; else none"> {{item.equipment.Shako.id}} </ion-col>
               <ion-col *ngIf="item.equipment.Gloves; else none"> {{item.equipment.Gloves.id}} </ion-col>
               <ion-col *ngIf="item.equipment.Vest; else none"> {{item.equipment.Vest.id}} </ion-col>
