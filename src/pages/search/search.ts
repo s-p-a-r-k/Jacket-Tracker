@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { QuickmanagementPage } from '../quickmanagement/quickmanagement';
+import { QuickmanagementPage2 } from '../quickmanagement2/quickmanagement2';
 import { AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
@@ -121,7 +121,7 @@ export class SearchPage {
     console.log(this.studentlist);
     console.log("=====================================================");
 
-    this.navCtrl.push(QuickmanagementPage,{match: this.matchlist});
+    this.navCtrl.push(QuickmanagementPage2,{match: this.matchlist});
   }
 
 
