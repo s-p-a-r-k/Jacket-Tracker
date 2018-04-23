@@ -35,12 +35,18 @@ export class ViewUniformsPage {
   matchlist: any[];
   returnlist = [];
   len = 0;
+  studentRecord: Observable<any[]>;
+  studentlist;
+
+
 
 
 
   constructor(public navCtrl: NavController, private afDB: AngularFireDatabase, public alertCtrl: AlertController, public events: Events, private navParams: NavParams) {
     this.items = afDB.list('students').valueChanges();
     this.items.subscribe(_afDB => {this.itemarr = _afDB})
+    this.studentRecord = afDB.list('students').valueChanges();
+    this.studentRecord.subscribe(_afDB => {this.studentlist = _afDB})
     this.equipRecordRef = this.afDB.list('equipment');
     this.studentRecordRef = this.afDB.list('students');
     this.matchlist = navParams.get('match');
@@ -49,6 +55,8 @@ export class ViewUniformsPage {
 
     console.log('========================================');
     console.log(this.matchlist);
+    console.log("Student " + this.studentlist);
+
     console.log('========================================');
   }
 
