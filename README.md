@@ -53,14 +53,16 @@ Note that common errors when trying to build and run the application include:
 - Uniform lieutenants can email one or more selected students
 - Option to send a previously-saved email template, or type a new email
 - Searchable results by student or uniform fields
+- Upload a new waiver to be displayed on uniform checkout
+- Change a uniform's status (clean, dirty, alteration needed, etc.)
 
 ### Bug Fixes
 
 ### Known Issues
 - You must enable popups during first time signin and accept the google agreement for emailing and waiver update features
 - Application crashes if user ever closes the google agreement windows
-- Navigation pane missing on uniform registration screen
+- Cannot type custom notes into a uniform
 - Names or emails with 15+ characters cause the search results table to be misshapen
 - Modifying selected students information is not yet implemented (can simply delete student and recreate with proper information)
-- No select all button in the quick management screen
 - After clicking 'Modify selected student's information' two identical pop-ups appear
+- 'View Current Assignments' is not populating data
