@@ -132,6 +132,9 @@ export class UniformRegistrationPage {
                     });
                 });
       }
+      else {
+          equipRecordsRef.update({student: ""});
+      }
 
 
       let alert = this.alertCtrl.create({
@@ -141,7 +144,7 @@ export class UniformRegistrationPage {
         buttons: [{
           text: 'OK',
           handler: () => {
-            this.navCtrl.pop();
+//            this.navCtrl.pop();
           }
         }]
       }).present();
